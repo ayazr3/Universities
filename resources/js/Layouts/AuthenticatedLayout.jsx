@@ -24,6 +24,30 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
                                 </NavLink>
+                                <NavLink href={route('announcement.index')} active={route().current('announcements.index')}>
+                                    Announcements
+                                </NavLink>
+                                <NavLink href={route('faq.index')} active={route().current('announcements.index')}>
+                                    Faq
+                                </NavLink>
+                                <NavLink href={route('admissionSchedule.index')} active={route().current('announcements.index')}>
+                                    AdmissionSchedule
+                                </NavLink>
+                                <NavLink href={route('registrationstep.index')} active={route().current('announcements.index')}>
+                                    RegistrationStep
+                                </NavLink>
+                                <NavLink href={route('settings.index')} active={route().current('announcements.index')}>
+                                    Settings
+                                </NavLink>
+                                <NavLink href={route('official-links.index')} active={route().current('announcements.index')}>
+                                    Official Links
+                                </NavLink>
+                                <NavLink href={route('terms.index')} active={route().current('announcements.index')}>
+                                    Terms
+                                </NavLink>
+                                <NavLink href={route('guidances.index')} active={route().current('announcements.index')}>
+                                    Guidances
+                                </NavLink>
                             </div>
                         </div>
 
@@ -94,6 +118,31 @@ export default function Authenticated({ user, header, children }) {
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('announcement.index')} active={route().current('announcements.index')}>
+                            Announcements
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('faq.index')} active={route().current('announcements.index')}>
+                            Faq
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('admissionSchedule.index')} active={route().current('announcements.index')}>
+                            AdmissionSchedule
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink href={route('registrationstep.index')} active={route().current('announcements.index')}>
+                            RegistrationStep
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('settings.index')} active={route().current('announcements.index')}>
+                            Settings
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('official-links.index')} active={route().current('announcements.index')}>
+                            Official Links
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('terms.index')} active={route().current('announcements.index')}>
+                            Terms
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('guidances.index')} active={route().current('announcements.index')}>
+                            Guidances
                         </ResponsiveNavLink>
                     </div>
 
