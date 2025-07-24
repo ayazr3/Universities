@@ -63,8 +63,34 @@ class GuidanceController extends Controller
     public function update(Request $request, Guidance $guidance)
     {
         //dd($guidance);
-        //dd($request->all());
-         $validated = $request->validate([
+            //dd($request->all());
+    //      $validated = $request->validate([
+    //     'title' => 'required|string|max:100',
+    //     'description' => 'required|string',
+    //     'link' => 'nullable|string|max:255',
+    //     'type' => 'required|in:article,booke,video,advice',
+    //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    // ]);
+
+    // // إذا لم يتم رفع صورة جديدة، احتفظ بالصورة القديمة
+    // if (!$request->hasFile('image')) {
+    //     $validated['image'] = $guidance->image;
+    // } else {
+    //     // حذف الصورة القديمة إذا كانت موجودة
+    //     if ($guidance->image) {
+    //         Storage::disk('public')->delete($guidance->image);
+    //     }
+    //     // رفع الصورة الجديدة
+    //     $validated['image'] = $request->file('image')->store('guidances', 'public');
+    // }
+
+    // $guidance->update($validated);
+
+    // return redirect()->route('guidances.index')->with('success', 'تم تحديث التوجيه بنجاح.');
+
+
+     // التحقق من القيم المدخلة
+    $validated = $request->validate([
         'title' => 'required|string|max:100',
         'description' => 'required|string',
         'link' => 'nullable|string|max:255',
@@ -72,21 +98,26 @@ class GuidanceController extends Controller
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
-    // إذا لم يتم رفع صورة جديدة، احتفظ بالصورة القديمة
-    if (!$request->hasFile('image')) {
-        $validated['image'] = $guidance->image;
-    } else {
-        // حذف الصورة القديمة إذا كانت موجودة
+    // معالجة الصورة
+    if ($request->hasFile('image')) {
+        // حذف الصورة القديمة إن وجدت
         if ($guidance->image) {
             Storage::disk('public')->delete($guidance->image);
         }
-        // رفع الصورة الجديدة
+        // رفع الصورة الجديدة وتخزين مسارها
         $validated['image'] = $request->file('image')->store('guidances', 'public');
+    } else {
+        // إذا لم تُرفع صورة جديدة، احتفظ بالقديمة
+        $validated['image'] = $guidance->image;
     }
 
+    // التحديث
     $guidance->update($validated);
 
     return redirect()->route('guidances.index')->with('success', 'تم تحديث التوجيه بنجاح.');
+
+
+
 
     }
 

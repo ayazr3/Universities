@@ -18,8 +18,10 @@ return new class extends Migration
             $table->text('summary');
             $table->text('details');
             $table->text('graduate_future');
+            $table->string('name_graduate_future');
             $table->string('icon',255);
             $table->string('degree_type',100);
+            $table->integer('academic_year_number');
             $table->timestamps();
         });
     }
