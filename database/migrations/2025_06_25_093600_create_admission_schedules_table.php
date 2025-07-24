@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('body');
             $table->date('date');
             $table->string('name',100);
+            $table->string('file_url',255);
             $table->timestamps();
         });
     }
