@@ -63,13 +63,13 @@ const Navbar = () => {
           الرئيسية
         </Link>
       
-<Link href={route('guidance.index')} className={window.location.pathname === "/guidance" ? "active" : ""}>
+<Link href={route('guidance.indexUser')} className={window.location.pathname === "/guidance" ? "active" : ""}>
    التوجيه والدعم
 </Link>
 
 
         <Link
-          href={route('faq.index')}  // استخدم اسم الراوت الذي عرّفته
+          href={route('faq.indexUser')}  // استخدم اسم الراوت الذي عرّفته
           className={window.location.pathname === "/questions" ? "active" : ""}
           onClick={() => {
             topScroll();

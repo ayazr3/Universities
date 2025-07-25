@@ -87,13 +87,13 @@ Route::get('/universities/{id}', [CollegeController::class, 'showUser'])->name('
 
 
 // راوت صفحة التوجيه والدعم للواجهة الأمامية
-Route::get('/guidance', [GuidanceController::class, 'frontendIndex'])->name('guidance.index');
+Route::get('/guidance', [GuidanceController::class, 'frontendIndex'])->name('guidance.indexUser');
 
 // صفحة الأسئلة الشائعة - 
-Route::get('/questions', [FaqController::class, 'indexUser'])->name('faq.index');
+Route::get('/questions', [FaqController::class, 'indexUser'])->name('faq.indexUser');
 
 
 
-//عرض معلومات الكلية 
-Route::get('/specialties', [SpecializationController::class, 'indexUser'])->name('specialties.index');
-Route::get('/specialties/{id}', [SpecializationController::class, 'showUser'])->name('specialties.show');
+// //عرض معلومات الكلية 
+// Route::get('/specialties', [SpecializationController::class, 'indexUser'])->name('specialties.indexUser');
+// Route::get('/specialties/{id}', [SpecializationController::class, 'showUser'])->name('specialties.show');
