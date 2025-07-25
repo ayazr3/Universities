@@ -1,0 +1,589 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;400&display=swap');
+
+.study-plan-bg {
+  min-height: 100vh;
+  background: #e8f0ff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  direction: rtl;
+  font-family: 'Cairo', sans-serif;
+  padding: 90px 0 180px;
+  
+}
+
+.study-plan-container {
+  width: 95%;
+  max-width: 900px;
+  margin: auto;
+  background: none;
+}
+
+.study-plan-title {
+ color: #3f51b5;
+  text-shadow: 2px 2px 5px rgba(63, 81, 181, 0.5);
+  font-size: 2.7rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  letter-spacing: 1px;
+  animation: fadeInDown 0.8s;
+}
+
+.study-plan-subtitle {
+  color: #1e293b;
+  font-size: 1.1rem;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeInDown 1.2s;
+}
+
+.study-plan-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 2.5rem;
+}
+
+.tab-btn {
+  background: white;
+  color: #296fe8;
+  border: none;
+  border-radius: 22px;
+  padding: 0.7rem 1.6rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 8px 0 rgba(40,55,120,0.07);
+  outline: none;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+  background: #296fe8;
+  color: white;
+  box-shadow: 0 4px 16px 0 rgba(40,55,120,0.13);
+}
+
+.study-plan-cards-outer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.study-plan-cards {
+  background:white;
+  border-radius: 22px;
+  padding: 2.5rem 1.2rem 1.4rem 1.2rem;
+  width: 100%;
+  max-width: 900px;
+  box-shadow: 0 8px 32px 0 rgba(30,37,105,0.13);
+  transition: box-shadow 0.3s;
+  position: relative;
+  animation: fadeIn 0.8s;
+}
+
+.year-info {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+
+.year-title {
+  color: #000000;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.year-semester {
+  color: #1a0989;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.9rem;
+  background:#e8f0ff;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+.cards-list {
+  display: flex;
+ 
+  gap: 1.3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.study-card {
+  background: rgba(255,255,255,0.13);
+  border-radius: 17px;
+  box-shadow: 0 4px 24px 0 rgba(30,37,105,0.10);
+  
+  min-width: 220px;
+  max-width: 260px;
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  animation: slideUp 0.8s;
+}
+
+.study-card:hover {
+  transform: translateY(-8px) scale(1.025);
+  box-shadow: 0 12px 32px 0 rgba(106,182,253,0.17);
+}
+
+.card-icon {
+  margin-bottom: 0.7rem;
+  animation: popIn 0.8s;
+}
+
+.card-content {
+  flex: 1;
+  flex-direction: column;
+}
+
+.card-title {
+  color: #000000;
+  font-size: 1.13rem;
+  font-weight: 900;
+  margin-bottom: 0.4rem;
+}
+
+.card-desc {
+  color: #464748;
+  font-size: 0.97rem;
+  font-weight: 400;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  margin-right: 10%;
+  margin-bottom: 5%;
+  gap: 0.7rem;
+ 
+}
+
+.download-btn {
+  background: #6ab6fd;
+  border: none;
+  border-radius: 9px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.24s, box-shadow 0.24s;
+  box-shadow: 0 2px 8px 0 rgba(106,182,253,0.13);
+}
+
+.download-btn:hover {
+  background: #3f7fdc;
+}
+
+.book-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .study-plan-cards {
+    padding: 1.8rem 0.7rem 1rem 0.7rem;
+  }
+  .cards-list {
+    gap: 0.7rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .study-plan-title {
+    font-size: 1.7rem;
+  }
+  .study-plan-cards {
+    padding: 1.2rem 0.2rem 0.7rem 0.2rem;
+  }
+  .cards-list {
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: stretch;
+  }
+  .study-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeIn {
+  from { opacity: 0;}
+  to { opacity: 1;}
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.7);}
+  60% { transform: scale(1.15);}
+  100% { transform: scale(1);}
+}
+
+/* Animation for cards on tab switch */
+.fade-in {
+  animation: fadeIn 0.7s;
+}
+.slide-up {
+  animation: slideUp 0.7s;
+}
+/* إضافة هذه الوسائط في نهاية ملف الـ CSS */
+
+@media (max-width: 1200px) {
+  .study-plan-container {
+    width: 90%;
+  }
+  
+  .study-plan-title {
+    font-size: 2.4rem;
+  }
+  
+  .study-card {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 992px) {
+  .study-plan-title {
+    font-size: 2.1rem;
+  }
+  
+  .study-plan-subtitle {
+    font-size: 1rem;
+  }
+  
+  .tab-btn {
+    padding: 0.6rem 1.4rem;
+    font-size: 1rem;
+  }
+  
+  .year-title {
+    font-size: 1.1rem;
+  }
+  
+  .card-title {
+    font-size: 1.05rem;
+  }
+  
+  .card-desc {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .study-plan-bg {
+    padding: 70px 0 100px;
+  }
+  
+  .study-plan-title {
+    font-size: 1.9rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .study-plan-tabs {
+    flex-wrap: wrap;
+    margin-bottom: 1.8rem;
+  }
+  
+  .study-plan-cards {
+    padding: 1.8rem 1rem;
+  }
+  
+  .year-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1.8rem;
+  }
+  
+  .cards-list {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .study-plan-bg {
+    padding: 50px 0 80px;
+  }
+  
+  .study-plan-title {
+    font-size: 1.7rem;
+  }
+  
+  .study-plan-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .tab-btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.95rem;
+  }
+  
+  .study-plan-cards {
+    padding: 1.5rem 0.8rem;
+    border-radius: 18px;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+  }
+  
+  .card-desc {
+    font-size: 0.85rem;
+  }
+  
+  .download-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .study-plan-title {
+    font-size: 1.5rem;
+  }
+  
+  .study-plan-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .tab-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .year-title {
+    font-size: 1rem;
+  }
+  
+  .year-semester {
+    font-size: 0.8rem;
+  }
+  
+  .cards-list {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .study-card {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .study-plan-title {
+    font-size: 1.4rem;
+  }
+  
+  .tab-btn {
+    padding: 0.35rem 0.9rem;
+  }
+  
+  .study-plan-cards {
+    padding: 1.2rem 0.6rem;
+  }
+}
+/* إضافة هذه الوسائط في نهاية ملف الـ CSS */
+
+@media (max-width: 1200px) {
+  .study-plan-container {
+    width: 90%;
+  }
+  
+  .study-plan-title {
+    font-size: 2.4rem;
+  }
+  
+  .study-card {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 992px) {
+  .study-plan-title {
+    font-size: 2.1rem;
+  }
+  
+  .study-plan-subtitle {
+    font-size: 1rem;
+  }
+  
+  .tab-btn {
+    padding: 0.6rem 1.4rem;
+    font-size: 1rem;
+  }
+  
+  .year-title {
+    font-size: 1.1rem;
+  }
+  
+  .card-title {
+    font-size: 1.05rem;
+  }
+  
+  .card-desc {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .study-plan-bg {
+    padding: 70px 0 100px;
+  }
+  
+  .study-plan-title {
+    font-size: 1.9rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .study-plan-tabs {
+    flex-wrap: wrap;
+    margin-bottom: 1.8rem;
+  }
+  
+  .study-plan-cards {
+    padding: 1.8rem 1rem;
+  }
+  
+  .year-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1.8rem;
+  }
+  
+  .cards-list {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .study-plan-bg {
+    padding: 50px 0 80px;
+  }
+  
+  .study-plan-title {
+    font-size: 1.7rem;
+  }
+  
+  .study-plan-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .tab-btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.95rem;
+  }
+  
+  .study-plan-cards {
+    padding: 1.5rem 0.8rem;
+    border-radius: 18px;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+  }
+  
+  .card-desc {
+    font-size: 0.85rem;
+  }
+  
+  .download-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .study-plan-title {
+    font-size: 1.5rem;
+  }
+  
+  .study-plan-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .tab-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .year-title {
+    font-size: 1rem;
+  }
+  
+  .year-semester {
+    font-size: 0.8rem;
+  }
+  
+  .cards-list {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .study-card {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .study-plan-title {
+    font-size: 1.4rem;
+  }
+  
+  .tab-btn {
+    padding: 0.35rem 0.9rem;
+  }
+  
+  .study-plan-cards {
+    padding: 1.2rem 0.6rem;
+  }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .study-plan-bg {
+    padding: 40px 0 60px;
+  }
+  
+  .study-plan-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .study-plan-subtitle {
+    margin-bottom: 1rem;
+  }
+  
+  .study-plan-tabs {
+    margin-bottom: 1.5rem;
+  }
+  
+  .study-plan-cards {
+    padding: 1rem 0.5rem;
+  }
+}

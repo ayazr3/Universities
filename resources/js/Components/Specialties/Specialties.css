@@ -1,0 +1,310 @@
+:root {
+  --main-bg: #f5f8fe;
+  --card-bg: #fff;
+  --border-radius: 18px;
+  --shadow: 0 6px 32px 0 rgba(80, 110, 180, 0.09);
+  --main-color: #222b3a;
+  --subtitle-color: #6c7a89;
+  --icon-size: 54px;
+  --transition: 0.35s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+body {
+  background: var(--main-bg);
+}
+
+.specialties-section {
+  padding: 48px 12px 32px;
+  max-width: 1100px;
+  margin: auto;
+  text-align: center;
+  direction: rtl;
+}
+
+.main-titlee {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color:#3f51b5;
+  text-shadow: 2px 2px 5px rgba(63, 81, 181, 0.5);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+  animation: fadeInDown 0.7s;
+  font-family: "El Messiri", sans-serif;
+}
+
+.subtitleeeee {
+  color: #1e293b;
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  animation: fadeInDown 0.9s;
+}
+
+.specialties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 28px;
+  justify-content: center;
+}
+
+.specialty-card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 28px 22px;
+  min-height: 120px;
+  transition: transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  animation: cardEnter 0.7s both;
+}
+
+.specialty-card:hover {
+  transform: translateY(-10px) scale(1.03) rotate(-1deg);
+  box-shadow: 0 12px 36px 0 rgba(60, 90, 200, 0.14);
+}
+
+.icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border-radius: 16px;
+  color: #fff;
+  margin-left: 10px;
+  box-shadow: 0 2px 8px rgba(80, 110, 180, 0.13);
+  transition: transform 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+  animation: popIn 0.7s;
+}
+
+.specialty-card:hover .icon {
+  transform: scale(1.14) rotate(6deg);
+}
+
+.card-titlee {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #000000;
+  margin: 0 0 5px 0;
+  letter-spacing: -0.5px;
+  transition: color 0.3s;
+}
+
+@media (max-width: 700px) {
+  .main-title { font-size: 1.6rem; }
+  .specialties-section { padding: 24px 5px 16px; }
+  .specialties-grid { gap: 18px; }
+  .specialty-card { padding: 18px 10px; }
+  .icon { width: 38px; height: 38px; font-size: 1.3rem; }
+}
+
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-18px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes cardEnter {
+  0% { opacity: 0; transform: translateY(36px) scale(0.95);}
+  100% { opacity: 1; transform: translateY(0) scale(1);}
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.7);}
+  80% { opacity: 1; transform: scale(1.08);}
+  100% { opacity: 1; transform: scale(1);}
+}
+
+.row_cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 28px;
+  justify-content: center;
+}
+
+.specialty-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 32px 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  min-width: 320px;
+  max-width: 370px;
+  position: relative;
+  text-align: right;
+  transition: box-shadow 0.3s, transform 0.3s;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.specialty-card:hover {
+  box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+  transform: translateY(-8px) scale(1.03);
+}
+
+.icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border-radius: 16px;
+  color: #fff;
+  margin-left: 10px;
+  box-shadow: 0 2px 8px rgba(80, 110, 180, 0.13);
+  transition: transform 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+  flex-shrink: 0;
+}
+
+.specialty-card:hover .icon {
+  transform: scale(1.14) rotate(6deg);
+}
+
+.card-descc {
+  color:#4644449c;
+  font-size: 1rem;
+  margin: 0 0 18px 0;
+  font-weight: 400;
+  opacity: 1;
+  transition: opacity 0.3s, transform 0.3s;
+  /* مهم لجعل الاختفاء ناعم */
+}
+
+.specialty-card:hover .card-descc {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+.card-btn {
+  width: 85%;
+  background:#102C57;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  position: absolute;
+  bottom: -10%;
+  transform: translateY(30px);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  margin-top: 0;
+}
+
+.specialty-card:hover .card-btn {
+  bottom: 10%;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 0.1s;
+}
+
+@media (max-width: 1200px) {
+  .specialties-section {
+    padding: 40px 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .main-titlee {
+    font-size: 2.4rem;
+  }
+  .subtitleeeee {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .specialties-section {
+    padding: 32px 16px;
+  }
+  .main-titlee {
+    font-size: 2rem;
+  }
+  .specialties-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .specialty-card {
+    padding: 24px 18px;
+    min-height: 110px;
+  }
+  .icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.8rem;
+  }
+  .card-titlee {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .specialties-section {
+    padding: 24px 12px;
+  }
+  .main-titlee {
+    font-size: 1.8rem;
+  }
+  .specialties-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .specialty-card {
+    padding: 20px 16px;
+    min-height: auto;
+    flex-direction: row;
+    align-items: center;
+  }
+  .icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.6rem;
+  }
+  .card-titlee {
+    font-size: 1.1rem;
+  }
+  .card-btn {
+    position: static;
+    transform: none;
+    margin-left: 16px;
+    bottom: auto;
+    pointer-events: auto;
+    width: auto;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: #102C57;
+    color: #fff;
+    transition: none;
+  }
+  .specialty-card:hover .card-btn {
+    bottom: auto;
+    transform: none;
+    pointer-events: auto;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 400px) {
+  .main-titlee {
+    font-size: 1.6rem;
+  }
+  .subtitleeeee {
+    font-size: 0.9rem;
+  }
+  .specialty-card {
+    padding: 18px 14px;
+  }
+}

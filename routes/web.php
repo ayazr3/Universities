@@ -12,7 +12,10 @@ use App\Http\Controllers\TermController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Models\Governorate;
+use App\Http\Controllers\CollegeController;
+use App\Http\Controllers\SpecializationController;
+/*
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,15 +26,25 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
+    $GOVERNORATES = Governorate::latest()->get();
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'GOVERNORATES' => $GOVERNORATES,
     ]);
-});
+})->name('welcome'); // إضافة اسم للراوت هنا
+
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -63,3 +76,24 @@ Route::middleware('auth')->group(function () {
 
 
 require __DIR__.'/auth.php';
+
+
+
+
+Route::get('/colleges', [CollegeController::class, 'indexUser'])->name('colleges.indexUser');
+// صفحة التفاصيل للكلية
+Route::get('/universities/{id}', [CollegeController::class, 'showUser'])->name('colleges.showUser');
+
+
+
+// راوت صفحة التوجيه والدعم للواجهة الأمامية
+Route::get('/guidance', [GuidanceController::class, 'frontendIndex'])->name('guidance.index');
+
+// صفحة الأسئلة الشائعة - 
+Route::get('/questions', [FaqController::class, 'indexUser'])->name('faq.index');
+
+
+
+//عرض معلومات الكلية 
+Route::get('/specialties', [SpecializationController::class, 'indexUser'])->name('specialties.index');
+Route::get('/specialties/{id}', [SpecializationController::class, 'showUser'])->name('specialties.show');

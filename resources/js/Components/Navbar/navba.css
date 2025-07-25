@@ -1,0 +1,441 @@
+:root {
+  --Dark-blue: #1E90FF; /* اللون الأزرق المشرق للنافبار */
+}
+
+/* ========== أساسيات النافبار ========== */
+.navBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100vw;
+  height: 5rem;
+  padding: 0 1.2rem;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInDown 0.5s ease forwards;
+  direction: rtl;
+  box-sizing: border-box;
+  margin: 0; /* تصحيح المساحات */
+}
+
+/* تأثير عند التمرير على النافبار */
+.navBar.scrolled {
+  background-color: var(--Dark-blue);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  animation: backgroundPulse 1.5s infinite alternate ease-in-out;
+}
+
+/* ========== الجانب الأيسر ========== */
+.left_side span {
+  text-align: center;
+  margin: 0.7rem 0;
+  padding: 0.4rem 1.2rem;
+  background-color: var(--Dark-blue);
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 5px rgba(30, 144, 255, 0.7);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.left_side span:hover {
+  background-color: #1C86EE;
+  transform: scale(1.05);
+  box-shadow: 0 5px 12px rgba(28, 134, 238, 0.8);
+}
+
+.navBar a {
+  text-decoration: none;
+}
+
+.left_side {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.search_form {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 24px;
+  padding: 2px 8px 2px 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s;
+}
+
+.search_form:focus-within {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+}
+
+.search_input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 8px 10px;
+  font-size: 1rem;
+  border-radius: 18px;
+  direction: rtl;
+  min-width: 110px;
+  transition: min-width 0.2s;
+}
+
+.search_input:focus {
+  min-width: 160px;
+}
+
+.search_button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: background 0.2s;
+  color: #555;
+  font-size: 1.4rem;
+}
+
+.search_button:hover,
+.search_button:focus {
+  background: #e2e2e2;
+  color: #222;
+}
+
+/* ========== الجانب الوسط ========== */
+.center_side {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.center_side a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.3s ease, border-bottom 0.3s ease, transform 0.3s ease;
+  padding-bottom: 2px;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.center_side a:hover,
+.center_side a.active {
+  color: var(--Dark-blue);
+  border-bottom: 3px solid var(--Dark-blue);
+  transform: translateY(-2px);
+}
+
+/* ========== الجانب الأيمن ========== */
+.N_right_side {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+}
+
+.N_right_side span {
+  margin-left: 9px;
+  margin-right: 8px;
+  font-weight: bold;
+  color: var(--Dark-blue);
+  font-size: 0.95rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.N_right_side span:hover {
+  color: #00264d;
+  transform: translateY(-2px);
+}
+
+.N_right_side svg {
+  margin: 0.7rem;
+  padding: 0.4rem;
+  background-color: var(--Dark-blue);
+  font-weight: bold;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 64, 128, 0.5);
+}
+
+.N_right_side svg:hover {
+  background-color: #004080;
+  transform: scale(1.1) rotate(8deg);
+  box-shadow: 0 7px 15px rgba(0, 64, 128, 0.7);
+}
+
+/* ========== Keyframes للانيميشن ========== */
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes backgroundPulse {
+  0% {
+    background-color: var(--Dark-blue);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  }
+  100% {
+    background-color: #003366;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* زر القائمة مخفي افتراضياً */
+.menu_toggle {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--Dark-blue);
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+  border-radius: 50%;
+}
+
+.menu_toggle:hover {
+  transform: rotate(90deg);
+  background-color: rgba(0, 64, 128, 0.1);
+}
+
+/* ========== ميديا كويري للشاشات المتوسطة والصغيرة ========== */
+@media (max-width: 1024px) {
+  .navBar {
+    padding: 0 1rem;
+  }
+
+  .center_side a {
+    font-size: 1rem;
+    margin-left: 0.8rem;
+  }
+
+  .left_side span,
+  .N_right_side span {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  .search_form {
+    padding: 2px 6px 2px 2px;
+  }
+
+  .search_input {
+    padding: 6px 8px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ========== ميديا كويري للشاشات الصغيرة ========== */
+@media (max-width: 768px) {
+  .navBar {
+    padding: 0 0.8rem;
+    height: 4.5rem;
+  }
+
+  .left_side,
+  .N_right_side {
+    width: auto;
+    gap: 0.5rem;
+  }
+
+  .center_side {
+    display: none;
+    flex-direction: column;
+    width: 100vw;
+    background-color: white;
+    position: absolute;
+    top: 4.5rem;
+    left: 0;
+    right: 0;
+    padding: 1rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+    z-index: 1001;
+    gap: 1rem;
+    animation: fadeInDown 0.3s ease-out;
+  }
+
+  .center_side.open {
+    display: flex;
+  }
+
+  .center_side a {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    border-bottom: none;
+    transition: all 0.3s ease;
+  }
+
+  .center_side a:hover,
+  .center_side a.active {
+    background-color: rgba(0, 64, 128, 0.05);
+    transform: translateX(-5px);
+    border-radius: 6px;
+  }
+
+  .menu_toggle {
+    display: block;
+    order: -1;
+  }
+
+  .left_side span,
+  .N_right_side span {
+    font-size: 0.85rem;
+    margin: 0.3rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .N_right_side svg {
+    margin: 0.3rem;
+    padding: 0.3rem;
+    font-size: 1.2rem;
+  }
+
+  .search_form {
+    margin-left: auto;
+    margin-right: 0.5rem;
+    flex-grow: 1;
+    max-width: 200px;
+  }
+
+  .search_input {
+    min-width: 90px;
+    padding: 5px 8px;
+    width: 100%;
+  }
+
+  .search_input:focus {
+    min-width: 120px;
+  }
+}
+
+/* ========== ميديا كويري للشاشات الصغيرة جداً ========== */
+@media (max-width: 480px) {
+  .navBar {
+    height: 4rem;
+    padding: 0 0.5rem;
+  }
+
+  .center_side {
+    top: 4rem;
+    padding: 0.8rem 0;
+    gap: 0.8rem;
+  }
+
+  .left_side {
+    gap: 0.3rem;
+    flex: 1;
+  }
+
+  .left_side span {
+    display: none;
+  }
+
+  .left_side .search_form {
+    display: flex;
+    max-width: none;
+  }
+
+  .N_right_side {
+    gap: 0.3rem;
+    flex: 0;
+  }
+
+  .N_right_side span {
+    display: none;
+  }
+
+  .menu_toggle {
+    font-size: 1.5rem;
+    padding: 0.3rem;
+  }
+
+  .center_side a {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .search_input {
+    min-width: 70px;
+    font-size: 0.8rem;
+  }
+
+  .search_input:focus {
+    min-width: 100px;
+  }
+
+  .search_button {
+    font-size: 1.2rem;
+  }
+}
+
+/* إخفاء تسجيل الدخول من القائمة الوسطى في الديسكتوب */
+.login_list_link {
+  display: none;
+}
+
+/* إظهار تسجيل الدخول داخل القائمة الوسطى في الشاشات الصغيرة فقط */
+@media (max-width: 768px) {
+  .left_side .login_link {
+    display: none;
+  }
+  .center_side .login_list_link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--Dark-blue);
+    color: #fff;
+    border-radius: 6px;
+    font-weight: bold;
+    padding: 0.5rem 1.2rem;
+    margin: 0.2rem 0;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 64, 128, 0.13);
+  }
+  .center_side .login_list_link:hover {
+    background: #004080;
+    color: #fff;
+    transform: scale(1.04);
+  }
+  .center_side .login_list_link span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1rem;
+  }
+}

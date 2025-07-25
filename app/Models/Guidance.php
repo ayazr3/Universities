@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Guidance extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','image','description','link','type'];
 
+    protected $fillable = [
+        'title',
+        'image',
+        'description',
+        'link',
+        'type',
+    ];
 }

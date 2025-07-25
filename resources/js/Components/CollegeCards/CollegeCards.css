@@ -1,0 +1,277 @@
+:root {
+  --main-blue: #2563eb;
+  --main-dark: #1e40af;
+  --light-bg: #f5f5f5;
+  --section-padding: clamp(12px, 3vw, 40px);
+  --section-gap: clamp(8px, 2vw, 24px);
+  --card-radius: 14px;
+  --font-main: "El Messiri", Tahoma, Arial, sans-serif;
+}
+
+* {
+ 
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--light-bg);
+  direction: rtl;
+}
+
+.damascus-uni-container {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  direction: rtl;
+}
+
+/* الهيدر */
+.header-section {
+  background: linear-gradient(135deg, var(--main-blue) 0%, var(--main-dark) 100%);
+  color: white;
+  padding: clamp(24px, 5vw, 48px) 10px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="90" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+  opacity: 0.3;
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
+  max-width: 98vw;
+  margin: 0 auto;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.graduation-icon {
+  font-size: clamp(24px, 5vw, 36px);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.main-title {
+  font-size: clamp(20px, 4vw, 32px);
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+  font-size: clamp(13px, 2vw, 18px);
+  margin: 0 0 24px 0;
+  opacity: 0.9;
+  color: black;
+  font-weight: 300;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-icon {
+  font-size: 16px;
+}
+
+.stat-text {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* الشبكة */
+.college-cards-container {
+  display: grid;
+  width: 100%;
+  max-width: 1460px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--section-gap);
+  padding: var(--section-padding);
+  background-color: var(--light-bg);
+  direction: rtl;
+  margin-inline: auto 24px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+  .college-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .college-cards-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .college-cards-container {
+    padding: 7px;
+    gap: 8px;
+  }
+}
+
+/* الكرت */
+.college-card {
+  background: white;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.college-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 8px 24px rgba(37,99,235,0.13);
+}
+
+/* الصورة */
+.card-image {
+  height: clamp(90px, 18vw, 140px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card-content {
+  padding: clamp(10px, 2vw, 18px);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.college-name {
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.college-description {
+  font-size: 13px;
+  color: #666;
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.college-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.info-icon {
+  font-size: 13px;
+  color: var(--main-blue);
+}
+
+.info-text {
+  font-size: 12px;
+  color: #8B8B8B;
+}
+
+.details-button {
+  width: 100%;
+  background: var(--main-blue);
+  color: white;
+  border: none;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 8px;
+}
+
+.details-button:hover {
+  background: #1d4ed8;
+}
+
+/* القسم السفلي */
+.bottom-section {
+  background: #f8fafc;
+  padding: var(--section-padding) 10px;
+  text-align: center;
+}
+
+.choose-title {
+  font-size: clamp(16px, 3vw, 24px);
+  font-weight: bold;
+  color: #1e293b;
+  margin: 0 0 12px 0;
+}
+
+.choose-description {
+  font-size: 13px;
+  color: #64748b;
+  max-width: 98vw;
+  margin: 0 auto 16px auto;
+  line-height: 1.6;
+}
+
+.underline {
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* تحسينات إضافية للشاشات الصغيرة */
+@media (max-width: 600px) {
+  .main-title,
+  .choose-title {
+    font-size: 18px;
+  }
+  .header-section,
+  .bottom-section {
+    padding: 16px 4px;
+  }
+  .college-card {
+    border-radius: 8px;
+  }
+}
