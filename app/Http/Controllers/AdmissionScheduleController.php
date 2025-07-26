@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AdmissionSchedule;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class AdmissionScheduleController extends Controller
@@ -31,12 +32,29 @@ class AdmissionScheduleController extends Controller
     // حفظ جدول جديد
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        // $validated = $request->validate([
+        //     'title' => 'required|string|max:100',
+        //     'body' => 'required|string',
+        //     'date' => 'required|date',
+        //     'name' => 'required|string|max:100',
+        // ]);
+
+        // AdmissionSchedule::create($validated);
+
+        // return redirect()->route('admissionSchedule.index')->with('success', 'تم إنشاء الجدول بنجاح.');
+         $validated = $request->validate([
             'title' => 'required|string|max:100',
             'body' => 'required|string',
             'date' => 'required|date',
             'name' => 'required|string|max:100',
+            'file_url' => 'nullable|file|mimes:pdf,doc,docx,txt|max:2048', // تحقق من الملف بنسبة مناسبة
         ]);
+
+        // إذا كان هناك ملف
+        if ($request->hasFile('file_url')) {
+            $filePath = $request->file('file_url')->store('admission_files', 'public');
+            $validated['file_url'] = $filePath;
+        }
 
         AdmissionSchedule::create($validated);
 
@@ -62,12 +80,51 @@ class AdmissionScheduleController extends Controller
     // تحديث جدول معين
     public function update(Request $request, AdmissionSchedule $admissionSchedule)
     {
-        $validated = $request->validate([
+        // $validated = $request->validate([
+        //     'title' => 'required|string|max:100',
+        //     'body' => 'required|string',
+        //     'date' => 'required|date',
+        //     'name' => 'required|string|max:100',
+        // ]);
+
+        // $admissionSchedule->update($validated);
+
+        // return redirect()->route('admissionSchedule.index')->with('success', 'تم تحديث الجدول بنجاح.');
+
+        // $validated = $request->validate([
+        //     'title' => 'required|string|max:100',
+        //     'body' => 'required|string',
+        //     'date' => 'required|date',
+        //     'name' => 'required|string|max:100',
+        //     'file_url' => 'nullable|file|mimes:pdf,doc,docx,txt|max:2048',
+        // ]);
+
+        // if ($request->hasFile('file_url')) {
+        //     // يمكنك حذف الملف القديم هنا إذا أردت
+        //     $filePath = $request->file('file_url')->store('admission_files', 'public');
+        //     $validated['file_url'] = $filePath;
+        // }
+
+        // $admissionSchedule->update($validated);
+
+        // return redirect()->route('admissionSchedule.index')->with('success', 'تم تحديث الجدول بنجاح.');
+
+          $validated = $request->validate([
             'title' => 'required|string|max:100',
             'body' => 'required|string',
             'date' => 'required|date',
             'name' => 'required|string|max:100',
+            'file_url' => 'nullable|file|mimes:pdf,doc,docx,txt|max:2048',
         ]);
+
+        if ($request->hasFile('file_url')) {
+            // حذف الملف القديم لو أردت
+            if ($admissionSchedule->file_url && Storage::disk('public')->exists($admissionSchedule->file_url)) {
+                Storage::disk('public')->delete($admissionSchedule->file_url);
+            }
+            $filePath = $request->file('file_url')->store('admission_files', 'public');
+            $validated['file_url'] = $filePath;
+        }
 
         $admissionSchedule->update($validated);
 
@@ -77,6 +134,13 @@ class AdmissionScheduleController extends Controller
     // حذف جدول معين
     public function destroy(AdmissionSchedule $admissionSchedule)
     {
+        // $admissionSchedule->delete();
+
+        // return redirect()->route('admissionSchedule.index')->with('success', 'تم حذف الجدول بنجاح.');
+         // حذف الملف المرتبط (اختياري)
+        if ($admissionSchedule->file_url && Storage::disk('public')->exists($admissionSchedule->file_url)) {
+            Storage::disk('public')->delete($admissionSchedule->file_url);
+        }
         $admissionSchedule->delete();
 
         return redirect()->route('admissionSchedule.index')->with('success', 'تم حذف الجدول بنجاح.');

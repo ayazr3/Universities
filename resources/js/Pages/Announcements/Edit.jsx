@@ -1,150 +1,171 @@
 import React from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { Inertia } from '@inertiajs/inertia';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import '@/Components/Admin/Style/Style.css';
 
-export default function AnnouncementEdit({ announcement ,auth }) {
-    const { data, setData, put, processing, errors } = useForm({
-        title: announcement.title,
-        summary: announcement.summary,
-        publisher: announcement.publisher,
-        image: null,
-        publish_date: announcement.publish_date,
-        details: announcement.details
-    });
+export default function AnnouncementEdit({ announcement, auth }) {
+  const { data, setData, put, processing, errors } = useForm({
+    title: announcement.title || '',
+    summary: announcement.summary || '',
+    publisher: announcement.publisher || '',
+    image: null,
+    publish_date: announcement.publish_date || '',
+    details: announcement.details || '',
+  });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        put(route('announcement.update', announcement.id));
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    return (
-        <AuthenticatedLayout
-                    user={auth.user}
-                    header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">إضافة سيارة جديدة</h2>}
-        >
-            <Head title="تعديل الإعلان" />
+    if (data.image) {
+      const formData = new FormData();
+      formData.append('title', data.title);
+      formData.append('summary', data.summary);
+      formData.append('publisher', data.publisher);
+      formData.append('publish_date', data.publish_date);
+      formData.append('details', data.details);
+      formData.append('image', data.image);
+      formData.append('_method', 'PUT');
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">
-                            <h2 className="text-2xl font-bold mb-6">تعديل الإعلان</h2>
+      Inertia.post(route('announcement.update', announcement.id), formData, {
+        preserveScroll: true,
+      });
+    } else {
+      put(route('announcement.update', announcement.id), { preserveScroll: true });
+    }
+  };
 
-                            <form onSubmit={handleSubmit}>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-                                        العنوان
-                                    </label>
-                                    <input
-                                        id="title"
-                                        type="text"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.title ? 'border-red-500' : ''}`}
-                                        value={data.title}
-                                        onChange={(e) => setData('title', e.target.value)}
-                                    />
-                                    {errors.title && <p className="text-red-500 text-xs italic">{errors.title}</p>}
-                                </div>
+  return (
+    <AuthenticatedLayout
+      user={auth.user}
+      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">تعديل الإعلان</h2>}
+    >
+      <Head title="تعديل الإعلان" />
 
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="summary">
-                                        الملخص
-                                    </label>
-                                    <textarea
-                                        id="summary"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.summary ? 'border-red-500' : ''}`}
-                                        value={data.summary}
-                                        onChange={(e) => setData('summary', e.target.value)}
-                                    />
-                                    {errors.summary && <p className="text-red-500 text-xs italic">{errors.summary}</p>}
-                                </div>
+      <div className="py-12 flex justify-center">
+        <div className="w-full max-w-lg">
+          <form onSubmit={handleSubmit} encType="multipart/form-data" className="modern-form" noValidate>
+            <h2 className="form-title">تعديل الإعلان</h2>
 
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="publisher">
-                                        الناشر
-                                    </label>
-                                    <input
-                                        id="publisher"
-                                        type="text"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.publisher ? 'border-red-500' : ''}`}
-                                        value={data.publisher}
-                                        onChange={(e) => setData('publisher', e.target.value)}
-                                    />
-                                    {errors.publisher && <p className="text-red-500 text-xs italic">{errors.publisher}</p>}
-                                </div>
-
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
-                                        الصورة (اتركه فارغًا للحفاظ على الصورة الحالية)
-                                    </label>
-                                    <input
-                                        id="image"
-                                        type="file"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.image ? 'border-red-500' : ''}`}
-                                        onChange={(e) => setData('image', e.target.files[0])}
-                                    />
-                                    {announcement.image && (
-                                        <div className="mt-2">
-                                            <p className="text-sm text-gray-500">الصورة الحالية:</p>
-                                            <img
-                                                src={`/storage/${announcement.image}`}
-                                                alt="Current"
-                                                className="h-20 w-auto mt-1"
-                                            />
-                                        </div>
-                                    )}
-                                    {errors.image && <p className="text-red-500 text-xs italic">{errors.image}</p>}
-                                </div>
-
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="publish_date">
-                                        تاريخ النشر
-                                    </label>
-                                    <input
-                                        id="publish_date"
-                                        type="date"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.publish_date ? 'border-red-500' : ''}`}
-                                        value={data.publish_date}
-                                        onChange={(e) => setData('publish_date', e.target.value)}
-                                    />
-                                    {errors.publish_date && <p className="text-red-500 text-xs italic">{errors.publish_date}</p>}
-                                </div>
-
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="details">
-                                        التفاصيل
-                                    </label>
-                                    <textarea
-                                        id="details"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.details ? 'border-red-500' : ''}`}
-                                        value={data.details}
-                                        onChange={(e) => setData('details', e.target.value)}
-                                        rows="5"
-                                    />
-                                    {errors.details && <p className="text-red-500 text-xs italic">{errors.details}</p>}
-                                </div>
-
-                                <div className="flex items-center justify-between">
-                                    <button
-                                        type="submit"
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                        disabled={processing}
-                                    >
-                                        {processing ? 'جاري التحديث...' : 'تحديث الإعلان'}
-                                    </button>
-                                    <Link
-                                        href={route('announcement.index')}
-                                        className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                                    >
-                                        رجوع
-                                    </Link>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            {/* العنوان */}
+            <div className="form-group">
+              <label htmlFor="title">العنوان</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={data.title}
+                onChange={e => setData('title', e.target.value)}
+                className={errors.title ? "input-error" : ""}
+                required
+                autoFocus
+              />
+              {errors.title && <p className="error-text">{errors.title}</p>}
             </div>
-        </AuthenticatedLayout>
-    );
-}
 
-//Edit.layout = page => <AuthenticatedLayout children={page} />;
+            {/* الملخص */}
+            <div className="form-group">
+              <label htmlFor="summary">الملخص</label>
+              <textarea
+                id="summary"
+                name="summary"
+                rows={3}
+                value={data.summary}
+                onChange={e => setData('summary', e.target.value)}
+                className={errors.summary ? "input-error" : ""}
+                required
+              />
+              {errors.summary && <p className="error-text">{errors.summary}</p>}
+            </div>
+
+            {/* الناشر */}
+            <div className="form-group">
+              <label htmlFor="publisher">الناشر</label>
+              <input
+                type="text"
+                id="publisher"
+                name="publisher"
+                value={data.publisher}
+                onChange={e => setData('publisher', e.target.value)}
+                className={errors.publisher ? "input-error" : ""}
+                required
+              />
+              {errors.publisher && <p className="error-text">{errors.publisher}</p>}
+            </div>
+
+            {/* الصورة */}
+            <div className="form-group">
+              <label htmlFor="image">الصورة (اتركه فارغًا للحفاظ على الصورة الحالية)</label>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+                onChange={e => setData('image', e.target.files[0])}
+                className={errors.image ? "input-error" : ""}
+              />
+              {announcement.image && !data.image && (
+                <div className="mt-2">
+                  <p className="current-image-note">الصورة الحالية:</p>
+                  <img
+                    src={`/storage/${announcement.image}`}
+                    alt="الصورة الحالية"
+                    className="rounded"
+                    style={{ height: '60px', marginTop: '8px' }}
+                  />
+                </div>
+              )}
+              {errors.image && <p className="error-text">{errors.image}</p>}
+            </div>
+
+            {/* تاريخ النشر */}
+            <div className="form-group">
+              <label htmlFor="publish_date">تاريخ النشر</label>
+              <input
+                type="date"
+                id="publish_date"
+                name="publish_date"
+                value={data.publish_date}
+                onChange={e => setData('publish_date', e.target.value)}
+                className={errors.publish_date ? "input-error" : ""}
+                required
+              />
+              {errors.publish_date && <p className="error-text">{errors.publish_date}</p>}
+            </div>
+
+            {/* التفاصيل */}
+            <div className="form-group">
+              <label htmlFor="details">التفاصيل</label>
+              <textarea
+                id="details"
+                name="details"
+                rows={5}
+                value={data.details}
+                onChange={e => setData('details', e.target.value)}
+                className={errors.details ? "input-error" : ""}
+                required
+              />
+              {errors.details && <p className="error-text">{errors.details}</p>}
+            </div>
+
+            {/* أزرار الإجراء */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '2rem', marginTop: 24 }}>
+              <button
+                type="submit"
+                disabled={processing}
+                className="submit-btn"
+                style={{ minWidth: 120 }}
+              >
+                {processing ? 'جاري التحديث...' : 'تحديث الإعلان'}
+              </button>
+              <Link href={route('announcement.index')} className="modern-link">
+                رجوع
+              </Link>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </AuthenticatedLayout>
+  );
+}

@@ -17,10 +17,15 @@ class AdmissionScheduleFactory extends Factory
     public function definition(): array
     {
         return [
+            // 'title' => $this->faker->sentence(3),
+            // 'body' => $this->faker->paragraph(3),
+            // 'date' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
+            // 'name' => $this->faker->name,
             'title' => $this->faker->sentence(3),
             'body' => $this->faker->paragraph(3),
             'date' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
             'name' => $this->faker->name,
+            'file_url' => 'admission_files/sample-file.pdf',
         ];
     }
 }

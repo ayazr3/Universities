@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import '@/Components/Admin/Style/Style.css'
 
 export default function GuidanceCreate({ auth, colleges }) {
   const { data, setData, post, processing, errors } = useForm({
@@ -20,81 +21,126 @@ export default function GuidanceCreate({ auth, colleges }) {
   };
 
   return (
-    <AuthenticatedLayout user={auth.user} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">إضافة توجيه جديد</h2>}>
+    <AuthenticatedLayout user={auth.user} header={<h2 className="form-title">إضافة توجيه جديد</h2>}>
       <Head title="إضافة توجيه جديد" />
-      <div className="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-          <form onSubmit={handleSubmit} encType="multipart/form-data">
-            <div className="mb-4">
-              <label htmlFor="title" className="block text-gray-700 font-bold mb-2">العنوان</label>
-              <input
-                id="title"
-                type="text"
-                value={data.title}
-                onChange={e => setData('title', e.target.value)}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.title ? 'border-red-500' : ''}`}
-              />
-              {errors.title && <p className="text-red-500 text-xs italic">{errors.title}</p>}
-            </div>
-             <div className="mb-4">
-                <label htmlFor="image" className="block text-gray-700 font-bold mb-2">الصورة (اختياري)</label>
-                <input
-                id="image"
-                type="file"
-                accept="image/*"
-                onChange={e => setData('image', e.target.files[0])}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.image ? 'border-red-500' : ''}`}
-                />
-                {errors.image && <p className="text-red-500 text-xs italic">{errors.image}</p>}
-            </div>
-            <div className="mb-4">
-              <label htmlFor="description" className="block text-gray-700 font-bold mb-2">الوصف</label>
-              <textarea
-                id="description"
-                value={data.description}
-                onChange={e => setData('description', e.target.value)}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.description ? 'border-red-500' : ''}`}
-              />
-              {errors.description && <p className="text-red-500 text-xs italic">{errors.description}</p>}
-            </div>
-            <div className="mb-4">
-              <label htmlFor="link" className="block text-gray-700 font-bold mb-2">الرابط (اختياري)</label>
-              <input
-                id="link"
-                type="text"
-                value={data.link}
-                onChange={e => setData('link', e.target.value)}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.link ? 'border-red-500' : ''}`}
-              />
-              {errors.link && <p className="text-red-500 text-xs italic">{errors.link}</p>}
-            </div>
-            <div className="mb-4">
-              <label htmlFor="type" className="block text-gray-700 font-bold mb-2">نوع التوجيه</label>
-              <select
-                id="type"
-                value={data.type}
-                onChange={e => setData('type', e.target.value)}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.type ? 'border-red-500' : ''}`}
-              >
-                <option value="article">مقال</option>
-                <option value="booke">كتاب</option>
-                <option value="video">فيديو</option>
-                <option value="advice">نصيحة</option>
-              </select>
-              {errors.type && <p className="text-red-500 text-xs italic">{errors.type}</p>}
-            </div>
-            <div className="flex items-center justify-between">
-              <button
-                type="submit"
-                disabled={processing}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                {processing ? 'جاري الحفظ...' : 'حفظ التوجيه'}
-              </button>
-              <Link href={route('guidances.index')} className="text-blue-500 hover:text-blue-700">رجوع</Link>
-            </div>
-          </form>
-        </div>
+      <div style={{
+        minHeight: "100vh", background: "rgb(179 194 215)",
+        display: "flex", alignItems: "center", justifyContent: "center"
+      }}>
+        <form
+          className="modern-form"
+          style={{width:'100%',maxWidth:"520px"}}
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
+          <h2 className="form-title" style={{marginBottom:16, marginTop:0}}>إدخال بيانات التوجيه</h2>
+
+          {/* عنوان التوجيه */}
+          <div className="form-group">
+            <label htmlFor="title">العنوان</label>
+            <input
+              id="title"
+              type="text"
+              className={errors.title ? "input-error" : ""}
+              value={data.title}
+              onChange={e => setData('title', e.target.value)}
+              autoFocus
+              required
+            />
+            {errors.title && <div style={{color:"#e74c3c", fontSize:"13px"}}>{errors.title}</div>}
+          </div>
+
+          {/* الصورة */}
+          <div className="form-group">
+            <label htmlFor="image">الصورة (اختياري)</label>
+            <input
+              id="image"
+              type="file"
+              accept="image/*"
+              onChange={e => setData('image', e.target.files[0])}
+              className={errors.image ? "input-error" : ""}
+            />
+            {errors.image && <div style={{color:"#e74c3c", fontSize:"13px"}}>{errors.image}</div>}
+          </div>
+
+          {/* الوصف */}
+          <div className="form-group">
+            <label htmlFor="description">الوصف</label>
+            <textarea
+              id="description"
+              rows={4}
+              className={errors.description ? "input-error" : ""}
+              value={data.description}
+              onChange={e => setData('description', e.target.value)}
+              required
+            />
+            {errors.description && <div style={{color:"#e74c3c", fontSize:"13px"}}>{errors.description}</div>}
+          </div>
+
+          {/* الرابط */}
+          <div className="form-group">
+            <label htmlFor="link">رابط (اختياري)</label>
+            <input
+              id="link"
+              type="url"
+              className={errors.link ? "input-error" : ""}
+              value={data.link}
+              onChange={e => setData('link', e.target.value)}
+              placeholder="https://example.com"
+            />
+            {errors.link && <div style={{color:"#e74c3c", fontSize:"13px"}}>{errors.link}</div>}
+          </div>
+
+          {/* نوع التوجيه */}
+          <div className="form-group">
+            <label htmlFor="type">نوع التوجيه</label>
+            <select
+              id="type"
+              className={errors.type ? "input-error" : ""}
+              value={data.type}
+              onChange={e => setData('type', e.target.value)}
+              required
+            >
+              <option value="article">مقالة</option>
+              <option value="booke">كتاب</option>
+              <option value="video">فيديو</option>
+              <option value="advice">نصيحة</option>
+            </select>
+            {errors.type && <div style={{color:"#e74c3c", fontSize:"13px"}}>{errors.type}</div>}
+          </div>
+
+          {/* أزرار الإجراء */}
+          <div style={{
+            display: "flex",
+            gap: "12px",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 10
+          }}>
+            <button
+              className="submit-btn"
+              type="submit"
+              disabled={processing}
+              style={{flex:1}}
+            >
+              {processing ? 'جاري الحفظ...' : 'حفظ التوجيه'}
+            </button>
+            <Link
+              href={route('guidances.index')}
+              style={{
+                color: "#3a8dde",
+                fontWeight: "bold",
+                textDecoration: "underline",
+                background: "#eaf4ff",
+                borderRadius: 7,
+                padding: "11px 15px",
+                fontSize: "15px"
+              }}
+            >
+              رجوع
+            </Link>
+          </div>
+        </form>
       </div>
     </AuthenticatedLayout>
   );

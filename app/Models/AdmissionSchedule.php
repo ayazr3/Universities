@@ -13,7 +13,8 @@ class AdmissionSchedule extends Model
         'title',
         'body',
         'date',
-        'name'
+        'name',
+        'file_url',
     ];
 
     protected $dates = [

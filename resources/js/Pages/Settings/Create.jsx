@@ -1,128 +1,8 @@
-// import React from 'react';
-// import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-// import { Head, Link, useForm } from '@inertiajs/react';
-// import SettingMap from '@/Components/SettingMap';
-
-// export default function SettingCreate({ auth }) {
-//   const { data, setData, post, processing, errors } = useForm({
-//     site_name: '',
-//     logo: '',
-//     url: '',
-//     location: { lat: 24.7136, lng: 46.6753 },
-//     description: '',
-//   });
-
-//   const handleLatLng = ({ lat, lng }) => {
-//     setData('location', { lat, lng });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     post(route('settings.store'));
-//   };
-
-//   return (
-//     <AuthenticatedLayout user={auth.user} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">إضافة إعداد جديد</h2>}>
-//       <Head title="إضافة إعداد جديد" />
-//       <div className="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-//         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-//           <form onSubmit={handleSubmit}>
-//             <div className="mb-4">
-//               <label htmlFor="site_name" className="block text-gray-700 font-bold mb-2">اسم الموقع</label>
-//               <input
-//                 id="site_name"
-//                 type="text"
-//                 value={data.site_name}
-//                 onChange={e => setData('site_name', e.target.value)}
-//                 className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.site_name ? 'border-red-500' : ''}`}
-//               />
-//               {errors.site_name && <p className="text-red-500 text-xs italic">{errors.site_name}</p>}
-//             </div>
-
-//             <div className="mb-4">
-//               <label htmlFor="logo" className="block text-gray-700 font-bold mb-2">رابط الشعار</label>
-//               <input
-//                 id="logo"
-//                 type="text"
-//                 value={data.logo}
-//                 onChange={e => setData('logo', e.target.value)}
-//                 className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.logo ? 'border-red-500' : ''}`}
-//               />
-//               {errors.logo && <p className="text-red-500 text-xs italic">{errors.logo}</p>}
-//             </div>
-
-//             <div className="mb-4">
-//               <label htmlFor="url" className="block text-gray-700 font-bold mb-2">رابط الموقع</label>
-//               <input
-//                 id="url"
-//                 type="text"
-//                 value={data.url}
-//                 onChange={e => setData('url', e.target.value)}
-//                 className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.url ? 'border-red-500' : ''}`}
-//               />
-//               {errors.url && <p className="text-red-500 text-xs italic">{errors.url}</p>}
-//             </div>
-
-//             <div className="mb-4">
-//               <label htmlFor="description" className="block text-gray-700 font-bold mb-2">الوصف</label>
-//               <textarea
-//                 id="description"
-//                 value={data.description}
-//                 onChange={e => setData('description', e.target.value)}
-//                 rows={5}
-//                 className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.description ? 'border-red-500' : ''}`}
-//               />
-//               {errors.description && <p className="text-red-500 text-xs italic">{errors.description}</p>}
-//             </div>
-
-//             <div className="mb-4">
-//               <label className="block text-gray-700 font-bold mb-2">الموقع على الخريطة</label>
-//               <SettingMap lat={data.location.lat} lng={data.location.lng} setLatLng={handleLatLng} editable={true} height={300} />
-//               <div className="flex gap-4 mt-2">
-//                 <input
-//                   type="number"
-//                   step="any"
-//                   value={data.location.lat}
-//                   onChange={e => setData('location', { ...data.location, lat: parseFloat(e.target.value) })}
-//                   placeholder="خط العرض"
-//                   className="border px-2 py-1 rounded w-1/2"
-//                 />
-//                 <input
-//                   type="number"
-//                   step="any"
-//                   value={data.location.lng}
-//                   onChange={e => setData('location', { ...data.location, lng: parseFloat(e.target.value) })}
-//                   placeholder="خط الطول"
-//                   className="border px-2 py-1 rounded w-1/2"
-//                 />
-//               </div>
-//               {(errors.location && typeof errors.location === 'string') && (
-//                 <p className="text-red-500 text-xs italic">{errors.location}</p>
-//               )}
-//             </div>
-
-//             <div className="flex items-center justify-between">
-//               <button
-//                 type="submit"
-//                 disabled={processing}
-//                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-//               >
-//                 {processing ? 'جاري الحفظ...' : 'حفظ الإعداد'}
-//               </button>
-//               <Link href={route('settings.index')} className="text-blue-500 hover:text-blue-700">رجوع</Link>
-//             </div>
-//           </form>
-//         </div>
-//       </div>
-//     </AuthenticatedLayout>
-//   );
-// }
-
-
 import React, { useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import SettingMap from '@/Components/SettingMap';
+import '@/Components/Admin/Style/Style.css';
 
 export default function SettingCreate({ auth }) {
   const { data, setData, post, processing, errors } = useForm({
@@ -174,152 +54,166 @@ export default function SettingCreate({ auth }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    post(route('settings.store'));
+    post(route('settings.store'), {
+      forceFormData: true, // في حال وجود ملفات والحقول المعقدة
+    });
   };
 
   return (
-    <AuthenticatedLayout user={auth.user} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">إضافة إعداد جديد</h2>}>
+    <AuthenticatedLayout user={auth.user} header={<h2 className="form-title">إضافة إعداد جديد</h2>}>
       <Head title="إضافة إعداد جديد" />
-      <div className="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-          <form onSubmit={handleSubmit}>
+      <div
+        style={{
+          minHeight: '100vh',
+          background: 'rgb(179 194 215)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1rem',
+        }}
+      >
+        <form onSubmit={handleSubmit} className="modern-form" style={{ width: '100%', maxWidth: 520 }} noValidate>
+          <h2 className="form-title" style={{ marginTop: 0, marginBottom: 16 }}>
+            إدخال بيانات الإعداد
+          </h2>
 
-            {/* اسم الموقع */}
-            <div className="mb-4">
-              <label htmlFor="site_name" className="block text-gray-700 font-bold mb-2">اسم الموقع</label>
+          {/* اسم الموقع */}
+          <div className="form-group">
+            <label htmlFor="site_name">اسم الموقع</label>
+            <input
+              type="text"
+              id="site_name"
+              value={data.site_name}
+              onChange={(e) => setData('site_name', e.target.value)}
+              className={errors.site_name ? 'input-error' : ''}
+              required
+              autoFocus
+            />
+            {errors.site_name && <div className="error-text">{errors.site_name}</div>}
+          </div>
+
+          {/* رابط الشعار */}
+          <div className="form-group">
+            <label htmlFor="logo">رابط الشعار</label>
+            <input
+              type="text"
+              id="logo"
+              value={data.logo}
+              onChange={(e) => setData('logo', e.target.value)}
+              className={errors.logo ? 'input-error' : ''}
+              required
+            />
+            {errors.logo && <div className="error-text">{errors.logo}</div>}
+          </div>
+
+          {/* رابط الموقع */}
+          <div className="form-group">
+            <label htmlFor="url">رابط الموقع</label>
+            <input
+              type="text"
+              id="url"
+              value={data.url}
+              onChange={(e) => setData('url', e.target.value)}
+              className={errors.url ? 'input-error' : ''}
+              required
+            />
+            {errors.url && <div className="error-text">{errors.url}</div>}
+          </div>
+
+          {/* الوصف */}
+          <div className="form-group">
+            <label htmlFor="description">الوصف</label>
+            <textarea
+              id="description"
+              rows={5}
+              value={data.description}
+              onChange={(e) => setData('description', e.target.value)}
+              className={errors.description ? 'input-error' : ''}
+              required
+            />
+            {errors.description && <div className="error-text">{errors.description}</div>}
+          </div>
+
+          {/* حقل البحث عن الموقع */}
+          <div className="form-group relative">
+            <label htmlFor="location_search">البحث عن موقع</label>
+            <input
+              type="text"
+              id="location_search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleSearch();
+                }
+              }}
+              placeholder="ابحث عن مدينة أو موقع"
+              className="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+            />
+            <button
+              type="button"
+              onClick={handleSearch}
+              disabled={searchLoading}
+              className="absolute top-8 right-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
+            >
+              {searchLoading ? 'جاري البحث...' : 'بحث'}
+            </button>
+
+            {searchResults.length > 0 && (
+              <ul className="absolute z-10 bg-white border border-gray-300 rounded w-full max-h-48 overflow-auto mt-1 shadow-lg">
+                {searchResults.map((result) => (
+                  <li
+                    key={result.place_id}
+                    onClick={() => handleSelectLocation(result)}
+                    className="cursor-pointer px-3 py-2 hover:bg-blue-100"
+                  >
+                    {result.display_name}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {searchError && <p className="text-red-500 text-xs italic mt-1">{searchError}</p>}
+          </div>
+
+          {/* الخريطة */}
+          <div className="form-group">
+            <label>الموقع على الخريطة</label>
+            <SettingMap lat={data.location.lat} lng={data.location.lng} setLatLng={handleLatLng} editable={true} height={300} />
+            <div className="flex gap-4 mt-2">
               <input
-                id="site_name"
-                type="text"
-                value={data.site_name}
-                onChange={e => setData('site_name', e.target.value)}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.site_name ? 'border-red-500' : ''}`}
+                type="number"
+                step="any"
+                value={data.location.lat}
+                onChange={(e) => setData('location', { ...data.location, lat: parseFloat(e.target.value) })}
+                placeholder="خط العرض"
+                className="border px-2 py-1 rounded w-1/2"
               />
-              {errors.site_name && <p className="text-red-500 text-xs italic">{errors.site_name}</p>}
-            </div>
-
-            {/* رابط الشعار */}
-            <div className="mb-4">
-              <label htmlFor="logo" className="block text-gray-700 font-bold mb-2">رابط الشعار</label>
               <input
-                id="logo"
-                type="text"
-                value={data.logo}
-                onChange={e => setData('logo', e.target.value)}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.logo ? 'border-red-500' : ''}`}
+                type="number"
+                step="any"
+                value={data.location.lng}
+                onChange={(e) => setData('location', { ...data.location, lng: parseFloat(e.target.value) })}
+                placeholder="خط الطول"
+                className="border px-2 py-1 rounded w-1/2"
               />
-              {errors.logo && <p className="text-red-500 text-xs italic">{errors.logo}</p>}
             </div>
+            {errors.location && typeof errors.location === 'string' && (
+              <p className="text-red-500 text-xs italic">{errors.location}</p>
+            )}
+          </div>
 
-            {/* رابط الموقع */}
-            <div className="mb-4">
-              <label htmlFor="url" className="block text-gray-700 font-bold mb-2">رابط الموقع</label>
-              <input
-                id="url"
-                type="text"
-                value={data.url}
-                onChange={e => setData('url', e.target.value)}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.url ? 'border-red-500' : ''}`}
-              />
-              {errors.url && <p className="text-red-500 text-xs italic">{errors.url}</p>}
-            </div>
-
-            {/* الوصف */}
-            <div className="mb-4">
-              <label htmlFor="description" className="block text-gray-700 font-bold mb-2">الوصف</label>
-              <textarea
-                id="description"
-                value={data.description}
-                onChange={e => setData('description', e.target.value)}
-                rows={5}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.description ? 'border-red-500' : ''}`}
-              />
-              {errors.description && <p className="text-red-500 text-xs italic">{errors.description}</p>}
-            </div>
-
-            {/* حقل البحث عن الموقع */}
-            <div className="mb-4 relative">
-              <label htmlFor="location_search" className="block text-gray-700 font-bold mb-2">البحث عن موقع</label>
-              <input
-                id="location_search"
-                type="text"
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                onKeyDown={e => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleSearch();
-                  }
-                }}
-                placeholder="ابحث عن مدينة أو موقع"
-                className="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-              />
-              <button
-                type="button"
-                onClick={handleSearch}
-                disabled={searchLoading}
-                className="absolute top-8 right-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
-              >
-                {searchLoading ? 'جاري البحث...' : 'بحث'}
-              </button>
-
-              {/* عرض نتائج البحث */}
-              {searchResults.length > 0 && (
-                <ul className="absolute z-10 bg-white border border-gray-300 rounded w-full max-h-48 overflow-auto mt-1 shadow-lg">
-                  {searchResults.map((result) => (
-                    <li
-                      key={result.place_id}
-                      onClick={() => handleSelectLocation(result)}
-                      className="cursor-pointer px-3 py-2 hover:bg-blue-100"
-                    >
-                      {result.display_name}
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              {searchError && <p className="text-red-500 text-xs italic mt-1">{searchError}</p>}
-            </div>
-
-            {/* الخريطة */}
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">الموقع على الخريطة</label>
-              <SettingMap lat={data.location.lat} lng={data.location.lng} setLatLng={handleLatLng} editable={true} height={300} />
-              <div className="flex gap-4 mt-2">
-                <input
-                  type="number"
-                  step="any"
-                  value={data.location.lat}
-                  onChange={e => setData('location', { ...data.location, lat: parseFloat(e.target.value) })}
-                  placeholder="خط العرض"
-                  className="border px-2 py-1 rounded w-1/2"
-                />
-                <input
-                  type="number"
-                  step="any"
-                  value={data.location.lng}
-                  onChange={e => setData('location', { ...data.location, lng: parseFloat(e.target.value) })}
-                  placeholder="خط الطول"
-                  className="border px-2 py-1 rounded w-1/2"
-                />
-              </div>
-              {(errors.location && typeof errors.location === 'string') && (
-                <p className="text-red-500 text-xs italic">{errors.location}</p>
-              )}
-            </div>
-
-            {/* أزرار الحفظ والرجوع */}
-            <div className="flex items-center justify-between">
-              <button
-                type="submit"
-                disabled={processing}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                {processing ? 'جاري الحفظ...' : 'حفظ الإعداد'}
-              </button>
-              <Link href={route('settings.index')} className="text-blue-500 hover:text-blue-700">رجوع</Link>
-            </div>
-          </form>
-        </div>
+          {/* أزرار الحفظ والرجوع */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 16 }}>
+            <button type="submit" disabled={processing} className="submit-btn" style={{ flex: 1 }}>
+              {processing ? 'جاري الحفظ...' : 'حفظ الإعداد'}
+            </button>
+            <Link href={route('settings.index')} className="modern-link" style={{ marginLeft: 16 }}>
+              رجوع
+            </Link>
+          </div>
+        </form>
       </div>
     </AuthenticatedLayout>
   );

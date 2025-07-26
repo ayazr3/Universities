@@ -1,110 +1,152 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import '@/Components/Admin/Style/Style.css';
 
 export default function AdmissionScheduleCreate({ auth }) {
-    const { data, setData, post, processing, errors } = useForm({
-        title: '',
-        body: '',
-        date: '',
-        name: '',
+  const { data, setData, post, processing, errors } = useForm({
+    title: '',
+    body: '',
+    date: '',
+    name: '',
+    file_url: null,
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    post(route('admissionSchedule.store'), {
+      forceFormData: true, // ضروري لإرسال الملفات بشكل صحيح
     });
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        post(route('admissionSchedule.store'));
-    };
-
-    return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">إضافة جدول قبول جديد</h2>}
+  return (
+    <AuthenticatedLayout user={auth.user} header={<h2 className="form-title">إضافة جدول قبول جديد</h2>}>
+      <Head title="إضافة جدول قبول جديد" />
+      <div
+        style={{
+          minHeight: "100vh",
+          background: "rgb(179 194 215)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: '1rem',
+        }}
+      >
+        <form
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+          className="modern-form"
+          style={{ width: '100%', maxWidth: 520 }}
+          noValidate
         >
-            <Head title="إضافة جدول قبول جديد" />
+          <h2 className="form-title" style={{ marginTop: 0, marginBottom: 16 }}>
+            إدخال بيانات جدول القبول
+          </h2>
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">
-                            <h2 className="text-2xl font-bold mb-6">إضافة جدول قبول جديد</h2>
+          {/* العنوان */}
+          <div className="form-group">
+            <label htmlFor="title">العنوان</label>
+            <input
+              type="text"
+              id="title"
+              className={errors.title ? "input-error" : ""}
+              value={data.title}
+              onChange={e => setData('title', e.target.value)}
+              autoFocus
+              required
+            />
+            {errors.title && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.title}</div>}
+          </div>
 
-                            <form onSubmit={handleSubmit}>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-                                        العنوان
-                                    </label>
-                                    <input
-                                        id="title"
-                                        type="text"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.title ? 'border-red-500' : ''}`}
-                                        value={data.title}
-                                        onChange={(e) => setData('title', e.target.value)}
-                                    />
-                                    {errors.title && <p className="text-red-500 text-xs italic">{errors.title}</p>}
-                                </div>
+          {/* التفاصيل */}
+          <div className="form-group">
+            <label htmlFor="body">التفاصيل</label>
+            <textarea
+              id="body"
+              rows={5}
+              className={errors.body ? "input-error" : ""}
+              value={data.body}
+              onChange={e => setData('body', e.target.value)}
+              required
+            />
+            {errors.body && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.body}</div>}
+          </div>
 
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="body">
-                                        التفاصيل
-                                    </label>
-                                    <textarea
-                                        id="body"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.body ? 'border-red-500' : ''}`}
-                                        value={data.body}
-                                        onChange={(e) => setData('body', e.target.value)}
-                                        rows="5"
-                                    />
-                                    {errors.body && <p className="text-red-500 text-xs italic">{errors.body}</p>}
-                                </div>
+          {/* التاريخ */}
+          <div className="form-group">
+            <label htmlFor="date">التاريخ</label>
+            <input
+              type="date"
+              id="date"
+              className={errors.date ? "input-error" : ""}
+              value={data.date}
+              onChange={e => setData('date', e.target.value)}
+              required
+            />
+            {errors.date && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.date}</div>}
+          </div>
 
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">
-                                        التاريخ
-                                    </label>
-                                    <input
-                                        id="date"
-                                        type="date"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.date ? 'border-red-500' : ''}`}
-                                        value={data.date}
-                                        onChange={(e) => setData('date', e.target.value)}
-                                    />
-                                    {errors.date && <p className="text-red-500 text-xs italic">{errors.date}</p>}
-                                </div>
+          {/* المسؤول */}
+          <div className="form-group">
+            <label htmlFor="name">المسؤول</label>
+            <input
+              type="text"
+              id="name"
+              className={errors.name ? "input-error" : ""}
+              value={data.name}
+              onChange={e => setData('name', e.target.value)}
+              required
+            />
+            {errors.name && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.name}</div>}
+          </div>
 
-                                <div className="mb-6">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                                        المسؤول
-                                    </label>
-                                    <input
-                                        id="name"
-                                        type="text"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.name ? 'border-red-500' : ''}`}
-                                        value={data.name}
-                                        onChange={(e) => setData('name', e.target.value)}
-                                    />
-                                    {errors.name && <p className="text-red-500 text-xs italic">{errors.name}</p>}
-                                </div>
+          {/* الملف */}
+          <div className="form-group">
+            <label htmlFor="file_url">الملف (اختياري)</label>
+            <input
+              type="file"
+              id="file_url"
+              accept=".pdf,.doc,.docx,.txt"
+              className={errors.file_url ? "input-error" : ""}
+              onChange={e => setData('file_url', e.target.files[0])}
+            />
+            {errors.file_url && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.file_url}</div>}
+          </div>
 
-                                <div className="flex items-center justify-between">
-                                    <button
-                                        type="submit"
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                        disabled={processing}
-                                    >
-                                        {processing ? 'جاري الحفظ...' : 'حفظ الجدول'}
-                                    </button>
-                                    <Link
-                                        href={route('admissionSchedule.index')}
-                                        className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                                    >
-                                        رجوع
-                                    </Link>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </AuthenticatedLayout>
-    );
+          {/* أزرار الإجراء */}
+          <div style={{
+            display: "flex",
+            gap: "12px",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 16,
+          }}>
+            <button
+              type="submit"
+              disabled={processing}
+              className="submit-btn"
+              style={{ flex: 1 }}
+            >
+              {processing ? "جاري الحفظ..." : "حفظ الجدول"}
+            </button>
+            <Link
+              href={route('admissionSchedule.index')}
+              style={{
+                color: "#3a8dde",
+                fontWeight: "bold",
+                textDecoration: "underline",
+                background: "#eaf4ff",
+                borderRadius: 7,
+                padding: "11px 15px",
+                fontSize: "15px",
+                textAlign: "center"
+              }}
+            >
+              رجوع
+            </Link>
+          </div>
+        </form>
+      </div>
+    </AuthenticatedLayout>
+  );
 }

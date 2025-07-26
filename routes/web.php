@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/registrationstep', RegistrationStepController::class);
     Route::resource('/settings', SettingController::class);
     Route::resource('/official-links', OfficialLinkController::class);
-    Route::resource('terms', TermController::class);
+    Route::resource('/terms', TermController::class);
     Route::resource('/guidances', GuidanceController::class);
 
 });

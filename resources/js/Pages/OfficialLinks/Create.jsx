@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import '@/Components/Admin/Style/Style.css';
 
 export default function OfficialLinkCreate({ auth }) {
   const { data, setData, post, processing, errors } = useForm({
@@ -14,48 +15,94 @@ export default function OfficialLinkCreate({ auth }) {
   };
 
   return (
-    <AuthenticatedLayout user={auth.user} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">إضافة رابط رسمي جديد</h2>}>
+    <AuthenticatedLayout user={auth.user} header={<h2 className="form-title">إضافة رابط رسمي جديد</h2>}>
       <Head title="إضافة رابط رسمي جديد" />
-      <div className="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-          <form onSubmit={handleSubmit}>
+      <div
+        style={{
+          minHeight: '100vh',
+          background: 'rgb(179 194 215)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1rem',
+        }}
+      >
+        <form
+          onSubmit={handleSubmit}
+          className="modern-form"
+          style={{ width: '100%', maxWidth: 520 }}
+          noValidate
+        >
+          <h2 className="form-title" style={{ marginBottom: 16, marginTop: 0 }}>
+            إدخال بيانات الرابط الرسمي
+          </h2>
 
-            <div className="mb-4">
-              <label htmlFor="entity_name" className="block text-gray-700 font-bold mb-2">اسم الجهة</label>
-              <input
-                id="entity_name"
-                type="text"
-                value={data.entity_name}
-                onChange={e => setData('entity_name', e.target.value)}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.entity_name ? 'border-red-500' : ''}`}
-              />
-              {errors.entity_name && <p className="text-red-500 text-xs italic">{errors.entity_name}</p>}
-            </div>
+          {/* اسم الجهة */}
+          <div className="form-group">
+            <label htmlFor="entity_name">اسم الجهة</label>
+            <input
+              id="entity_name"
+              type="text"
+              value={data.entity_name}
+              onChange={e => setData('entity_name', e.target.value)}
+              className={errors.entity_name ? 'input-error' : ''}
+              autoFocus
+              required
+            />
+            {errors.entity_name && <div className="error-text">{errors.entity_name}</div>}
+          </div>
 
-            <div className="mb-4">
-              <label htmlFor="link" className="block text-gray-700 font-bold mb-2">الرابط</label>
-              <input
-                id="link"
-                type="text"
-                value={data.link}
-                onChange={e => setData('link', e.target.value)}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.link ? 'border-red-500' : ''}`}
-              />
-              {errors.link && <p className="text-red-500 text-xs italic">{errors.link}</p>}
-            </div>
+          {/* الرابط */}
+          <div className="form-group">
+            <label htmlFor="link">الرابط</label>
+            <input
+              id="link"
+              type="text"
+              value={data.link}
+              onChange={e => setData('link', e.target.value)}
+              className={errors.link ? 'input-error' : ''}
+              required
+            />
+            {errors.link && <div className="error-text">{errors.link}</div>}
+          </div>
 
-            <div className="flex items-center justify-between">
-              <button
-                type="submit"
-                disabled={processing}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                {processing ? 'جاري الحفظ...' : 'حفظ الرابط'}
-              </button>
-              <Link href={route('official-links.index')} className="text-blue-500 hover:text-blue-700">رجوع</Link>
-            </div>
-          </form>
-        </div>
+          {/* أزرار الإجراء */}
+          <div
+            style={{
+              display: 'flex',
+              gap: '12px',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginTop: 16,
+            }}
+          >
+            <button
+              type="submit"
+              disabled={processing}
+              className="submit-btn"
+              style={{ flex: 1 }}
+            >
+              {processing ? 'جاري الحفظ...' : 'حفظ الرابط'}
+            </button>
+            <Link
+              href={route('official-links.index')}
+              className="modern-link"
+              style={{
+                marginLeft: 16,
+                fontWeight: 'bold',
+                textDecoration: 'underline',
+                background: '#eaf4ff',
+                borderRadius: 7,
+                padding: '11px 15px',
+                fontSize: '15px',
+                textAlign: 'center',
+                color: '#3a8dde',
+              }}
+            >
+              رجوع
+            </Link>
+          </div>
+        </form>
       </div>
     </AuthenticatedLayout>
   );

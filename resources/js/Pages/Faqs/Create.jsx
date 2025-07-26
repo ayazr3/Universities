@@ -1,80 +1,105 @@
+
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import '@/Components/Admin/Style/Style.css'; // تأكد أن مسار ملف الستايل صحيح
 
 export default function FaqCreate({ auth }) {
-    const { data, setData, post, processing, errors } = useForm({
-        question: '',
-        answer: '',
-    });
+  const { data, setData, post, processing, errors } = useForm({
+    question: '',
+    answer: '',
+  });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        post(route('faq.store'));
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    post(route('faq.store'));
+  };
 
-    return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">إضافة سؤال جديد</h2>}
+  return (
+    <AuthenticatedLayout
+      user={auth.user}
+      header={<h2 className="form-title">إضافة سؤال جديد</h2>}
+    >
+      <Head title="إضافة سؤال جديد" />
+
+      <div
+        style={{
+          minHeight: "100vh",
+          background: "rgb(179 194 215)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <form
+          className="modern-form"
+          style={{ width: '100%', maxWidth: "520px" }}
+          onSubmit={handleSubmit}
         >
-            <Head title="إضافة سؤال جديد" />
+          <h2 className="form-title" style={{ marginBottom: 16, marginTop: 0 }}>إضافة سؤال جديد</h2>
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">
-                            <h2 className="text-2xl font-bold mb-6">إضافة سؤال جديد</h2>
+          {/* سؤال */}
+          <div className="form-group">
+            <label htmlFor="question">السؤال</label>
+            <input
+              id="question"
+              type="text"
+              className={errors.question ? "input-error" : ""}
+              value={data.question}
+              onChange={e => setData('question', e.target.value)}
+              autoFocus
+              required
+            />
+            {errors.question && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.question}</div>}
+          </div>
 
-                            <form onSubmit={handleSubmit}>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="question">
-                                        السؤال
-                                    </label>
-                                    <input
-                                        id="question"
-                                        type="text"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.question ? 'border-red-500' : ''}`}
-                                        value={data.question}
-                                        onChange={(e) => setData('question', e.target.value)}
-                                    />
-                                    {errors.question && <p className="text-red-500 text-xs italic">{errors.question}</p>}
-                                </div>
+          {/* إجابة */}
+          <div className="form-group">
+            <label htmlFor="answer">الإجابة</label>
+            <textarea
+              id="answer"
+              rows={4}
+              className={errors.answer ? "input-error" : ""}
+              value={data.answer}
+              onChange={e => setData('answer', e.target.value)}
+              required
+            />
+            {errors.answer && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.answer}</div>}
+          </div>
 
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="answer">
-                                        الإجابة
-                                    </label>
-                                    <textarea
-                                        id="answer"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.answer ? 'border-red-500' : ''}`}
-                                        value={data.answer}
-                                        onChange={(e) => setData('answer', e.target.value)}
-                                        rows="5"
-                                    />
-                                    {errors.answer && <p className="text-red-500 text-xs italic">{errors.answer}</p>}
-                                </div>
-
-                                <div className="flex items-center justify-between">
-                                    <button
-                                        type="submit"
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                        disabled={processing}
-                                    >
-                                        {processing ? 'جاري الحفظ...' : 'حفظ السؤال'}
-                                    </button>
-                                    <Link
-                                        href={route('faq.index')}
-                                        className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                                    >
-                                        رجوع
-                                    </Link>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </AuthenticatedLayout>
-    );
+          {/* الأزرار */}
+          <div style={{
+            display: "flex",
+            gap: "12px",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 10
+          }}>
+            <button
+              className="submit-btn"
+              type="submit"
+              disabled={processing}
+              style={{ flex: 1 }}
+            >
+              {processing ? 'جاري الحفظ...' : 'حفظ السؤال'}
+            </button>
+            <Link
+              href={route('faq.index')}
+              style={{
+                color: "#3a8dde",
+                fontWeight: "bold",
+                textDecoration: "underline",
+                background: "#eaf4ff",
+                borderRadius: 7,
+                padding: "11px 15px",
+                fontSize: "15px"
+              }}
+            >
+              رجوع
+            </Link>
+          </div>
+        </form>
+      </div>
+    </AuthenticatedLayout>
+  );
 }

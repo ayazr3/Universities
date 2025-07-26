@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import '@/Components/Admin/Style/Style.css';
 
 export default function OfficialLinkEdit({ officialLink, auth }) {
   const { data, setData, put, processing, errors } = useForm({
@@ -10,49 +11,66 @@ export default function OfficialLinkEdit({ officialLink, auth }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    put(route('official-links.update', officialLink.id));
+    put(route('official-links.update', officialLink.id), {
+      preserveScroll: true,
+    });
   };
 
   return (
-    <AuthenticatedLayout user={auth.user} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">تعديل الرابط الرسمي</h2>}>
+    <AuthenticatedLayout
+      user={auth.user}
+      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">تعديل الرابط الرسمي</h2>}
+    >
       <Head title="تعديل الرابط الرسمي" />
-      <div className="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-          <form onSubmit={handleSubmit}>
 
-            <div className="mb-4">
-              <label htmlFor="entity_name" className="block text-gray-700 font-bold mb-2">اسم الجهة</label>
+      <div className="py-12 flex justify-center">
+        <div className="w-full max-w-lg">
+          <form onSubmit={handleSubmit} className="modern-form">
+            <h2 className="form-title">تعديل الرابط الرسمي</h2>
+
+            {/* اسم الجهة */}
+            <div className="form-group">
+              <label htmlFor="entity_name">اسم الجهة</label>
               <input
                 id="entity_name"
                 type="text"
+                name="entity_name"
                 value={data.entity_name}
                 onChange={e => setData('entity_name', e.target.value)}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.entity_name ? 'border-red-500' : ''}`}
+                className={errors.entity_name ? "input-error" : ""}
+                required
               />
-              {errors.entity_name && <p className="text-red-500 text-xs italic">{errors.entity_name}</p>}
+              {errors.entity_name && <p className="error-text">{errors.entity_name}</p>}
             </div>
 
-            <div className="mb-4">
-              <label htmlFor="link" className="block text-gray-700 font-bold mb-2">الرابط</label>
+            {/* الرابط */}
+            <div className="form-group">
+              <label htmlFor="link">الرابط</label>
               <input
                 id="link"
-                type="text"
+                type="url"
+                name="link"
                 value={data.link}
                 onChange={e => setData('link', e.target.value)}
-                className={`shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${errors.link ? 'border-red-500' : ''}`}
+                className={errors.link ? "input-error" : ""}
+                placeholder="https://example.com"
+                required
               />
-              {errors.link && <p className="text-red-500 text-xs italic">{errors.link}</p>}
+              {errors.link && <p className="error-text">{errors.link}</p>}
             </div>
 
-            <div className="flex items-center justify-between">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems:'center', gap: '2rem', marginTop: 24 }}>
               <button
                 type="submit"
                 disabled={processing}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="submit-btn"
+                style={{ minWidth: 120 }}
               >
                 {processing ? 'جاري التحديث...' : 'تحديث الرابط'}
               </button>
-              <Link href={route('official-links.index')} className="text-blue-500 hover:text-blue-700">رجوع</Link>
+              <Link href={route('official-links.index')} className="modern-link">
+                رجوع
+              </Link>
             </div>
           </form>
         </div>

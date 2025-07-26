@@ -1,90 +1,97 @@
 import React from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import '@/Components/Admin/Style/Style.css';
 
 export default function RegistrationStepEdit({ registrationstep, auth }) {
-    const { data, setData, put, processing, errors } = useForm({
-        step_name: registrationstep.step_name || '',
-        description: registrationstep.description || '',
-        sub_step: registrationstep.sub_step || [],
+  const { data, setData, put, processing, errors } = useForm({
+    step_name: registrationstep.step_name || '',
+    description: registrationstep.description || '',
+    sub_step: registrationstep.sub_step || [],
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    put(route('registrationstep.update', registrationstep.id), {
+      preserveScroll: true,
     });
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        put(route('registrationstep.update', registrationstep.id));
-    };
+  return (
+    <AuthenticatedLayout
+      user={auth.user}
+      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">تعديل خطوة التسجيل</h2>}
+    >
+      <Head title="تعديل خطوة التسجيل" />
 
-    return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">تعديل خطوة التسجيل</h2>}
-        >
-            <Head title="تعديل خطوة التسجيل" />
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">
-                            <h2 className="text-2xl font-bold mb-6">تعديل خطوة التسجيل</h2>
-                            <form onSubmit={handleSubmit}>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="step_name">
-                                        اسم الخطوة
-                                    </label>
-                                    <input
-                                        id="step_name"
-                                        type="text"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.step_name ? 'border-red-500' : ''}`}
-                                        value={data.step_name}
-                                        onChange={(e) => setData('step_name', e.target.value)}
-                                    />
-                                    {errors.step_name && <p className="text-red-500 text-xs italic">{errors.step_name}</p>}
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                                        الوصف
-                                    </label>
-                                    <textarea
-                                        id="description"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.description ? 'border-red-500' : ''}`}
-                                        value={data.description}
-                                        onChange={(e) => setData('description', e.target.value)}
-                                        rows="5"
-                                    />
-                                    {errors.description && <p className="text-red-500 text-xs italic">{errors.description}</p>}
-                                </div>
-                                <div className="mb-6">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="sub_step">
-                                        الخطوات الفرعية (افصل بينها بفاصلة)
-                                    </label>
-                                    <input
-                                        id="sub_step"
-                                        type="text"
-                                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.sub_step ? 'border-red-500' : ''}`}
-                                        value={Array.isArray(data.sub_step) ? data.sub_step.join(',') : ''}
-                                        onChange={(e) => setData('sub_step', e.target.value.split(','))}
-                                    />
-                                    {errors.sub_step && <p className="text-red-500 text-xs italic">{errors.sub_step}</p>}
-                                </div>
-                                <div className="flex items-center justify-between">
-                                    <button
-                                        type="submit"
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                        disabled={processing}
-                                    >
-                                        {processing ? 'جاري التحديث...' : 'تحديث الخطوة'}
-                                    </button>
-                                    <Link
-                                        href={route('registrationstep.index')}
-                                        className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                                    >
-                                        رجوع
-                                    </Link>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+      <div className="py-12 flex justify-center">
+        <div className="w-full max-w-lg">
+          <form onSubmit={handleSubmit} className="modern-form" noValidate>
+            <h2 className="form-title">تعديل خطوة التسجيل</h2>
+
+            {/* اسم الخطوة */}
+            <div className="form-group">
+              <label htmlFor="step_name">اسم الخطوة</label>
+              <input
+                type="text"
+                id="step_name"
+                name="step_name"
+                value={data.step_name}
+                onChange={e => setData('step_name', e.target.value)}
+                className={errors.step_name ? "input-error" : ""}
+                required
+                autoFocus
+              />
+              {errors.step_name && <p className="error-text">{errors.step_name}</p>}
             </div>
-        </AuthenticatedLayout>
-    );
+
+            {/* الوصف */}
+            <div className="form-group">
+              <label htmlFor="description">الوصف</label>
+              <textarea
+                id="description"
+                name="description"
+                rows={5}
+                value={data.description}
+                onChange={e => setData('description', e.target.value)}
+                className={errors.description ? "input-error" : ""}
+                required
+              />
+              {errors.description && <p className="error-text">{errors.description}</p>}
+            </div>
+
+            {/* الخطوات الفرعية */}
+            <div className="form-group">
+              <label htmlFor="sub_step">الخطوات الفرعية (افصل بينها بفاصلة)</label>
+              <input
+                type="text"
+                id="sub_step"
+                name="sub_step"
+                value={Array.isArray(data.sub_step) ? data.sub_step.join(',') : ''}
+                onChange={e => setData('sub_step', e.target.value.split(',').map(s => s.trim()))}
+                className={errors.sub_step ? "input-error" : ""}
+                placeholder="مثلاً: خطوة 1, خطوة 2, خطوة 3"
+              />
+              {errors.sub_step && <p className="error-text">{errors.sub_step}</p>}
+            </div>
+
+            {/* أزرار الإجراء */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '2rem', marginTop: 24 }}>
+              <button
+                type="submit"
+                disabled={processing}
+                className="submit-btn"
+                style={{ minWidth: 120 }}
+              >
+                {processing ? 'جاري التحديث...' : 'تحديث الخطوة'}
+              </button>
+              <Link href={route('registrationstep.index')} className="modern-link" style={{ alignSelf: 'center' }}>
+                رجوع
+              </Link>
+            </div>
+          </form>
+        </div>
+      </div>
+    </AuthenticatedLayout>
+  );
 }

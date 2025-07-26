@@ -99,7 +99,31 @@ class AnnouncementController extends Controller
      */
     public function update(Request $request, Announcement $announcement)
     {
-        $validated = $request->validate([
+    //     $validated = $request->validate([
+    //     'title' => 'required|string|max:100',
+    //     'summary' => 'required|string',
+    //     'publisher' => 'required|string|max:100',
+    //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    //     'publish_date' => 'required|date',
+    //     'details' => 'required|string',
+    // ]);
+
+    // // إذا لم يتم رفع صورة جديدة، احتفظ بالصورة القديمة
+    // if (!$request->hasFile('image')) {
+    //     $validated['image'] = $announcement->image;
+    // } else {
+    //     // إذا تم رفع صورة جديدة
+    //     if ($announcement->image) {
+    //         Storage::disk('public')->delete($announcement->image);
+    //     }
+    //     $validated['image'] = $request->file('image')->store('announcement', 'public');
+    // }
+
+    // $announcement->update($validated);
+
+    // return redirect()->route('announcement.index')->with('success', 'تم تحديث الإعلان بنجاح.');
+
+     $validated = $request->validate([
         'title' => 'required|string|max:100',
         'summary' => 'required|string',
         'publisher' => 'required|string|max:100',
@@ -108,15 +132,15 @@ class AnnouncementController extends Controller
         'details' => 'required|string',
     ]);
 
-    // إذا لم يتم رفع صورة جديدة، احتفظ بالصورة القديمة
-    if (!$request->hasFile('image')) {
-        $validated['image'] = $announcement->image;
-    } else {
-        // إذا تم رفع صورة جديدة
-        if ($announcement->image) {
+    if ($request->hasFile('image')) {
+        // حذف الصورة القديمة اذا وجدت
+        if ($announcement->image && Storage::disk('public')->exists($announcement->image)) {
             Storage::disk('public')->delete($announcement->image);
         }
-        $validated['image'] = $request->file('image')->store('announcement', 'public');
+        $validated['image'] = $request->file('image')->store('announcements', 'public');
+    } else {
+        // لم يتم رفع صورة جديدة، احتفظ بالصورة القديمة
+        $validated['image'] = $announcement->image;
     }
 
     $announcement->update($validated);
