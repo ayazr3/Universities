@@ -1,13 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Guidance;
 use Illuminate\Support\Facades\Storage;
 
 class GuidanceController extends Controller
 {
+    public function frontendIndex()
+{
+    $articles = Guidance::where('type', 'article')->get();
+    $books = Guidance::where('type', 'booke')->get();
+    $videos = Guidance::where('type', 'video')->get();
+    $advices = Guidance::where('type', 'advice')->get();
+
+    return Inertia::render('Guidances/indexUser', [
+        'articles' => $articles,
+        'books' => $books,
+        'videos' => $videos,
+        'advices' => $advices,
+    ]);
+}
      public function index()
     {
         $guidances = Guidance::latest()->get();

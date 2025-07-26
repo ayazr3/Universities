@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;400&display=swap');
+
+/* عزل القسم ومنع التداخل */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.books-section {
+  font-family: 'Cairo', Arial, sans-serif;
+  margin: 60px auto 100px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+  border-bottom: 2px solid #f1f1f1;
+  background: #fafbfc;
+  z-index: 1;
+  position: relative;
+}
+
+.books-title {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #3f51b5;
+  text-shadow: 2px 2px 5px rgba(63, 81, 181, 0.5);
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.books-desc {
+  text-align: center;
+  color: #6c7a89;
+  font-size: 1.15rem;
+  margin-bottom: 40px;
+  font-weight: 300;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.books-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(30,41,59,0.03);
+  padding: 0 32px;
+  height: 64px;
+  margin-bottom: 40px;
+  border: 1px solid #f1f1f1;
+  overflow-x: auto;
+  gap: 12px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.navbar-link {
+  color: #222;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  white-space: nowrap;
+}
+
+.navbar-link.active,
+.navbar-link:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #181c32;
+  font-size: 1.15rem;
+  gap: 10px;
+}
+
+.navbar-icon {
+  background: #2563eb;
+  color: #fff;
+  border-radius: 50%;
+  font-weight: bold;
+  padding: 8px 14px;
+  font-size: 20px;
+  margin-right: 10px;
+  margin-left: 2px;
+  display: inline-block;
+}
+
+.books-grid {
+  display: flex;
+  gap: 36px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.book-card {
+  background: #fff;
+  border: 1.5px solid #eef2f7;
+  border-radius: 14px;
+  width: 360px;
+  height: 460px;
+  box-shadow: 0 2px 8px rgba(30,41,59,0.04);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s, transform 0.3s;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.book-card:hover {
+  box-shadow: 0 10px 28px rgba(37,99,235,0.15);
+  transform: translateY(-8px) scale(1.05);
+}
+
+.book-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background: #f6f6f6;
+}
+
+.book-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 14px 14px 0 0;
+}
+
+.book-rating {
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  background: #fff;
+  color: #222;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 4px 14px 4px 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.star {
+  color: #fbbf24;
+  font-size: 1.2em;
+  margin-right: 3px;
+}
+
+.book-info {
+  padding: 24px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.book-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #181c32;
+  margin-bottom: 6px;
+  text-align: right;
+}
+
+.book-author {
+  color: #2563eb;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.book-desc {
+  color: #888;
+  font-size: 1rem;
+  margin-bottom: 14px;
+  line-height: 1.7;
+  text-align: right;
+}
+
+.book-pages {
+  color: #222;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.book-btn {
+  display: block;
+  background: #2563eb;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 12px 0;
+  margin-bottom: 26px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: auto;
+  transition: background 0.3s;
+  letter-spacing: 0.3px;
+  box-shadow: 0 1px 6px rgba(37,99,235,0.06);
+}
+
+.book-btn:hover {
+  background: #1d4ed8;
+}
+
+/* نقاط التوقف للشاشات المتوسطة */
+@media (max-width: 1100px) {
+  .books-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .book-card {
+    width: 95%;
+    max-width: 420px;
+    height: auto;
+  }
+}
+
+/* نقاط التوقف للشاشات الصغيرة */
+@media (max-width: 600px) {
+  .books-section {
+    padding: 0 8px;
+    margin: 40px 0 60px 0;
+  }
+  .books-title {
+    font-size: 1.6rem;
+  }
+  .books-desc {
+    font-size: 1rem;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  .book-card {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+  }
+  .book-img,
+  .book-img-wrap {
+    height: 130px;
+  }
+  .books-navbar {
+    flex-direction: column;
+    gap: 14px;
+    height: auto;
+    padding: 12px;
+    margin-bottom: 24px;
+  }
+}
+
+/* نقاط التوقف للشاشات الصغيرة جدًا */
+@media (max-width: 400px) {
+  .books-title {
+    font-size: 1.2rem;
+  }
+  .books-desc {
+    font-size: 0.9rem;
+  }
+  .book-card {
+    padding: 8px;
+  }
+  .book-btn {
+    font-size: 1rem;
+    padding: 10px 0;
+    margin-bottom: 20px;
+  }
+}
+
+/* فاصل مرئي إضافي بين الأقسام */
+.books-section + * {
+  margin-top: 50px !important;
+}
+  

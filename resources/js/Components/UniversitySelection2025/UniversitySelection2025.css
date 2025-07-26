@@ -1,0 +1,266 @@
+.us2025-main-bg {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #4e54c8 0%, #8f94fb 100%);
+  font-family: "El Messiri", sans-serif;
+  direction: ltr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
+.us2025-content-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3vw;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 3vw;
+  margin: 32px 0;
+}
+
+.us2025-welcome-card {
+  background: rgba(255,255,255,0.20);
+  border-radius: 28px;
+  box-shadow: 0 6px 32px rgba(78,84,200,0.16);
+  padding: 3rem 2.2rem 2.2rem 2.2rem;
+  width: 650px;
+  max-width: 100%;
+  min-width: 320px;
+  text-align: center;
+  position: relative;
+  margin-bottom: 2.5rem;
+  animation: us2025-fadeIn 1.5s;
+  transition: box-shadow 0.2s;
+}
+
+.us2025-welcome-card:hover {
+  box-shadow: 0 8px 40px rgba(78,84,200,0.22);
+}
+
+.us2025-icon-user {
+  width: 56px;
+  height: 56px;
+  margin: 12% auto 0;
+  background: url("data:image/svg+xml;utf8,<svg fill='%23ffffff' viewBox='0 0 24 24' width='56' height='56' xmlns='http://www.w3.org/2000/svg'><circle cx='12' cy='8' r='4'/><path d='M12 14c-4 0-7 2-7 4v2h14v-2c0-2-3-4-7-4z'/></svg>") no-repeat center/contain;
+}
+
+.us2025-welcome-card h2 {
+  color: #fff;
+  margin-top: 1.2rem;
+  margin-bottom: 0.7rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-shadow: 0 2px 6px rgba(78,84,200,0.10);
+}
+
+.us2025-welcome-card p {
+  color: #e3e7fa;
+  font-size: 1.07rem;
+  margin-bottom: 1.7rem;
+  line-height: 1.7;
+}
+
+.us2025-download-btn {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(67,233,123,0.14);
+  transition: background 0.2s, transform 0.2s;
+  animation: us2025-bounce 1.8s infinite;
+}
+
+.us2025-download-btn:hover {
+  background: linear-gradient(135deg, #38f9d7 0%, #43e97b 100%);
+  transform: scale(1.10);
+}
+
+.us2025-icon-download {
+  width: 24px;
+  height: 24px;
+  display: block;
+  background: url("data:image/svg+xml;utf8,<svg fill='%234e54c8' viewBox='0 0 24 24' width='24' height='24' xmlns='http://www.w3.org/2000/svg'><path d='M12 16l4-5h-3V4h-2v7H8l4 5zm-7 2v2h14v-2H5z'/></svg>") no-repeat center/contain;
+}
+
+.us2025-info-section {
+  background: rgba(255,255,255,0.20);
+  border-radius: 28px;
+  box-shadow: 0 6px 32px rgba(143,148,251,0.16);
+  padding: 3rem 2.2rem 2.2rem 2.2rem;
+  min-width: 320px;
+  max-width: 420px;
+  margin-bottom: 2.5rem;
+  animation: us2025-slideIn 1.5s;
+  transition: box-shadow 0.2s;
+}
+
+.us2025-info-section:hover {
+  box-shadow: 0 8px 40px rgba(143,148,251,0.22);
+}
+
+.us2025-info-section h1 {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 1.2rem;
+  letter-spacing: 1.2px;
+  text-shadow: 0 2px 8px rgba(143,148,251,0.10);
+}
+
+.us2025-info-section h1 span {
+  color: #43e97b;
+  font-size: 2.2rem;
+  margin-right: 0.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.us2025-info-section p {
+  color: #e3e7fa;
+  font-size: 1.13rem;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+.us2025-primary-btn {
+  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+  color: #4e54c8;
+  font-weight: 800;
+  border: none;
+  border-radius: 14px;
+  padding: 1.1rem 2.5rem;
+  font-size: 1.15rem;
+  box-shadow: 0 2px 14px rgba(67,233,123,0.13);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+}
+
+.us2025-primary-btn:hover {
+  background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
+  transform: scale(1.05);
+}
+
+.us2025-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.us2025-stats div {
+  text-align: center;
+  min-width: 90px;
+  padding: 0.5rem 0.7rem;
+}
+
+.us2025-stats span {
+  color: #43e97b;
+  font-size: 2.2rem;
+  font-weight: 900;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.us2025-stats p {
+  color: #fff;
+  font-size: 1.13rem;
+  margin-top: 0.2rem;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .us2025-welcome-card,
+  .us2025-info-section {
+    width: 95vw;
+    max-width: 98vw;
+    min-width: unset;
+    padding: 2rem 1.2rem;
+  }
+  .us2025-content-wrapper {
+    gap: 4vw;
+    padding: 0 2vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .us2025-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 0 1rem;
+  }
+  .us2025-welcome-card,
+  .us2025-info-section {
+    width: 100%;
+    max-width: 100%;
+    padding: 1.7rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .us2025-primary-btn {
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 1.05rem;
+  }
+  .us2025-stats {
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .us2025-welcome-card,
+  .us2025-info-section {
+    padding: 1rem 0.5rem 0.8rem 0.5rem;
+    border-radius: 16px;
+  }
+  .us2025-welcome-card h2,
+  .us2025-info-section h1 {
+    font-size: 1.1rem;
+  }
+  .us2025-welcome-card p,
+  .us2025-info-section p {
+    font-size: 0.95rem;
+  }
+  .us2025-primary-btn {
+    font-size: 0.95rem;
+    padding: 0.8rem 0;
+  }
+  .us2025-download-btn {
+    width: 34px;
+    height: 34px;
+    left: 1rem;
+    bottom: 1rem;
+  }
+  .us2025-icon-download {
+    width: 18px;
+    height: 18px;
+  }
+  .us2025-icon-user {
+    width: 38px;
+    height: 38px;
+    margin: 18% auto 0;
+  }
+  .us2025-stats span {
+    font-size: 1.4rem;
+  }
+  .us2025-stats p {
+    font-size: 0.95rem;
+  }
+}

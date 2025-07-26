@@ -1,0 +1,285 @@
+:root {
+  --main-bg: #f7f8fa; /* خلفية عامة فاتحة */
+  --card-bg: #fff; /* خلفية البطاقات */
+  --done-bg: #eafbef; /* خلفية المهام المنتهية */
+  --pending-bg: #fff8e6; /* خلفية المهام المنتظرة */
+  --done-border: #34c759; /* لون الحد الأيمن للمنتهية */
+  --pending-border: #ff9800; /* لون الحد الأيمن للمنتظرة */
+  --main-title: #222; /* لون العناوين */
+  --subtitle: #888; /* لون العناوين الفرعية */
+  --done-icon: #34c759; /* لون أيقونة المنتهية */
+  --pending-icon: #ff9800; /* لون أيقونة المنتظرة */
+  --primary: #3f51b5; /* لون الحد الافتراضي */
+  --footer-bg: #ff7043; /* خلفية التنبيه السفلي */
+  --footer-text: #fff; /* لون نص التنبيه */
+}
+
+/* خلفية الصفحة */
+body {
+  background: var(--main-bg);
+  overflow-x: hidden;
+  font-family: "El Messiri", sans-serif;
+}
+
+/* الحاوية الرئيسية */
+.important-dates-container {
+  width: 800px;
+  margin: 40px auto;
+  background: var(--main-bg);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(60, 60, 120, 0.1);
+  padding: 32px 18px 24px 18px;
+  text-align: center;
+  position: relative;
+  margin-top: 10px;
+  transition: box-shadow 0.4s ease;
+  will-change: transform;
+}
+
+.important-dates-container:hover {
+  box-shadow: 0 14px 40px rgba(63, 81, 181, 0.2);
+  transform: translateY(-6px);
+}
+
+/* العنوان الرئيسي */
+.main-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+   color: #3f51b5;
+  text-shadow: 2px 2px 5px rgba(63, 81, 181, 0.5);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  animation: textPop 1s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+/* العنوان الفرعي */
+.important-dates-container.subtitlee {
+  color:#1e293b;
+  font-size: 0.864rem;
+  margin-bottom: 28px;
+  font-weight: 300;
+  animation: fadeInUp 1s 0.2s forwards;
+}
+
+/* قائمة البطاقات */
+.dates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* البطاقات */
+.date-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(63, 81, 181, 0.05);
+  padding: 22px 18px 15px 18px;
+  text-align: right;
+  border-right: 6px solid var(--primary);
+  transition: box-shadow 0.35s cubic-bezier(.68,-0.55,.27,1.55), 
+              transform 0.35s cubic-bezier(.68,-0.55,.27,1.55),
+              background 0.35s ease;
+  position: relative;
+  opacity: 0;
+  transform: translateY(32px) scale(0.97) rotateX(7deg);
+  animation: cardAppear 1s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+  will-change: transform, box-shadow, opacity;
+  cursor: default;
+}
+
+/* ترتيب ظهور البطاقات بتأخير متدرج */
+.date-card:nth-child(1) { animation-delay: 0.2s; }
+.date-card:nth-child(2) { animation-delay: 0.35s; }
+.date-card:nth-child(3) { animation-delay: 0.5s; }
+.date-card:nth-child(4) { animation-delay: 0.65s; }
+.date-card:nth-child(5) { animation-delay: 0.8s; }
+.date-card:nth-child(6) { animation-delay: 0.95s; }
+
+/* خلفية وحدود البطاقات المنتهية */
+.date-card.done {
+  background: var(--done-bg);
+  border-right-color: var(--done-border);
+}
+
+/* خلفية وحدود البطاقات المنتظرة */
+.date-card.pending {
+  background: var(--pending-bg);
+  border-right-color: var(--pending-border);
+}
+
+/* تأثير التفاعل عند تحويم الماوس على البطاقة */
+.date-card:hover {
+  transform: scale(1.05) rotateY(-6deg) translateY(-8px);
+  box-shadow: 0 14px 36px rgba(63, 81, 181, 0.18), 0 4px 12px rgba(255, 112, 67, 0.12);
+  background: #fffef9;
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* تأثير الضغط على البطاقة */
+.date-card:active {
+  transform: scale(0.98) rotateY(-2deg) translateY(-4px);
+  box-shadow: 0 8px 20px rgba(63, 81, 181, 0.12);
+}
+
+/* رأس البطاقة */
+.date-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+/* عنوان البطاقة */
+.date-title {
+  font-size: 0.904rem;
+  font-weight: 700;
+  color: var(--main-title);
+  letter-spacing: 0.1px;
+  transition: color 0.3s ease;
+}
+
+/* تغيير لون العنوان عند التحويم */
+.date-card:hover .date-title {
+  color: var(--primary);
+}
+
+/* أيقونات الحالة */
+.status-icon {
+  font-size: 1.12rem;
+  margin-left: 10px;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.05));
+  transition: color 0.3s ease, filter 0.3s ease;
+}
+
+/* أيقونة المنتهية */
+.status-icon.done {
+  color: var(--done-icon);
+  filter: drop-shadow(0 0 6px rgba(52, 199, 89, 0.3));
+}
+
+/* أيقونة المنتظرة مع نبض خفيف */
+.status-icon.pending {
+  color: var(--pending-icon);
+  animation: pulse 1.6s infinite alternate;
+}
+
+/* معلومات التاريخ والوقت */
+.date-info {
+  display: flex;
+  gap: 14px;
+  color: #444;
+  font-size: 0.84rem;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.date-date {
+  font-weight: 600;
+}
+
+.date-time {
+  color: #888;
+  font-size: 0.8rem;
+  font-weight: 4;
+}
+
+/* وصف البطاقة */
+.date-desc {
+  color: #666;
+  font-size: 0.776rem;
+  margin-top: 4px;
+  transition: color 0.3s ease;
+}
+
+/* تغيير لون الوصف عند تحويم الماوس */
+.date-card:hover .date-desc {
+  color: var(--pending-border);
+}
+
+/* التنبيه السفلي */
+.footer-alert {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  font-size: 0.928rem;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 14px 0;
+  margin-top: 38px;
+  box-shadow: 0 4px 14px rgba(255, 112, 67, 0.18);
+  animation: pop 0.7s cubic-bezier(0.19, 1, 0.22, 1) 0.7s both;
+  letter-spacing: 0.6px;
+  transition: background 0.3s ease;
+  user-select: none;
+}
+
+.footer-alert:hover {
+  background: #ff5722;
+  cursor: default;
+}
+
+/* أنيميشنات */
+
+/* ظهور تدريجي للبطاقات */
+@keyframes cardAppear {
+ 0% { opacity: 0; transform: translateY(32px) scale(0.97) rotateX(7deg);}
+ 60% { opacity: 1; transform: translateY(-8px) scale(1.03) rotateX(-2deg);}
+ 100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0);}
+}
+
+/* نبض الأيقونة */
+@keyframes pulse {
+ 0% { filter: drop-shadow(0 0 0px #ff9800); }
+ 100% { filter: drop-shadow(0 0 10px #ff9800cc);}
+}
+
+/* ظهور النص الرئيسي */
+@keyframes textPop {
+ 0% { transform: scale(0.85); opacity: 0; }
+ 60% { transform: scale(1.1); opacity: 1; }
+ 100% { transform: scale(1); }
+}
+
+/* ظهور العنوان الفرعي */
+@keyframes fadeInUp {
+ 0% { opacity: 0; transform: translateY(20px);}
+ 100% { opacity: 1; transform: translateY(0);}
+}
+
+/* ظهور التنبيه السفلي */
+@keyframes pop {
+ 0% { transform: scale(0.92); opacity: 0; }
+ 70% { transform: scale(1.07); opacity: 1; }
+ 100% { transform: scale(1); opacity: 1; }
+}
+
+/* دعم الريسبونس */
+@media (max-width: 600px) {
+  .important-dates-container {
+    padding: 18px 3vw 18px 3vw;
+    max-width: 98vw;
+    border-radius: 14px;
+  }
+  .main-title {
+    font-size: 1.2rem;
+  }
+  .subtitlee {
+    font-size: 0.8rem;
+  }
+  .date-title {
+    font-size: 0.8rem;
+  }
+  .date-info {
+    font-size: 0.76rem;
+    gap: 10px;
+  }
+  .footer-alert {
+    font-size: 0.8rem;
+    padding: 12px 0;
+  }
+  .date-card {
+    padding: 18px 14px 12px 14px;
+    border-radius: 14px;
+  }
+}

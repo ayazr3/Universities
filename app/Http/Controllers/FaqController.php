@@ -9,6 +9,14 @@ use Inertia\Inertia;
 
 class FaqController extends Controller
 {
+         public function indexUser()
+    {
+        $faqs = Faq::orderBy('id')->get(); // جلب جميع الأسئلة بترتيب id
+
+        return Inertia::render('Faqs/IndexUser', [
+            'faqs' => $faqs,
+        ]);
+    }
      // عرض جميع الأسئلة والأجوبة
     public function index()
     {

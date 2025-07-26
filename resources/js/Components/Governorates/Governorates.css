@@ -1,0 +1,297 @@
+/* ====== الحاوية الرئيسية ====== */
+.sygov-container {
+  padding: 3rem 0 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f8fe;
+
+  animation: sygov-fadeInUp 0.8s ease forwards;
+  margin-bottom: 10px;
+}
+
+/* ====== العنوان الرئيسي ====== */
+.sygov-title {
+   color:#3f51b5;
+  text-shadow: 2px 2px 5px rgba(63, 81, 181, 0.5);
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: sygov-fadeInUp 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+
+/* ====== العنوان الفرعي ====== */
+.sygov-subtitle {
+  color: #1e293b;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  text-align: center;
+  /* font-weight: 700; */
+  max-width: 500px;
+  line-height: 1.4;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: sygov-fadeInUp 0.8s ease forwards;
+  animation-delay: 0.4s;
+}
+
+/* ====== عناصر التحكم ====== */
+.sygov-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: sygov-fadeInUp 0.8s ease forwards;
+  animation-delay: 0.6s;
+}
+
+/* ====== زر عرض التخصصات ====== */
+.sygov-btn,
+.sygov-btn-disabled {
+  padding: 0.8rem 1.6rem;
+  border: none;
+  width: 200px;
+  height: 48px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.sygov-btn {
+  background-color: #2979ff;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(41, 121, 255, 0.15);
+}
+
+.sygov-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.18);
+  transform: skewX(-25deg);
+  transition: left 0.5s;
+  pointer-events: none;
+  border-radius: 6px;
+}
+
+.sygov-btn:hover {
+  background-color: #1565c0;
+  box-shadow: 0 4px 12px rgba(21, 101, 192, 0.23);
+  transform: translateY(-2px);
+}
+
+.sygov-btn:hover::after {
+  left: 125%;
+}
+
+.sygov-btn-disabled {
+  background-color: #c5d3e6 !important;
+  color: #fff !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  opacity: 0.7;
+  transform: none !important;
+}
+
+.sygov-btn-disabled::after {
+  display: none;
+}
+
+/* ====== قائمة المحافظات ====== */
+.sygov-select {
+  padding: 0.7rem 1.5rem;
+  border: 1.5px solid #c7c7c7;
+  border-radius: 6px;
+  background-color: #fff;
+  min-width: 160px;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-right: 20px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  outline-offset: 2px;
+}
+
+.sygov-select:focus {
+  border-color: #2979ff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(41, 121, 255, 0.45);
+}
+
+/* ====== قائمة المحافظات المصغرة ====== */
+.sygov-list {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: sygov-fadeInUp 0.8s ease forwards;
+  animation-delay: 0.8s;
+}
+
+/* ====== عنصر المحافظة ====== */
+.sygov-item-active,
+.sygov-item-disabled {
+  background: #e3ecfa;
+  width: 70px;
+  height: 38px;
+  border-radius: 6px;
+  text-align: center;
+  padding: 0.5rem 0;
+  color: #222;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+  /* user-select: none; */
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.sygov-item-active {
+  background-color: #2979ff !important;
+  color: #fff !important;
+  box-shadow: 0 4px 8px rgba(41, 121, 255, 0.19);
+  border: 2px solid #1565c0;
+}
+
+.sygov-item-active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: skewX(-20deg);
+  transition: left 0.5s;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.sygov-item-active:hover::before {
+  left: 150%;
+}
+
+.sygov-item-active:hover {
+  background-color: #1565c0;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(21, 101, 192, 0.23);
+  transform: translateY(-2px);
+}
+
+.sygov-item-disabled {
+  background: #f1f1f1 !important;
+  color: #bcbcbc !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  border: 1px dashed #d3d3d3 !important;
+  opacity: 0.7;
+  pointer-events: none !important;
+  transition: none;
+}
+
+/* ====== ميديا كويري للشاشات المتوسطة والصغيرة ====== */
+@media (max-width: 768px) {
+  .sygov-container {
+    padding: 2.5rem 1.2rem;
+  }
+  .sygov-title {
+    font-size: 1.8rem;
+  }
+  .sygov-subtitle {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+  .sygov-controls {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .sygov-btn, .sygov-btn-disabled {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.9rem;
+    width: 180px;
+    height: 42px;
+  }
+  .sygov-select {
+    min-width: 140px;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    margin-right: 0;
+  }
+  .sygov-list {
+    width: 100%;
+    gap: 0.8rem;
+    padding: 0.8rem;
+  }
+  .sygov-item-active, .sygov-item-disabled {
+    width: 50px;
+    height: 30px;
+    font-size: 0.8rem;
+    padding: 0.4rem 0;
+  }
+}
+
+/* ====== ميديا كويري للشاشات الصغيرة جداً ====== */
+@media (max-width: 480px) {
+  .sygov-title {
+    font-size: 1.5rem;
+  }
+  .sygov-subtitle {
+    font-size: 0.9rem;
+  }
+  .sygov-btn, .sygov-btn-disabled {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    width: 150px;
+    height: 38px;
+  }
+  .sygov-select {
+    min-width: 120px;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.9rem;
+  }
+  .sygov-list {
+    width: 100%;
+    gap: 0.6rem;
+    padding: 0.6rem;
+  }
+  .sygov-item-active, .sygov-item-disabled {
+    width: 42px;
+    height: 26px;
+    font-size: 0.75rem;
+    padding: 0.35rem 0;
+  }
+}
+
+/* ====== Keyframes للانيميشن ====== */
+@keyframes sygov-fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

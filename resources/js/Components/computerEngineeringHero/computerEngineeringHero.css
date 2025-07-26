@@ -1,0 +1,319 @@
+.ce-hero {
+  height: 70vh;
+  background: #00A9FF;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
+  direction: rtl;
+  overflow-x: hidden;
+}
+
+.ce-navbar {
+  background: white;
+  box-shadow: 0 1px 8px rgba(60,60,100,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 4vw;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  animation: navbarFadeIn 1.2s cubic-bezier(.6,0,.4,1) 0.2s backwards;
+}
+
+@keyframes navbarFadeIn {
+  0% { opacity: 0; transform: translateY(-30px);}
+  100% { opacity: 1; transform: none;}
+}
+
+.ce-navlinks {
+  display: flex;
+  gap: 2vw;
+  text-decoration: none;
+  align-items: center;
+}
+
+.ce-link {
+  margin-top: 4px;
+  text-decoration: none;
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
+  transition: color 0.2s;
+  position: relative;
+  color: #000;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ce-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  transition: width 0.2s;
+  position: absolute;
+  right: 0;
+  bottom: -3px;
+  background: #050d9c95;
+}
+
+.ce-link:hover::after {
+  width: 100%;
+}
+
+.ce-projects-list {
+  margin-right: 20px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 0px;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ce-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3vw 5vw;
+  animation: heroFadeIn 1.6s cubic-bezier(.6,0,.4,1) 0.5s backwards;
+  text-align: center;
+}
+
+@keyframes heroFadeIn {
+  0% { opacity: 0; transform: translateY(40px);}
+  100% { opacity: 1; transform: none;}
+}
+
+.ce-title-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 1.5rem);
+  margin-bottom: 0.5rem;
+  animation: titleFadeIn 1.7s cubic-bezier(.6,0,.4,1) 1.4s backwards;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@keyframes titleFadeIn {
+  0% { opacity: 0; transform: translateY(-30px);}
+  100% { opacity: 1; transform: none;}
+}
+
+.ce-titlee {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: #040a6ddd;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 16px rgba(80,90,220,0.08);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.ce-icon {
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+  color: #fff;
+  background: rgba(120,140,255,0.16);
+  border-radius: 50%;
+  padding: 0.4rem 0.7rem;
+  box-shadow: 0 2px 8px rgba(120,140,255,0.10);
+  animation: iconBounce 2.5s infinite alternate cubic-bezier(.6,0,.4,1);
+}
+
+.ce-icon-left {
+  animation-delay: 0.2s;
+}
+.ce-icon-right {
+  animation-delay: 0.6s;
+}
+
+@keyframes iconBounce {
+  0% { transform: translateY(0);}
+  100% { transform: translateY(-12px);}
+}
+
+.ce-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  color: #e5e6f7;
+  margin-bottom: clamp(1rem, 2.2vw, 2.2rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  animation: subtitleFadeIn 1.8s cubic-bezier(.6,0,.4,1) 1.7s backwards;
+  line-height: 1.5;
+  max-width: 90%;
+}
+
+@keyframes subtitleFadeIn {
+  0% { opacity: 0; transform: translateY(20px);}
+  100% { opacity: 1; transform: none;}
+}
+
+.ce-tags {
+  display: flex;
+  gap: clamp(0.5rem, 1.1vw, 1.1rem);
+  margin-bottom: clamp(1rem, 2.7vw, 2.7rem);
+  animation: tagsFadeIn 1.9s cubic-bezier(.6,0,.4,1) 2s backwards;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 5vw;
+}
+
+@keyframes tagsFadeIn {
+  0% { opacity: 0; transform: translateY(20px);}
+  100% { opacity: 1; transform: none;}
+}
+
+.ce-tag {
+  background: #CDF5FD;
+  color: #050d9c95;
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
+  font-weight: 700;
+  border-radius: 2rem;
+  padding: 0.4rem 1.2rem;
+  box-shadow: 0 1px 8px rgba(120,120,220,0.09);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.ce-tag-lightning {
+  background: #050d9c95;
+  color: #fff;
+  font-weight: 700;
+}
+
+.ce-scroll-indicator {
+  margin-top: clamp(1rem, 2.5vw, 2.5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ce-scroll-dot {
+  width: clamp(12px, 1.5vw, 18px);
+  height: clamp(12px, 1.5vw, 18px);
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.45;
+  animation: scrollPulse 1.7s infinite alternate cubic-bezier(.6,0,.4,1);
+}
+
+@keyframes scrollPulse {
+  0% { opacity: 0.45; transform: scale(1);}
+  100% { opacity: 1; transform: scale(1.25);}
+}
+
+/* Enhanced Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .ce-navbar {
+    padding: 0.7rem 3vw;
+  }
+  .ce-navlinks {
+    gap: 1.5vw;
+  }
+}
+
+@media (max-width: 992px) {
+  .ce-hero {
+    height: auto;
+    min-height: 60vh;
+  }
+  .ce-content {
+    padding-top: 5vw;
+    padding-bottom: 5vw;
+  }
+  .ce-navlinks {
+    gap: 1vw;
+  }
+  .ce-link {
+    font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .ce-navbar {
+    padding: 0.7rem 2vw;
+    flex-wrap: wrap;
+  }
+  .ce-navlinks {
+    gap: 3vw;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ce-title-row {
+    gap: 0.8rem;
+  }
+  .ce-subtitle {
+    max-width: 95%;
+  }
+  .ce-tags {
+    padding: 0 2vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .ce-hero {
+    min-height: 80vh;
+  }
+  .ce-navbar {
+    padding: 0.5rem 1vw;
+  }
+  .ce-navlinks {
+    gap: 4vw;
+  }
+  .ce-link {
+    font-size: clamp(0.8rem, 3.5vw, 1rem);
+    margin-top: 2px;
+  }
+  .ce-projects-list {
+    margin-right: 0;
+    padding: 3px 8px;
+    font-size: clamp(0.8rem, 3.5vw, 1rem);
+  }
+  .ce-title-row {
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+  .ce-titlee {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+  .ce-icon {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    padding: 0.3rem 0.6rem;
+  }
+  .ce-subtitle {
+    font-size: clamp(0.9rem, 3.8vw, 1.1rem);
+    margin-bottom: 1.5rem;
+  }
+  .ce-tag {
+    font-size: clamp(0.8rem, 3.5vw, 1rem);
+    padding: 0.3rem 1rem;
+  }
+  .ce-scroll-dot {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .ce-hero {
+    min-height: 85vh;
+  }
+  .ce-navlinks {
+    gap: 5vw;
+  }
+  .ce-titlee {
+    font-size: clamp(1.3rem, 8vw, 1.8rem);
+  }
+  .ce-subtitle {
+    font-size: clamp(0.8rem, 4vw, 1rem);
+  }
+  .ce-tag {
+    font-size: clamp(0.7rem, 4vw, 0.9rem);
+    padding: 0.2rem 0.8rem;
+  }
+}

@@ -1,0 +1,286 @@
+
+/* عزل القسم ومنع التداخل */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.educational-videos-container {
+  max-width: 1200px;
+  margin: 60px auto 100px auto;
+  padding: 32px 20px;
+  background: linear-gradient(145deg, #fff, #f0f4ff);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  direction: rtl;
+  font-family: 'Cairo', Arial, sans-serif;
+  transition: background-color 0.4s, box-shadow 0.4s;
+  will-change: background-color, box-shadow;
+  position: relative;
+  z-index: 1;
+  border-bottom: 2px solid #e6eaf5;
+}
+
+/* العناوين */
+.main-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 18px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.07);
+}
+
+.subtitle {
+  text-align: center;
+  color: #777;
+  margin-bottom: 36px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* قائمة الفيديوهات */
+.videos-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: center;
+  padding: 0 8px;
+  transition: gap 0.3s;
+  width: 100%;
+}
+
+/* كرت الفيديو */
+.video-card {
+  background: #fefefe;
+  border-radius: 16px;
+  width: 340px;
+  min-width: 250px;
+  max-width: 100%;
+  height: 420px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow 0.35s, transform 0.35s;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid #f0f2f7;
+  margin-bottom: 16px;
+  z-index: 2;
+}
+
+.video-card:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+  transform: translateY(-10px) scale(1.04);
+  border-color: #1976d2;
+}
+
+/* صورة الفيديو */
+.video-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  background: #ddd;
+  transition: box-shadow 0.3s;
+}
+
+.video-card:hover .video-image-wrapper {
+  box-shadow: inset 0 0 20px rgba(25, 118, 210, 0.22);
+}
+
+.video-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.video-card:hover .video-image {
+  transform: scale(1.08) rotate(1deg);
+}
+
+/* مدة الفيديو */
+.video-duration {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(25, 118, 210, 0.85);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(25, 118, 210, 0.4);
+  letter-spacing: 0.02em;
+  z-index: 3;
+}
+
+/* معلومات الفيديو */
+.video-info {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  flex-grow: 1;
+  transition: color 0.35s;
+}
+
+.video-title {
+  font-size: 1.15rem;
+  color: #1a1a1a;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  transition: color 0.35s;
+}
+
+.video-description {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0 0 8px 0;
+  min-height: 44px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  transition: color 0.35s;
+}
+
+.video-card:hover .video-title,
+.video-card:hover .video-description {
+  color: #0f4a8c;
+}
+
+/* زر مشاهدة الفيديو */
+.video-button {
+  background: #1976d2;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 22px;
+  align-self: stretch;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(25, 118, 210, 0.4);
+  transition: background 0.35s, box-shadow 0.35s, transform 0.3s;
+  will-change: background-color, box-shadow, transform;
+}
+
+.video-button:hover,
+.video-button:focus {
+  background: #0f4a8c;
+  box-shadow: 0 8px 24px rgba(15, 74, 140, 0.5);
+  transform: scale(1.03);
+  outline: none;
+}
+
+/* نقاط التوقف للشاشات المتوسطة */
+@media (max-width: 1100px) {
+  .educational-videos-container {
+    padding: 20px 8px;
+    margin: 40px 0 60px 0;
+  }
+  .videos-list {
+    gap: 20px;
+  }
+  .video-card {
+    width: 96%;
+    max-width: 400px;
+    height: 370px;
+  }
+  .video-image-wrapper {
+    height: 130px;
+  }
+}
+
+/* نقاط التوقف للشاشات الصغيرة */
+@media (max-width: 700px) {
+  .main-title {
+    font-size: 1.3rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 22px;
+  }
+  .videos-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 0 2px;
+  }
+  .video-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 290px;
+    margin-bottom: 18px;
+  }
+  .video-image-wrapper {
+    height: 90px;
+  }
+  .video-info {
+    padding: 10px 4px;
+    gap: 7px;
+  }
+  .video-title {
+    font-size: 0.98rem;
+  }
+  .video-description {
+    font-size: 0.8rem;
+    min-height: 18px;
+  }
+  .video-button {
+    padding: 7px 8px;
+    font-size: 0.85rem;
+    margin-top: 16px;
+  }
+}
+
+/* نقاط التوقف للشاشات الصغيرة جدًا */
+@media (max-width: 400px) {
+  .main-title {
+    font-size: 1rem;
+  }
+  .subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+  .video-card {
+    padding: 4px;
+    height: 210px;
+  }
+  .video-image-wrapper {
+    height: 60px;
+  }
+  .video-info {
+    padding: 5px 2px;
+    gap: 4px;
+  }
+  .video-title {
+    font-size: 0.85rem;
+  }
+  .video-description {
+    font-size: 0.7rem;
+    min-height: 10px;
+  }
+  .video-button {
+    font-size: 0.75rem;
+    padding: 5px 4px;
+    margin-top: 10px;
+  }
+}
+
+/* فاصل مرئي بين القسم وأي قسم يليه */
+.educational-videos-container + * {
+  margin-top: 48px !important;
+}
