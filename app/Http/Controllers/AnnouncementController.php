@@ -15,7 +15,7 @@ class AnnouncementController extends Controller
     {
         $announcements = Announcement::latest()->get();
         //dd($announcements);
-        return inertia('Announcements/Index', [
+        return inertia('Admin/Announcements/Index', [
             'announcements' => $announcements,
             'stats' => [
                 'total' => Announcement::count(),
@@ -23,22 +23,6 @@ class AnnouncementController extends Controller
             ]
         ]);
 
-    //     return inertia('Announcements/Index', [
-    //     'announcements' => [
-    //         [
-    //             'id' => 1,
-    //             'title' => 'عنوان تجريبي',
-    //             'summary' => 'ملخص تجريبي',
-    //             'publisher' => 'ناشر تجريبي',
-    //             'publish_date' => now()->toDateString(),
-    //         ],
-    //     ],
-    //     'stats' => [
-    //         'total' => 1,
-    //         'recent' => 1,
-    //     ],
-    // ]);
-        //return "hi";
     }
 
     /**
@@ -46,7 +30,7 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        return inertia('Announcements/Create');
+        return inertia('Admin/Announcements/Create');
     }
 
     /**
@@ -79,7 +63,7 @@ class AnnouncementController extends Controller
      */
     public function show(Announcement $announcement)
     {
-        return inertia('Announcements/Show', [
+        return inertia('Admin/Announcements/Show', [
             'announcement' => $announcement
         ]);
     }
@@ -89,7 +73,7 @@ class AnnouncementController extends Controller
      */
     public function edit(Announcement $announcement)
     {
-        return inertia('Announcements/Edit', [
+        return inertia('Admin/Announcements/Edit', [
             'announcement' => $announcement
         ]);
     }
@@ -99,30 +83,6 @@ class AnnouncementController extends Controller
      */
     public function update(Request $request, Announcement $announcement)
     {
-    //     $validated = $request->validate([
-    //     'title' => 'required|string|max:100',
-    //     'summary' => 'required|string',
-    //     'publisher' => 'required|string|max:100',
-    //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    //     'publish_date' => 'required|date',
-    //     'details' => 'required|string',
-    // ]);
-
-    // // إذا لم يتم رفع صورة جديدة، احتفظ بالصورة القديمة
-    // if (!$request->hasFile('image')) {
-    //     $validated['image'] = $announcement->image;
-    // } else {
-    //     // إذا تم رفع صورة جديدة
-    //     if ($announcement->image) {
-    //         Storage::disk('public')->delete($announcement->image);
-    //     }
-    //     $validated['image'] = $request->file('image')->store('announcement', 'public');
-    // }
-
-    // $announcement->update($validated);
-
-    // return redirect()->route('announcement.index')->with('success', 'تم تحديث الإعلان بنجاح.');
-
      $validated = $request->validate([
         'title' => 'required|string|max:100',
         'summary' => 'required|string',

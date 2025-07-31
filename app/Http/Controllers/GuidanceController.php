@@ -26,7 +26,7 @@ class GuidanceController extends Controller
     {
         $guidances = Guidance::latest()->get();
 
-        return inertia('Guidances/Index', [
+        return inertia('Admin/Guidances/Index', [
             'guidances' => $guidances,
             'stats' => [
                 'total' => Guidance::count(),
@@ -37,7 +37,7 @@ class GuidanceController extends Controller
 
     public function create()
     {
-        return inertia('Guidances/Create');
+        return inertia('Admin/Guidances/Create');
     }
 
     public function store(Request $request)
@@ -61,7 +61,7 @@ class GuidanceController extends Controller
 
     public function show(Guidance $guidance)
     {
-        return inertia('Guidances/Show', [
+        return inertia('Admin/Guidances/Show', [
             'guidance' => $guidance
         ]);
     }
@@ -69,7 +69,7 @@ class GuidanceController extends Controller
     public function edit(Guidance $guidance)
     {
         // dd($guidance->all());
-        return inertia('Guidances/Edit', [
+        return inertia('Admin/Guidances/Edit', [
             'guidance' => $guidance
         ]);
     }

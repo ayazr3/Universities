@@ -14,7 +14,7 @@ class AdmissionScheduleController extends Controller
     {
         $schedules = AdmissionSchedule::latest()->get();
 
-        return inertia('AdmissionSchedules/Index', [
+        return inertia('Admin/AdmissionSchedules/Index', [
             'schedules' => $schedules,
             'stats' => [
                 'total' => AdmissionSchedule::count(),
@@ -26,23 +26,13 @@ class AdmissionScheduleController extends Controller
     // عرض نموذج إضافة جدول جديد
     public function create()
     {
-        return inertia('AdmissionSchedules/Create');
+        return inertia('Admin/AdmissionSchedules/Create');
     }
 
     // حفظ جدول جديد
     public function store(Request $request)
     {
-        // $validated = $request->validate([
-        //     'title' => 'required|string|max:100',
-        //     'body' => 'required|string',
-        //     'date' => 'required|date',
-        //     'name' => 'required|string|max:100',
-        // ]);
-
-        // AdmissionSchedule::create($validated);
-
-        // return redirect()->route('admissionSchedule.index')->with('success', 'تم إنشاء الجدول بنجاح.');
-         $validated = $request->validate([
+                $validated = $request->validate([
             'title' => 'required|string|max:100',
             'body' => 'required|string',
             'date' => 'required|date',
@@ -64,7 +54,7 @@ class AdmissionScheduleController extends Controller
     // عرض جدول معين
     public function show(AdmissionSchedule $admissionSchedule)
     {
-        return inertia('AdmissionSchedules/Show', [
+        return inertia('Admin/AdmissionSchedules/Show', [
             'admissionSchedule' => $admissionSchedule
         ]);
     }
@@ -72,7 +62,7 @@ class AdmissionScheduleController extends Controller
     // عرض نموذج تعديل جدول
     public function edit(AdmissionSchedule $admissionSchedule)
     {
-        return inertia('AdmissionSchedules/Edit', [
+        return inertia('Admin/AdmissionSchedules/Edit', [
             'admissionSchedule' => $admissionSchedule
         ]);
     }
@@ -80,35 +70,6 @@ class AdmissionScheduleController extends Controller
     // تحديث جدول معين
     public function update(Request $request, AdmissionSchedule $admissionSchedule)
     {
-        // $validated = $request->validate([
-        //     'title' => 'required|string|max:100',
-        //     'body' => 'required|string',
-        //     'date' => 'required|date',
-        //     'name' => 'required|string|max:100',
-        // ]);
-
-        // $admissionSchedule->update($validated);
-
-        // return redirect()->route('admissionSchedule.index')->with('success', 'تم تحديث الجدول بنجاح.');
-
-        // $validated = $request->validate([
-        //     'title' => 'required|string|max:100',
-        //     'body' => 'required|string',
-        //     'date' => 'required|date',
-        //     'name' => 'required|string|max:100',
-        //     'file_url' => 'nullable|file|mimes:pdf,doc,docx,txt|max:2048',
-        // ]);
-
-        // if ($request->hasFile('file_url')) {
-        //     // يمكنك حذف الملف القديم هنا إذا أردت
-        //     $filePath = $request->file('file_url')->store('admission_files', 'public');
-        //     $validated['file_url'] = $filePath;
-        // }
-
-        // $admissionSchedule->update($validated);
-
-        // return redirect()->route('admissionSchedule.index')->with('success', 'تم تحديث الجدول بنجاح.');
-
           $validated = $request->validate([
             'title' => 'required|string|max:100',
             'body' => 'required|string',

@@ -15,7 +15,7 @@ class SettingController extends Controller
             return $setting;
         });
 
-        return inertia('Settings/Index', [
+        return inertia('Admin/Settings/Index', [
             'settings' => $settings,
             'stats' => [
                 'total' => Setting::count(),
@@ -27,7 +27,7 @@ class SettingController extends Controller
     // عرض نموذج إضافة إعداد جديد
     public function create()
     {
-        return inertia('Settings/Create');
+        return inertia('Admin/Settings/Create');
     }
 
     // حفظ إعداد جديد
@@ -58,7 +58,7 @@ class SettingController extends Controller
     {
         $setting->location = json_decode($setting->location, true) ?: ['lat' => 24.7136, 'lng' => 46.6753];
 
-        return inertia('Settings/Show', [
+        return inertia('Admin/Settings/Show', [
             'setting' => $setting
         ]);
     }
@@ -68,7 +68,7 @@ class SettingController extends Controller
     {
         $setting->location = json_decode($setting->location, true) ?: ['lat' => 24.7136, 'lng' => 46.6753];
 
-        return inertia('Settings/Edit', [
+        return inertia('Admin/Settings/Edit', [
             'setting' => $setting
         ]);
     }

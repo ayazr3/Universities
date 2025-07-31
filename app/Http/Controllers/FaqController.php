@@ -22,7 +22,7 @@ class FaqController extends Controller
     {
         $faqs = Faq::latest()->get();
 
-        return inertia('Faqs/Index', [
+        return inertia('Admin/Faqs/Index', [
             'faqs' => $faqs,
             'stats' => [
                 'total' => Faq::count(),
@@ -34,7 +34,7 @@ class FaqController extends Controller
     // عرض نموذج إضافة سؤال جديد
     public function create()
     {
-        return inertia('Faqs/Create');
+        return inertia('Admin/Faqs/Create');
     }
 
     // حفظ سؤال جديد
@@ -53,7 +53,7 @@ class FaqController extends Controller
     // عرض سؤال معين
     public function show(Faq $faq)
     {
-        return inertia('Faqs/Show', [
+        return inertia('Admin/Faqs/Show', [
             'faq' => $faq
         ]);
     }
@@ -61,7 +61,7 @@ class FaqController extends Controller
     // عرض نموذج تعديل سؤال
     public function edit(Faq $faq)
     {
-        return inertia('Faqs/Edit', [
+        return inertia('Admin/Faqs/Edit', [
             'faq' => $faq
         ]);
     }
