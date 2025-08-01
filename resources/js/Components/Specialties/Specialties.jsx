@@ -1,32 +1,10 @@
 import React, { useState } from "react";
 import "./Specialties.css";
+// استيراد الأيقونات إذا أردت، أو تستقبل أيقونات من السيرفر لكن أبسط تعطي أيقونة افتراضية هنا
 import { FaComputer } from "react-icons/fa6";
-import { MdEnergySavingsLeaf } from "react-icons/md";
-import { TbRobot } from "react-icons/tb";
 import { Link } from "@inertiajs/react";
 
-const specialtiesData = [
-  {
-    icon: <FaComputer />,
-    title: "تقنيات الحاسوب",
-    desc: "تأهيل فنيين في تركيب وصيانة وتشغيل الحواسيب والشبكات والبرمجيات.",
-    link: "/Jurisdiction",
-  },
-  {
-    icon: <MdEnergySavingsLeaf />,
-    title: "طاقات متجددة",
-    desc: "دراسة وتطبيق مصادر الطاقة النظيفة كالطاقة الشمسية.",
-    link: null,
-  },
-  {
-    icon: <TbRobot />,
-    title: "ميكاترونكس",
-    desc: "دمج الميكانيكا والإلكترونيات والتحكم لتطوير الأنظمة الذكية.",
-    link: null,
-  },
-];
-
-export default function Specialties() {
+export default function Specialties({ specializations }) {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const handleCardClick = (idx) => {
@@ -39,6 +17,9 @@ export default function Specialties() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // أيقونة افتراضية لكل تخصص لإبراز الشكل، يمكن تعديل حسب الحاجة
+  const defaultIcon = <FaComputer />;
+
   return (
     <section className="specialties-section">
       <h2 className="main-titlee">التخصصات المتوفرة</h2>
@@ -46,42 +27,37 @@ export default function Specialties() {
         استكشف مجموعة متنوعة من التخصصات الهندسية المتقدمة التي تؤهلك لسوق العمل
       </p>
       <div className="row_cards">
-        {specialtiesData.map((item, idx) => (
-          <div
-            className={`specialty-card${activeIndex === idx ? " active" : ""}`}
-            key={idx}
-            onClick={() => handleCardClick(idx)}
-          >
-            <span
-              className="icon"
-              style={{ background: "#102C57", boxShadow: `0 4px 11px #102C57` }}
+        {specializations && specializations.length > 0 ? (
+          specializations.map((item, idx) => (
+            <div
+              className={`specialty-card${activeIndex === idx ? " active" : ""}`}
+              key={item.id}
+              onClick={() => handleCardClick(idx)}
             >
-              {item.icon}
-            </span>
-            <div>
-              <h3 className="card-titlee">{item.title}</h3>
-              <p className="card-descc">{item.desc}</p>
-              {item.link ? (
-                <Link to={item.link} onClick={topScroll}>
-                  <button
-                    className={`card-btn${activeIndex === idx ? " show" : ""}`}
-                    tabIndex={activeIndex === idx ? 0 : -1}
-                  >
-                    استكشف التخصص
-                  </button>
-                </Link>
-              ) : (
+              <span
+                className="icon"
+                style={{ background: "#102C57", boxShadow: `0 4px 11px #102C57` }}
+              >
+                {defaultIcon}
+              </span>
+              <div>
+                <h3 className="card-titlee">{item.name}</h3>
+                <p className="card-descc">{item.summary}</p>
                 <button
                   className={`card-btn${activeIndex === idx ? " show" : ""}`}
                   tabIndex={activeIndex === idx ? 0 : -1}
                 >
                   استكشف التخصص
                 </button>
-              )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>لا توجد تخصصات متوفرة لهذه الكلية.</p>
+        )}
       </div>
     </section>
   );
 }
+
+

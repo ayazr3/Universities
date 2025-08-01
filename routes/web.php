@@ -94,6 +94,3 @@ Route::get('/questions', [FaqController::class, 'indexUser'])->name('faq.indexUs
 
 
 
-// //عرض معلومات الكلية 
-// Route::get('/specialties', [SpecializationController::class, 'indexUser'])->name('specialties.indexUser');
-// Route::get('/specialties/{id}', [SpecializationController::class, 'showUser'])->name('specialties.show');

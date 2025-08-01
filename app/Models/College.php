@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 class College extends Model
 {
+       use HasFactory;
     protected $fillable = [
         'governorate_id',
         'name',
@@ -28,4 +29,10 @@ class College extends Model
     {
         return $this->belongsTo(Governorate::class);
     }
+    public function specializations()
+    {
+        return $this->hasMany(Specialization::class);
+    }
 }
+
+

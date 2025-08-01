@@ -6,7 +6,7 @@ import Specialties from '@/Components/Specialties/Specialties';
     
 import Navbar from '@/Components/Navbar/Navbar';
 import Footer from '@/Components/Footer/Footer';
-export default function CollegeDetails({ college }) {
+export default function CollegeDetails({ college, specializations })  {
 
   // إعداد بيانات stats للإحصائيات مع بيانات الكلية من الخادم
   const stats = [
@@ -24,7 +24,7 @@ export default function CollegeDetails({ college }) {
       <EngineeringCollege stats={stats} name={college.name} image={college.image} />
       <CollegeIntro summary={college.summary} />
       <CollegeMap location={college.location} name={college.name} address={college.details} />
-      <Specialties />
+        <Specialties specializations={specializations} />
     </div>
     <Footer/>
     </>

@@ -29,12 +29,21 @@ class CollegeController extends Controller
         ]);
     }
 
+
     public function showUser($id)
-    {
-        $college = College::with('governorate')->findOrFail($id);
-       
-        return Inertia::render('CollegeDetails', [ 
-            'college' => $college,
-        ]);
-    }
+{
+    $college = College::with(['governorate', 'specializations'])->findOrFail($id);
+
+    return Inertia::render('CollegeDetails', [
+        'college' => $college,
+        'specializations' => $college->specializations->map(function($specialization) {
+            return [
+                'id' => $specialization->id,
+                'name' => $specialization->name,
+                'summary' => $specialization->summary,
+            ];
+        }),
+    ]);
+}
+
 }
