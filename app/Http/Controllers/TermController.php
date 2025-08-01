@@ -11,7 +11,7 @@ class TermController extends Controller
     {
         $terms = Term::latest()->get();
 
-        return inertia('Terms/Index', [
+        return inertia('Admin/Terms/Index', [
             'terms' => $terms,
             'stats' => [
                 'total' => Term::count(),
@@ -22,7 +22,7 @@ class TermController extends Controller
 
     public function create()
     {
-        return inertia('Terms/Create');
+        return inertia('Admin/Terms/Create');
     }
 
     public function store(Request $request)
@@ -40,12 +40,12 @@ class TermController extends Controller
 
     public function show(Term $term)
     {
-        return inertia('Terms/Show', ['term' => $term]);
+        return inertia('Admin/Terms/Show', ['term' => $term]);
     }
 
     public function edit(Term $term)
     {
-        return inertia('Terms/Edit', ['term' => $term]);
+        return inertia('Admin/Terms/Edit', ['term' => $term]);
     }
 
     public function update(Request $request, Term $term)

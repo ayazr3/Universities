@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Governorate;
 use App\Http\Controllers\CollegeController;
+use App\Http\Controllers\GovernorateController;
 use App\Http\Controllers\SpecializationController;
 /*
 /*
@@ -71,6 +72,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/official-links', OfficialLinkController::class);
     Route::resource('/terms', TermController::class);
     Route::resource('/guidances', GuidanceController::class);
+    Route::resource('/governorates', GovernorateController::class);
+    Route::resource('/Admincolleges', CollegeController::class);
 
 });
 
@@ -89,8 +92,12 @@ Route::get('/universities/{id}', [CollegeController::class, 'showUser'])->name('
 // راوت صفحة التوجيه والدعم للواجهة الأمامية
 Route::get('/guidance', [GuidanceController::class, 'frontendIndex'])->name('guidance.indexUser');
 
-// صفحة الأسئلة الشائعة - 
+// صفحة الأسئلة الشائعة -
 Route::get('/questions', [FaqController::class, 'indexUser'])->name('faq.indexUser');
 
 
+
+// //عرض معلومات الكلية
+// Route::get('/specialties', [SpecializationController::class, 'indexUser'])->name('specialties.indexUser');
+// Route::get('/specialties/{id}', [SpecializationController::class, 'showUser'])->name('specialties.show');
 

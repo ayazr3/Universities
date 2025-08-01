@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class UniversityCenter extends Model
 {
     use HasFactory;
+
+    public function governorate()
+    {
+        return $this->belongsTo(Governorate::class);
+    }
 }

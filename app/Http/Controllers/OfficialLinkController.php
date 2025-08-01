@@ -12,7 +12,7 @@ class OfficialLinkController extends Controller
     {
         $officialLinks = OfficialLink::latest()->get();
 
-        return inertia('OfficialLinks/Index', [
+        return inertia('Admin/OfficialLinks/Index', [
             'officialLinks' => $officialLinks,
             'stats' => [
                 'total' => OfficialLink::count(),
@@ -24,7 +24,7 @@ class OfficialLinkController extends Controller
     // عرض نموذج إضافة رابط رسمي جديد
     public function create()
     {
-        return inertia('OfficialLinks/Create');
+        return inertia('Admin/OfficialLinks/Create');
     }
 
     // حفظ رابط رسمي جديد
@@ -43,7 +43,7 @@ class OfficialLinkController extends Controller
     // عرض تفاصيل رابط رسمي معين
     public function show(OfficialLink $officialLink)
     {
-        return inertia('OfficialLinks/Show', [
+        return inertia('Admin/OfficialLinks/Show', [
             'officialLink' => $officialLink
         ]);
     }
@@ -51,7 +51,7 @@ class OfficialLinkController extends Controller
     // عرض نموذج تعديل رابط رسمي
     public function edit(OfficialLink $officialLink)
     {
-        return inertia('OfficialLinks/Edit', [
+        return inertia('Admin/OfficialLinks/Edit', [
             'officialLink' => $officialLink
         ]);
     }

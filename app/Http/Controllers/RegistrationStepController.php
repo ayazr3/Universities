@@ -16,7 +16,7 @@ class RegistrationStepController extends Controller
             return $step;
         });
 
-        return inertia('RegistrationSteps/Index', [
+        return inertia('Admin/RegistrationSteps/Index', [
             'steps' => $steps,
             'stats' => [
                 'total' => RegistrationStep::count(),
@@ -28,7 +28,7 @@ class RegistrationStepController extends Controller
     // عرض نموذج إضافة خطوة جديدة
     public function create()
     {
-        return inertia('RegistrationSteps/Create');
+        return inertia('Admin/RegistrationSteps/Create');
     }
 
     // حفظ خطوة جديدة
@@ -58,7 +58,7 @@ class RegistrationStepController extends Controller
 
          $registrationstep->sub_step = json_decode($registrationstep->sub_step, true) ?: [];
 
-        return inertia('RegistrationSteps/Show', [
+        return inertia('Admin/RegistrationSteps/Show', [
             'registrationstep' => $registrationstep
         ]);
     }
@@ -67,7 +67,7 @@ class RegistrationStepController extends Controller
     public function edit(RegistrationStep $registrationstep)
     {
          $registrationstep->sub_step = json_decode($registrationstep->sub_step, true) ?: [];
-        return inertia('RegistrationSteps/Edit', [
+        return inertia('Admin/RegistrationSteps/Edit', [
             'registrationstep' => $registrationstep
         ]);
     }
