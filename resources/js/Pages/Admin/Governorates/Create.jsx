@@ -14,46 +14,65 @@ export default function GovernorateCreate({ auth }) {
   };
 
   return (
-    <AuthenticatedLayout user={auth.user} header={<h2 className="form-title">إضافة محافظة</h2>}>
+    <AuthenticatedLayout user={auth.user}>
       <Head title="إضافة محافظة" />
-      <div
+      <form
+        className="modern-form"
         style={{
-          minHeight: "100vh", background: "rgb(179 194 215)", display: "flex",
-          alignItems: "center", justifyContent: "center", padding: '1rem',
+          margin: '40px auto',
+          width: '100%',
+          maxWidth: 480,
+          minHeight: 0,
         }}
+        onSubmit={handleSubmit}
+        noValidate
       >
-        <form onSubmit={handleSubmit} className="modern-form" style={{ width: '100%', maxWidth: 520 }} noValidate>
-          <h2 className="form-title" style={{ marginTop: 0, marginBottom: 16 }}>
-            بيانات المحافظة
-          </h2>
-          <div className="form-group">
-            <label htmlFor="name">اسم المحافظة</label>
-            <input
-              type="text" id="name"
-              className={errors.name ? "input-error" : ""}
-              value={data.name}
-              onChange={e => setData('name', e.target.value)} autoFocus required
-            />
-            {errors.name && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.name}</div>}
-          </div>
-          <div style={{
-            display: "flex", gap: "12px", justifyContent: "space-between",
-            alignItems: "center", marginTop: 16,
-          }}>
-            <button type="submit" disabled={processing} className="submit-btn" style={{ flex: 1 }}>
-              {processing ? "جاري الحفظ..." : "حفظ"}
-            </button>
-            <Link
-              href={route('governorates.index')}
-              style={{
-                color: "#3a8dde", fontWeight: "bold", textDecoration: "underline",
-                background: "#eaf4ff", borderRadius: 7, padding: "11px 15px", fontSize: "15px",
-                textAlign: "center"
-              }}
-            >رجوع</Link>
-          </div>
-        </form>
-      </div>
+        <h2 className="form-title" style={{ marginBottom: 30, fontSize: 32 }}>إضافة محافظة جديدة</h2>
+
+        {/* حقل اسم المحافظة */}
+        <div className="form-group">
+          <label htmlFor="name">اسم المحافظة</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={data.name}
+            onChange={e => setData('name', e.target.value)}
+            required
+            className={errors.name ? 'input-error' : ''}
+            autoFocus
+          />
+          {errors.name && (
+            <div className="input-error" style={{ marginTop: 4 }}>{errors.name}</div>
+          )}
+        </div>
+
+        {/* أزرار التنفيذ */}
+        <button
+          type="submit"
+          className="submit-btn"
+          disabled={processing}
+          style={{ width: '100%', margin: '15px 0 8px 0' }}
+        >
+          {processing ? "جاري الحفظ..." : "حفظ المحافظة"}
+        </button>
+
+        <Link
+          href={route('governorates.index')}
+          className="back-link"
+          style={{
+            display: 'inline-block',
+            width: '100%',
+            color: "#3a8dde",
+            textDecoration: "underline",
+            fontWeight: "bold",
+            textAlign: "center",
+            margin: "6px 0 0 0",
+          }}
+        >
+          رجوع إلى جدول المحافظات
+        </Link>
+      </form>
     </AuthenticatedLayout>
   );
 }
