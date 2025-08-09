@@ -50,6 +50,8 @@ export default function Show({ auth, college }) {
               <dt style={{ fontWeight: 'bold', marginTop: 8 }}>عدد الطلاب:</dt>
               <dd>{college.student_count}</dd>
 
+              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>اسم المحافظة :</dt>
+              <dd>{college.governorate?.name || '--'}</dd>
               <dt style={{ fontWeight: 'bold', marginTop: 8 }}>الرابط الرسمي:</dt>
               <dd
                 style={{

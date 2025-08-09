@@ -75,7 +75,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('/governorates', GovernorateController::class);
     Route::resource('/Admincolleges', CollegeController::class);
 
+
 });
+
 
 
 require __DIR__.'/auth.php';
