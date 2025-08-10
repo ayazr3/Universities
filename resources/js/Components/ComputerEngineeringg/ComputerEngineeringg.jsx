@@ -4,10 +4,6 @@ import "./ComputerEngineering.css";
 const ComputerEngineering = ({ specialization }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (!specialization) {
-    return <div>جاري التحميل...</div>;
-  }
-
   return (
     <section className="ce-container">
       <div className="ce-bg-overlay"></div>
@@ -23,19 +19,6 @@ const ComputerEngineering = ({ specialization }) => {
             </p>
           )}
         </div>
-        
-        <div className="specialization-metadata">
-          <div className="metadata-item">
-            <strong>نوع الدرجة:</strong> {specialization.degree_type}
-          </div>
-          <div className="metadata-item">
-            <strong>عدد السنوات الدراسية:</strong> {specialization.academic_year_number} سنوات
-          </div>
-          <div className="metadata-item">
-            <strong>الكلية:</strong> {specialization.college?.name}
-          </div>
-        </div>
-
         <button
           className="ce-expand-btn"
           onClick={() => setIsExpanded(!isExpanded)}

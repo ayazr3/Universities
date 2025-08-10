@@ -1,0 +1,378 @@
+/* ========== أساسيات القسم ========== */
+.HelpSmart {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 2rem 1.5rem;
+  direction: ltr;
+  background-color: var(--bg-color, #e8f0ff);
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+  animation: fadeInUp 1s ease forwards;
+  min-height: 100vh;
+  box-sizing: border-box;
+  max-width: 100vw;
+  border-radius: 0;
+  margin: 0;
+  width: 100vw;
+  position: relative;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+}
+
+
+/* ======== الجانب الأيسر ======== */
+.S_leftSide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 1 1 50%;
+  text-align: right;
+  gap: 1.2rem;
+  animation: fadeInRight 1s ease forwards;
+  opacity: 0;
+  transform: translateX(30px);
+  animation-delay: 0.3s;
+  animation-fill-mode: forwards;
+  min-width: 0;
+  padding: 0 2vw;
+}
+
+
+.S_leftSide h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+
+
+.S_leftSide h4 {
+  color: #393E46;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+
+.S_leftSide .step {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  direction: rtl;
+  align-items: center;
+}
+
+
+.S_leftSide .step span {
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  background-color: rgba(132, 255, 132, 0.99);
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  /* user-select: none; */
+}
+
+
+.S_leftSide .step h3 {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #948979;
+  margin: 0;
+  line-height: 1.4;
+}
+
+
+.S_leftSide button {
+  background-color: var(--Dark-blue);
+  border: 1px solid white;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  padding: 0.85rem 1.8rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+
+.S_leftSide button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.HelpSmart .S_leftSide a {
+  text-decoration: none;
+}
+
+
+/* ======== الجانب الأيمن ======== */
+.S_rightSide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: right;
+  flex: 1 1 50%;
+  animation: fadeInLeft 1s ease forwards;
+  opacity: 0;
+  transform: translateX(-30px);
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  min-width: 0;
+  padding: 0 2vw;
+}
+
+
+.S_rightSide .S_container {
+  width: 100%;
+  max-width: 500px;
+  min-height: 240px;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.S_rightSide .S_container .head {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1rem;
+  direction: rtl;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+
+.S_rightSide .S_container .head svg {
+  background-color: rgb(79, 127, 239);
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 8px;
+  border-radius: 50%;
+  color: white;
+  box-shadow: 0 2px 6px rgba(79, 127, 239, 0.7);
+}
+
+
+.S_rightSide .S_container .head h4 {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #222;
+}
+
+
+.container_Text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+
+.container_Text > div {
+  background-color: rgb(235, 235, 235);
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+
+.center {
+  background-color: #3f70c45f !important;
+}
+
+
+/* ========== أنيميشن ========== */
+@keyframes fadeInRight {
+  0% { opacity: 0; transform: translateX(30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+
+@keyframes fadeInLeft {
+  0% { opacity: 0; transform: translateX(-30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ========== ريسبونسيف ========== */
+
+
+/* أقل من 1200px */
+@media (max-width: 700px) {
+  .HelpSmart {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+  .S_leftSide, .S_rightSide {
+    padding: 0 1.5vw;
+ 
+  }
+}
+
+
+/* أقل من 1024px */
+@media (max-width: 1024px) {
+  .HelpSmart {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 2rem 1rem;
+    gap: 1.2rem;
+    min-height: auto;
+    width: auto;
+    direction: rtl;
+  }
+  .S_leftSide, .S_rightSide {
+    flex: unset;
+    width: 100%;
+    min-width: 0;
+    padding: 0 1.5rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .S_leftSide {
+    padding-bottom: 1.5rem;
+    align-items: center;
+    text-align: center;
+    gap: 1.2rem;
+  }
+  .S_leftSide h1 {
+    font-size: 1.4rem;
+  }
+  .S_leftSide h4 {
+    max-width: 100%;
+    font-size: 1.1rem;
+  }
+  .S_leftSide .step h3 {
+    font-size: 0.95rem;
+  }
+  .S_rightSide .S_container {
+    max-width: 100%;
+    min-height: 220px;
+    padding: 1.2rem;
+  }
+  .S_rightSide .S_container .head {
+    justify-content: center;
+    gap: 0.8rem;
+  }
+  .S_rightSide .S_container .head h4 {
+    font-size: 1.1rem;
+  }
+  .container_Text > div {
+    font-size: 0.95rem;
+    padding: 0.8rem 1rem;
+  }
+  .S_leftSide button {
+    font-size: 0.95rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+
+/* أقل من 768px */
+@media (max-width: 768px) {
+  .HelpSmart {
+    padding: 1.2rem 1rem;
+    gap: 1rem;
+  }
+  .S_leftSide h1 {
+    font-size: 1.25rem;
+  }
+  .S_leftSide h4 {
+    font-size: 1rem;
+  }
+  .S_leftSide .step span,
+  .S_leftSide .step h3 {
+    font-size: 0.85rem;
+  }
+  .S_leftSide button {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.2rem;
+  }
+  .S_rightSide .S_container {
+    min-height: 180px;
+    padding: 1rem;
+  }
+  .S_rightSide .S_container .head h4 {
+    font-size: 1rem;
+  }
+  .container_Text > div {
+    font-size: 0.85rem;
+    padding: 0.7rem 0.9rem;
+  }
+}
+
+
+/* أقل من 480px */
+@media (max-width: 480px) {
+  .HelpSmart {
+    padding: 0.7rem 0.8rem;
+    gap: 0.5rem;
+  }
+  .S_leftSide h1 {
+    font-size: 1.1rem;
+  }
+  .S_leftSide h4 {
+    font-size: 0.9rem;
+    direction: rtl;
+  }
+  .S_leftSide .step span,
+  .S_leftSide .step h3 {
+    font-size: 0.75rem;
+  }
+  .S_leftSide button {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+  .S_rightSide .S_container {
+    min-height: 140px;
+    padding: 0.7rem 1rem;
+    margin-left: 0;
+  }
+  .S_rightSide .S_container .head svg {
+    width: 1rem;
+    height: 1rem;
+    padding: 5px;
+  }
+  .S_rightSide .S_container .head h4 {
+    font-size: 0.95rem;
+  }
+  .container_Text > div {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.6rem;
+  }
+}

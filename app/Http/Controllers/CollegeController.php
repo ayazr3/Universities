@@ -33,7 +33,7 @@ class CollegeController extends Controller
 
 
     public function showUser($id)
-<<<<<<< HEAD
+
 {
     $college = College::with(['governorate', 'specializations'])->findOrFail($id);
 
@@ -49,14 +49,8 @@ class CollegeController extends Controller
     ]);
 }
 
-=======
-    {
-        $college = College::with('governorate')->findOrFail($id);
 
-        return Inertia::render('CollegeDetails', [
-            'college' => $college,
-        ]);
-    }
+ 
 
     public function index()
     {
@@ -220,5 +214,5 @@ class CollegeController extends Controller
         $college->delete();
         return redirect()->route('Admincolleges.index')->with('success', 'تم حذف الكلية بنجاح.');
     }
->>>>>>> fd98fab4492e1c7b7af67d91ba4c04688c64d769
+
 }

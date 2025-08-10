@@ -16,6 +16,10 @@ use App\Models\Governorate;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\GovernorateController;
 use App\Http\Controllers\SpecializationController;
+use App\Http\Controllers\UniversitySelectionPageController;
+use App\Http\Controllers\ChatAIController;
+
+
 /*
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +42,10 @@ Route::get('/', function () {
     ]);
 })->name('welcome'); // إضافة اسم للراوت هنا
 
+//من اجل المفاضلة على الصفحة الرئيسية 
+Route::get('/', [UniversitySelectionPageController::class, 'welcomeUser'])->name('welcome');
+
+
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
 //         'canLogin' => Route::has('login'),
@@ -46,6 +54,8 @@ Route::get('/', function () {
 //         'phpVersion' => PHP_VERSION,
 //     ]);
 // });
+
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -90,14 +100,16 @@ Route::get('/universities/{id}', [CollegeController::class, 'showUser'])->name('
 
 
 // راوت صفحة التوجيه والدعم للواجهة الأمامية
-Route::get('/guidance', [GuidanceController::class, 'frontendIndex'])->name('guidance.indexUser');
+Route::get('/guidance', [GuidanceController::class, 'frontendIndexUser'])->name('guidance.indexUser');
 
 // صفحة الأسئلة الشائعة -
 Route::get('/questions', [FaqController::class, 'indexUser'])->name('faq.indexUser');
 
 
 
-// //عرض معلومات الكلية
-// Route::get('/specialties', [SpecializationController::class, 'indexUser'])->name('specialties.indexUser');
-// Route::get('/specialties/{id}', [SpecializationController::class, 'showUser'])->name('specialties.show');
 
+Route::get('/university-selection', [UniversitySelectionPageController::class, 'indexUser'])->name('university.selection');
+
+////رات الشات 
+
+Route::get('/chat-ai', [ChatAIController::class, 'indexUser'])->name('chat.ai');

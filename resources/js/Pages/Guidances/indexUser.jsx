@@ -20,3 +20,4 @@ export default function GuidanceIndex({ articles, books, videos, advices }) {
     </>
   );
 }
+

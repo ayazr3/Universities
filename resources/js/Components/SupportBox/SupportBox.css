@@ -17,11 +17,11 @@
 
 body {
   background: var(--secondary);
-   font-family: "El Messiri", sans-serif;
+  font-family: "El Messiri", sans-serif;
 }
 
 .support-container {
-  min-height: 100vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,18 +35,26 @@ body {
   background: #ffffff;
   border-radius: var(--card-radius);
   box-shadow: var(--shadow);
-  padding: 3rem 2rem 2rem 2rem;
-  max-width: 100%;
-  width: calc(100% - 2rem);
+  padding: 3rem 2rem 2rem;
+  max-width: 70%;
+  width: 90%;
   text-align: center;
   animation: fadeInUp 0.8s var(--transition);
   position: relative;
   margin: 0 auto;
+  max-height: 80%;
+  box-sizing: border-box;
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .support-icon {
@@ -57,8 +65,12 @@ body {
 
 .icon-circle {
   background: linear-gradient(145deg, #e0e7ff 35%, #2563eb 100%);
-  width: 80px;
-  height: 80px;
+  width: 15vw;
+  max-width: 80px;
+  height: 15vw;
+  max-height: 80px;
+  min-width: 60px;
+  min-height: 60px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -68,33 +80,44 @@ body {
 }
 
 @keyframes bounceIn {
-  0% { transform: scale(0.7); opacity: 0; }
-  60% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .question-mark {
-  font-size: 2.8rem;
+  font-size: 4vw;
+  max-font-size: 2.8rem;
+  min-font-size: 1.8rem;
   color: #fff;
   font-weight: bold;
   text-shadow: 0 2px 8px #2563eb55;
 }
 
 .support-title {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
   color: #3f51b5;
-  text-shadow: 2px 2px 5px rgba(63, 81, 181, 0.5); 
+  text-shadow: 2px 2px 5px rgba(63, 81, 181, 0.5);
   margin-bottom: 1rem;
   letter-spacing: -0.5px;
 }
 
 .support-desc {
   color: #1e293b;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 3vw, 1.2rem);
   font-weight: 300;
   margin-bottom: 2rem;
-  line-height: 1.8;
+  line-height: 1.6;
+  padding: 0 1rem;
 }
 
 .support-actions {
@@ -103,6 +126,7 @@ body {
   justify-content: center;
   margin-bottom: 2rem;
   flex-wrap: wrap;
+  padding: 0 1rem;
 }
 
 .support-btn {
@@ -110,13 +134,14 @@ body {
   padding: 1rem 2rem;
   border-radius: 10px;
   border: none;
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
   font-family: "El Messiri", sans-serif;
   transition: background var(--transition), color var(--transition), box-shadow var(--transition), transform var(--transition);
   cursor: pointer;
   font-weight: 600;
   box-shadow: 0 2px 8px #2563eb11;
   margin-bottom: 0.2rem;
+  flex-shrink: 0;
 }
 
 .support-btn.primary {
@@ -152,6 +177,7 @@ body {
   color: var(--text-gray);
   opacity: 0.95;
   direction: rtl;
+  padding: 0 1rem;
 }
 
 .phone {
@@ -168,34 +194,75 @@ body {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .support-container {
+  
+  padding: 0rem;
+  }
+  .support-card {
+    padding: 2rem 1.5rem 1.5rem;
+    max-width: 100%;
+  }
+  .support-title {
+    font-size: 1.8rem;
+  }
+  .support-desc {
+    font-size: 1rem;
+  }
+  .support-btn {
+    min-width: 140px;
+    padding: 0.9rem 1.8rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .support-card {
+    padding: 1.5rem 1rem 1rem;
+  }
+  .support-title {
+    font-size: 1.5rem;
+  }
+  .support-desc {
+    font-size: 0.9rem;
+  }
+  .support-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .support-btn {
+    width: 100%;
+    max-width: 240px;
+    min-width: auto;
+  }
+  .support-footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+  }
 }
 
 @media (max-width: 360px) {
   .support-card {
     padding: 1rem 0.8rem;
-    margin-top: -217px;
   }
   .support-title {
     font-size: 1.2rem;
   }
   .support-desc {
     font-size: 0.85rem;
-  }
-  .support-actions {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-  }
-  .support-btn {
-    width: 100%;
-    max-width: 200px;
-  }
-  .support-footer {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
   }
 }

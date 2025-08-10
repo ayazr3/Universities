@@ -1,26 +1,27 @@
-import React from "react";
-import ComputerEngineeringHero from "@/Components/ComputerEngineeringHero";
-import ComputerEngineering from "@/Components/ComputerEngineering";
-import StudyPlan from "@/Components/StudyPlan";
-import FutureOpportunities from "@/Components/FutureOpportunities";
-import AcademicPrograms from "@/Components/AcademicPrograms";
-import Navbar from "@/Components/Navbar/Navbar";
-import Footer from "@/Components/Footer/Footer";
+import React from 'react';
+import ComputerEngineeringHero from '@/Components/computerEngineeringHero/ComputerEngineeringHero' ;
+import ComputerEngineering from '@/Components/ComputerEngineeringg/ComputerEngineeringg';
+import FutureOpportunities from '@/Components/FutureOpportunities/FutureOpportunities';
+import AcademicPrograms from '@/Components/AcademicPrograms/AcademicPrograms';
 
-export default function SpecializationDetails({ specialization }) {
+const SpecializationDetails = ({ specializations }) => {
 
-  // يمكنك تمرير البيانات أو عرض التخصص في العنوان مثلاً
-  return (
-    <>
-      <Navbar />
-      <main>
-        <ComputerEngineeringHero />
-        <ComputerEngineering />
-        <StudyPlan />
-        <FutureOpportunities />
-        <AcademicPrograms />
-      </main>
-      <Footer />
-    </>
-  );
-}
+
+  const specialization = specializations.length > 0 ? specializations[0] : null;
+
+  if (!specialization) {
+    return <div>لا توجد بيانات متاحة</div>;
+  }
+
+  return (
+    <>
+      <ComputerEngineeringHero specialization={specialization} />
+      <ComputerEngineering specialization={specialization} />
+      <FutureOpportunities specialization={specialization} />
+      <AcademicPrograms specialization={specialization} />
+    </>
+  );
+};
+
+export default SpecializationDetails
+;

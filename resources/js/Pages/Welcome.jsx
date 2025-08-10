@@ -2,8 +2,11 @@ import Governorates from "@/Components/Governorates/Governorates";
 import Navbar from "@/Components/Navbar/Navbar";
 import { Head } from "@inertiajs/react";
 import Footer from "@/Components/Footer/Footer"
+import HelpSmart from "@/Components/HelpSmart/HelpSmart";
+import Support from "@/Components/Support/Support";
 
-export default function Welcome({ GOVERNORATES }) {
+import Differentiation from "@/Components/differentiation/differentiation";
+export default function Welcome({ GOVERNORATES , registrationSteps, admissionFile}) {
   return (
     <>
       <Head title="طريقك للجامعة " />
@@ -12,6 +15,9 @@ export default function Welcome({ GOVERNORATES }) {
    
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
         <Governorates GOVERNORATES={GOVERNORATES} />
+        <HelpSmart/>
+        <Support/>
+  <Differentiation registrationSteps={registrationSteps} admissionFile={admissionFile} /> 
       </div>
       <Footer/>
     </>

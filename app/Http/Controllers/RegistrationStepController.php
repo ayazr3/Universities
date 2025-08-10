@@ -8,6 +8,16 @@ use Inertia\Inertia;
 
 class RegistrationStepController extends Controller
 {
+
+    public function indexUser()
+    {
+        $steps = RegistrationStep::all();
+
+        return inertia('UniversitySelectionPage', [
+            'registrationSteps' => $steps,
+        ]);
+    }
+
     // عرض جميع الخطوات
     public function index()
     {

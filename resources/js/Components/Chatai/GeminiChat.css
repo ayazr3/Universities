@@ -1,0 +1,194 @@
+/* الحاوية الرئيسية */
+.gemini-chat-container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  direction: rtl;
+  background-color: #ffffff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 80vh; /* ارتفاع جيد للشات */
+  overflow: hidden;
+}
+
+/* رأس الشات */
+.gemini-header {
+  background-color: #4285F4;
+  color: white;
+  padding: 12px 16px;
+  text-align: right;
+  font-weight: 600;
+  font-size: 1.2rem;
+  /* user-select: none; */
+}
+
+/* منطقة المحادثة مع تمرير */
+.chat-area {
+  flex-grow: 1;
+  padding: 12px 16px;
+  overflow-y: auto;
+  background: #f5f5f7;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+/* رسالة الترحيب في وسط المنطقة */
+.welcome-message {
+  margin: auto;
+  text-align: center;
+  color: #777;
+}
+
+.welcome-icon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+/* رسائل المستخدم (الأسئلة) */
+.response-container.user {
+  align-self: flex-end;
+  background-color: #dcf8c6; /* لون فاتح يشبه واتساب */
+  color: #222;
+  padding: 10px 14px;
+  border-radius: 20px 20px 4px 20px;
+  max-width: 80%;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  word-wrap: break-word;
+}
+
+/* رسائل جيميني (الردود) */
+.response-container.ai {
+  align-self: flex-start;
+  background-color: #fff;
+  color: #333;
+  padding: 10px 14px;
+  border-radius: 20px 20px 20px 4px;
+  max-width: 80%;
+  box-shadow: 0 2px 5px rgba(66, 133, 244, 0.2);
+  word-wrap: break-word;
+}
+
+/* عناوين الرسائل (السؤال/الرد) */
+.response-header {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+/* محتوى الإجابة */
+.response-content p {
+  margin: 0.3em 0;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+/* منطقة الإدخال */
+.input-form {
+  padding: 10px 12px;
+  background-color: #eee;
+  border-top: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+}
+
+/* حاوية مربع الإدخال والزر */
+.input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* مربع النص */
+.input-container textarea {
+  flex-grow: 1;
+  font-size: 1rem;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-family: inherit;
+  height: 40px;
+  line-height: 1.2;
+  transition: border-color 0.3s;
+  direction: rtl;
+  overflow-y: auto;
+  max-height: 100px;
+}
+
+.input-container textarea:focus {
+  outline: none;
+  border-color: #4285f4;
+}
+
+/* زر الإرسال */
+.input-container button {
+  background-color: #4285f4;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  /* user-select: none; */
+}
+
+.input-container button:hover:not(:disabled) {
+  background-color: #357ae8;
+}
+
+.input-container button:disabled {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+}
+
+/* تلميح الإرسال */
+.input-hint {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+  margin: 6px 0 0 0;
+}
+
+/* مؤشر التحميل */
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  color: #4285f4;
+  font-weight: 600;
+  justify-content: center;
+}
+
+/* Spinner */
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #4285f4;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* تحكم في النص داخل الردود ليكسر الأسطر ويكون مناسب */
+.response-container p {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

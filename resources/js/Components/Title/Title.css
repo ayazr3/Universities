@@ -1,0 +1,38 @@
+.main_title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.main_title h1 {
+  font-weight: 700;
+  color: #3f51b5;
+  text-shadow: 2px 2px 5px rgba(63, 81, 181, 0.5);
+  font-size: 2.3rem;
+  margin-right: 3px;
+  text-align: center;
+  word-break: break-word;
+}
+
+.main_title h5 {
+  font-weight: 300;
+  color: #1e293b;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+
+@media (max-width: 600px) {
+  .main_title {
+    padding: 1rem 0;
+  }
+  .main_title h1 {
+    font-size: 1.5rem;
+  }
+  .main_title h5 {
+    font-size: 1rem;
+  }
+}

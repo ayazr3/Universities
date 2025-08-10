@@ -9,6 +9,16 @@ use Inertia\Inertia;
 
 class AdmissionScheduleController extends Controller
 {
+    public function indexUser()
+    {
+        $schedules = AdmissionSchedule::orderBy('date')->get();
+
+        return inertia('UniversitySelectionPage', [
+            'admissionSchedules' => $schedules,
+        ]);
+    }
+
+
     // عرض جميع الجداول
     public function index()
     {

@@ -1,6 +1,6 @@
 import React from "react";
 import "./SupportBox.css";
-import { Link } from "react-router";
+import { Link } from "@inertiajs/react";
 
 const SupportBox = () => (
   
@@ -17,7 +17,15 @@ const SupportBox = () => (
       </p>
       <div className="support-actions">
 
-       <Link to={'/chatAi'}> <button className="support-btn primary">الدردشة المباشرة</button></Link>
+          <Link
+            href={route('chat.ai')}   // استخدام اسم الراوت من لارافيل
+            onClick={() => setMenuOpen(false)}
+            className={window.location.pathname === "/chat-ai" ? "active" : ""}
+          >
+             <button className="support-btn primary">الدردشة المباشرة</button>
+      
+          </Link>
+       {/* <Link to={'/chatAi'}> <button className="support-btn primary">الدردشة المباشرة</button></Link> */}
       </div>
       <div className="support-footer">
       </div>

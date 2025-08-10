@@ -4,6 +4,7 @@ import { RiBook3Fill } from "react-icons/ri";
 import { Link } from "@inertiajs/react";
 import "./navba.css";
 
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -78,23 +79,26 @@ const Navbar = () => {
         >
            الاسئلة الشائعة
         </Link>
-        <Link
-          href="#"
-          onClick={() => setMenuOpen(false)}
-          className={window.location.pathname === "/chatAi" ? "active" : ""}
-        >
-          شات الذكاء الاصطناعي
-        </Link>
-        <Link
-          href="#"
-          onClick={() => {
-            topScroll();
-            setMenuOpen(false);
-          }}
-          className={window.location.pathname === "/Selectionprocess" ? "active" : ""}
-        >
-           المفاضلة
-        </Link>
+<Link
+  href={route('chat.ai')}   // استخدام اسم الراوت من لارافيل
+  onClick={() => setMenuOpen(false)}
+  className={window.location.pathname === "/chat-ai" ? "active" : ""}
+>
+  شات الذكاء الاصطناعي
+</Link>
+
+
+              <Link
+            href={route('university.selection')}  // استدعي الراوت الذي أنشأناه سابقا
+            className={window.location.pathname === "/university-selection" ? "active" : ""}
+            onClick={() => {
+              topScroll();
+              setMenuOpen(false);
+            }}
+          >
+            المفاضلة
+          </Link>
+
         <Link
           href={route("login")}
           className="login_list_link"

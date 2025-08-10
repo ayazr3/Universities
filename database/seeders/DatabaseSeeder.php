@@ -31,14 +31,14 @@ class DatabaseSeeder extends Seeder
 //        GuidanceSeeder::class,
 //          GovernoratesTableSeeder::class,
 //         CollegeSeeder::class,
-//         SpecializationSeeder::class,
+       SpecializationSeeder::class,
 
 // SpecializationSeeder::class,
 
         // AnnouncementSeeder::class,
 
         //   FaqSeeder::class,
-        //   AdmissionScheduleSeeder::class,
+          // AdmissionScheduleSeeder::class,
         // RegistrationStepSeeder::class,
         // SettingSeeder::class,
         // OfficialLinkSeeder::class,
@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
       //    GovernoratesTableSeeder::class,
       //   CollegeSeeder::class,
         //  SpecializationSeeder::class,
-
+// UniversityCenterSeeder::class
 
     ]);
     }

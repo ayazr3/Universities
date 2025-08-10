@@ -1,7 +1,12 @@
 import React from "react";
 import "./UniversitySelection2025.css";
 
-const UniversitySelection2025 = () => {
+const UniversitySelection2025 = ({
+  admissionFile,
+  year,
+  totalSpecializationsCount,
+  universityCentersCount,
+}) => {
   return (
     <div className="us2025-main-bg">
       <div className="us2025-content-wrapper">
@@ -10,25 +15,52 @@ const UniversitySelection2025 = () => {
           <h2>مرحباً بكم</h2>
           <p>في مستقبلكم الأكاديمي</p>
           <div className="us2025-download-btn">
-            <span className="us2025-icon-download"></span>
+            {admissionFile ? (
+              <a
+                href={admissionFile}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="us2025-icon-download"
+                title="تحميل ملف المفاضلة"
+              />
+            ) : (
+              // عرض زر تحميل معطل أو نص فقط
+              <span className="us2025-icon-download" title="لا يوجد ملف للتحميل حالياً" style={{opacity: 0.5, cursor: "default"}} />
+            )}
           </div>
         </div>
+
         <div className="us2025-info-section us2025-slide-in">
-          <h1>
-            مفاضلة الجامعة <span>2024-2025</span>
+          <h1 className="direction">
+            مفاضلة الجامعة <br /><span>{year}-{Number(year) + 1}</span>
+
           </h1>
           <p>
             ابدأ رحلتك الأكاديمية معنا. تعرف على جميع التفاصيل حول مواعيد التقديم، الخطوات المطلوبة، ومراكز التسجيل المتاحة.
           </p>
-          <button className="us2025-primary-btn">تحميل ملف المفاضلة</button>
+
+          {/* زر تحميل الملف بأكمله */}
+          {admissionFile ? (
+            <button
+              className="us2025-primary-btn"
+              onClick={() => window.open(admissionFile, "_blank")}
+            >
+              تحميل ملف المفاضلة
+            </button>
+          ) : (
+            <button className="us2025-primary-btn" disabled>
+              لا يوجد ملف للتحميل
+            </button>
+          )}
+
           <div className="us2025-stats">
             <div>
-              <span>+50</span>
+              <span>+{totalSpecializationsCount}</span>
               <p>تخصص أكاديمي</p>
             </div>
             <div>
-              <span>15</span>
-              <p>مركز تقديم</p>
+              <span>{universityCentersCount}</span>
+              <p>مراكز التقديم </p>
             </div>
           </div>
         </div>

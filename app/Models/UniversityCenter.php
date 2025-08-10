@@ -11,6 +11,8 @@ class UniversityCenter extends Model
 
     public function governorate()
     {
-        return $this->belongsTo(Governorate::class);
-    }
+        // return $this->belongsTo(Governorate::class);
+         return $this->hasMany(\App\Models\UniversityCenter::class);
 }
+    }
+   

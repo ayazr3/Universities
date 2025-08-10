@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class GuidanceController extends Controller
 {
-    public function frontendIndex()
+    public function frontendIndexUser(Request $request)
 {
     $articles = Guidance::where('type', 'article')->get();
     $books = Guidance::where('type', 'booke')->get();
@@ -20,6 +20,8 @@ class GuidanceController extends Controller
         'books' => $books,
         'videos' => $videos,
         'advices' => $advices,
+
+  
     ]);
 }
      public function index()
