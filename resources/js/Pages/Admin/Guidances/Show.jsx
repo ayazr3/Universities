@@ -4,7 +4,6 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import '@/Components/Admin/Style/Style.css';
 
 export default function GuidanceShow({ guidance, auth }) {
-  // دالة تحويل كود النوع لاسم معرب
   const getTypeName = (type) => {
     switch (type) {
       case 'article': return 'مقالة';
@@ -16,64 +15,131 @@ export default function GuidanceShow({ guidance, auth }) {
   };
 
   return (
-    <AuthenticatedLayout
-      user={auth.user}
-      header={<h2 className="form-title" style={{marginBottom: 0}}>تفاصيل التوجيه</h2>}
-    >
-      <Head title="تفاصيل التوجيه" />
-      <div className="modern-table-container" style={{display: 'flex', justifyContent:'center', alignItems: 'flex-start', minHeight:'70vh'}}>
-        <div className="modern-card" style={{maxWidth: 480, width: '100%', margin: '40px 0', padding:'32px 28px', background: "#fff"}}>
+    <AuthenticatedLayout user={auth.user}>
+      <Head title={`تفاصيل الإرشاد - ${guidance.title}`} />
 
-          <h2 className="form-title" style={{fontSize:'1.4rem'}}>{guidance.title}</h2>
-          <div className="card-detail-item">
-            <span className="label">النوع:</span>
-            <span>{getTypeName(guidance.type)}</span>
-          </div>
-          <div className="card-detail-item">
-            <span className="label">الوصف:</span>
-            <span>{guidance.description}</span>
-          </div>
-          {guidance.link && (
-            <div className="card-detail-item">
-              <span className="label">الرابط:</span>
-              <a
-                href={guidance.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="table-link"
-                style={{ direction: 'ltr', fontWeight: '500', marginRight: 8 }}
-              >
-                {guidance.link}
-              </a>
-            </div>
-          )}
-          {guidance.image && (
-            <div className="card-detail-item" style={{flexDirection:'column', gap:0}}>
-              <span className="label" style={{marginBottom:'5px'}}>الصورة:</span>
+      <div
+        className="panel"
+        style={{
+          maxWidth: 700,
+          margin: '40px auto',
+          padding: 20,
+          background: '#fff',
+          borderRadius: 12,
+          boxShadow: '0 12px 24px rgba(58,141,222,0.15)',
+          fontFamily: "'Cairo', sans-serif",
+        }}
+      >
+        {/* العنوان */}
+        <h1 className="form-title" style={{ marginBottom: 20, fontSize: '1.8rem' }}>
+          {guidance.title}
+        </h1>
+
+        {/* صورة + بيانات */}
+        <div className="details-grid" style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+          {/* صورة الإرشاد */}
+          <div style={{ flex: '0 0 220px' }}>
+            {guidance.image && (
               <img
                 src={`/storage/${guidance.image}`}
                 alt={guidance.title}
-                style={{height:100, borderRadius: '8px', boxShadow: '0 1px 8px #eee'}}
+                style={{
+                  width: '100%',
+                  borderRadius: 14,
+                  marginBottom: 14,
+                  border: '1px solid #eee'
+                }}
               />
-            </div>
-          )}
-
-          <div className="actions-cell" style={{marginTop:'2.5rem', justifyContent:'center'}}>
-            <Link
-              href={route('guidances.edit', guidance.id)}
-              className="action-btn edit-btn"
-              style={{minWidth:'100px'}}
-            >
-              تعديل
-            </Link>
-            <Link
-              href={route('guidances.index')}
-              className="action-btn view-btn"
-              style={{background:'#e2e8f0', color:'#3059d5', minWidth:'100px'}}
-            >
-              رجوع
-            </Link>
+            )}
           </div>
+
+          {/* التفاصيل */}
+          <div style={{ flex: 1 }}>
+            <dl style={{ direction: 'rtl', fontSize: 16, color: '#34495e' }}>
+              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>النوع:</dt>
+              <dd>{getTypeName(guidance.type)}</dd>
+
+              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>الوصف:</dt>
+              <dd style={{ whiteSpace: 'pre-line' }}>{guidance.description}</dd>
+
+              {guidance.link && (
+                <>
+                  <dt style={{ fontWeight: 'bold', marginTop: 8 }}>الرابط:</dt>
+                  <dd
+                    style={{
+                      maxWidth: '100%',
+                      overflowWrap: 'break-word',
+                      wordBreak: 'break-word'
+                    }}
+                  >
+                    <a
+                      href={guidance.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="official-link"
+                      style={{
+                        display: 'inline-block',
+                        color: '#3a8dde',
+                        textDecoration: 'underline',
+                        fontWeight: '500',
+                        direction: 'ltr'
+                      }}
+                    >
+                      {guidance.link}
+                    </a>
+                  </dd>
+                </>
+              )}
+
+              {/* إذا كان لديك خاصية isGeneral */}
+              {guidance.isGeneral && (
+                <>
+                  <dt style={{ fontWeight: 'bold', marginTop: 8 }}>عام:</dt>
+                  <dd>{guidance.isGeneral === 'للموقع' ? 'للموقع كامل' : 'لكلية بحد ذاتها'}</dd>
+                </>
+              )}
+            </dl>
+          </div>
+        </div>
+
+        {/* أزرار تعديل ورجوع */}
+        <div style={{
+          marginTop: 30,
+          display: 'flex',
+          gap: 12,
+          flexWrap: 'wrap',
+          justifyContent: 'flex-start'
+        }}>
+          <Link
+            href={route('guidances.edit', guidance.id)}
+            className="submit-btn"
+            style={{
+              display: 'inline-block',
+              textAlign: 'center',
+              padding: '12px 20px',
+              borderRadius: 8,
+              maxWidth: "50%"
+            }}
+          >
+            تعديل
+          </Link>
+          <Link
+            href={route('guidances.index')}
+            style={{
+              color: "#3a8dde",
+              textDecoration: "underline",
+              fontWeight: "bold",
+              background: "#eaf4ff",
+              borderRadius: 8,
+              padding: "10px 16px",
+              fontSize: "15px",
+              minWidth: "100px",
+              textAlign: "center",
+
+            }}
+          >
+            رجوع
+          </Link>
         </div>
       </div>
     </AuthenticatedLayout>

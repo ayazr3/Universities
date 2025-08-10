@@ -52,9 +52,21 @@ class CollegeController extends Controller
 
  
 
+    // public function index()
+    // {
+    //     $colleges = College::latest()->get();
+    //     return inertia('Admin/Colleges/Index', [
+    //         'colleges' => $colleges,
+    //         'stats' => [
+    //             'total' => College::count(),
+    //             'recent' => College::where('created_at', '>', now()->subDays(7))->count(),
+    //         ]
+    //     ]);
+    // }
     public function index()
     {
-        $colleges = College::latest()->get();
+        $colleges = College::with('governorate')->latest()->get();
+
         return inertia('Admin/Colleges/Index', [
             'colleges' => $colleges,
             'stats' => [

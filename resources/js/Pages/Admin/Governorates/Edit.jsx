@@ -14,37 +14,60 @@ export default function GovernorateEdit({ governorate, auth }) {
   };
 
   return (
-    <AuthenticatedLayout user={auth.user} header={<h2>تعديل المحافظة</h2>}>
+    <AuthenticatedLayout user={auth.user}>
       <Head title="تعديل المحافظة" />
-      <div className="py-12 flex justify-center">
-        <div className="w-full max-w-lg">
-          <form onSubmit={handleSubmit} className="modern-form" noValidate>
-            <h2 className="form-title">تعديل اسم المحافظة</h2>
-            <div className="form-group">
-              <label htmlFor="name">اسم المحافظة</label>
-              <input
-                type="text" id="name"
-                value={data.name}
-                onChange={e => setData('name', e.target.value)}
-                className={errors.name ? 'input-error' : ''}
-                required autoFocus
-              />
-              {errors.name && <p className="error-text">{errors.name}</p>}
-            </div>
-            <div style={{
-              display: "flex", gap: "12px", justifyContent: "space-between",
-              alignItems: "center", marginTop: 16,
-            }}>
-              <button type="submit" disabled={processing} className="submit-btn" style={{ flex: 1 }}>
-                {processing ? "جاري التحديث..." : "تحديث"}
-              </button>
-              <Link href={route('governorates.index')} className="modern-link" style={{ alignSelf: 'center' }}>
-                رجوع
-              </Link>
-            </div>
-          </form>
+
+      <form
+        className="modern-form"
+        onSubmit={handleSubmit}
+        noValidate
+        style={{ maxWidth: 480, margin: '40px auto' }}
+      >
+        <h2 className="form-title">تعديل بيانات المحافظة</h2>
+
+        {/* حقل اسم المحافظة */}
+        <div className="form-group">
+          <label htmlFor="name">اسم المحافظة</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={data.name}
+            onChange={e => setData('name', e.target.value)}
+            required
+            className={errors.name ? 'input-error' : ''}
+            autoFocus
+          />
+          {errors.name && <p className="input-error">{errors.name}</p>}
         </div>
-      </div>
+
+        {/* زر الحفظ */}
+        <button
+          type="submit"
+          className="submit-btn"
+          disabled={processing}
+          style={{ width: '100%', marginTop: 10 }}
+        >
+          {processing ? 'جاري التحديث...' : 'تحديث المحافظة'}
+        </button>
+
+        {/* زر الرجوع */}
+        <Link
+          href={route('governorates.index')}
+          className="back-link"
+          style={{
+            display: 'inline-block',
+            width: '100%',
+            textAlign: 'center',
+            marginTop: 16,
+            color: '#3a8dde',
+            textDecoration: 'underline',
+            fontWeight: 'bold'
+          }}
+        >
+          رجوع إلى جدول المحافظات
+        </Link>
+      </form>
     </AuthenticatedLayout>
   );
 }
