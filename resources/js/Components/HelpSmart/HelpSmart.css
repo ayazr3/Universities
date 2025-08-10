@@ -248,7 +248,7 @@
     align-items: stretch;
     padding: 2rem 1rem;
     gap: 1.2rem;
-    min-height: auto;
+    /* min-height: auto; */
     width: auto;
     direction: rtl;
   }
