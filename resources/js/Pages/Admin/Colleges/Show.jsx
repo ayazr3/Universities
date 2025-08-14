@@ -1,19 +1,13 @@
 import React from 'react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
-import SettingMap from '@/Components/SettingMap'; // استيراد مكون الخريطة
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import '@/Components/Admin/Style/Style.css';
 
-export default function Show({ auth, college }) {
-  console.log('COLLEGE PROPS', college);
-
-  // فك تحويل نص location إن كان موجود كـ string
-  const location =
-    typeof college.location === 'string' ? JSON.parse(college.location) : college.location;
-
+export default function FaqShow({ faq, auth }) {
   return (
     <AuthenticatedLayout user={auth.user}>
-      <Head title={college.name} />
+      <Head title={`تفاصيل السؤال الشائع - ${faq.question}`} />
+
       <div
         className="panel"
         style={{
@@ -26,95 +20,56 @@ export default function Show({ auth, college }) {
           fontFamily: "'Cairo', sans-serif",
         }}
       >
-        <h1 className="form-title" style={{ marginBottom: 20 }}>
-          {college.name}
+        {/* العنوان */}
+        <h1 className="form-title" style={{ marginBottom: 22, fontSize: '1.7rem' }}>
+          {faq.question}
         </h1>
+
+        {/* التفاصيل (الإجابة) */}
         <div className="details-grid" style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
-          <div style={{ flex: '0 0 220px' }}>
-            {college.image && (
-              <img
-                src={`/storage/${college.image}`}
-                alt={college.name}
-                style={{ width: '100%', borderRadius: 14, marginBottom: 14, border: '1px solid #eee' }}
-              />
-            )}
-          </div>
           <div style={{ flex: 1 }}>
             <dl style={{ direction: 'rtl', fontSize: 16, color: '#34495e' }}>
-              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>المحافظة:</dt>
-              <dd>{college.governorate?.name ?? '--'}</dd>
-
-              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>سنة التأسيس:</dt>
-              <dd>{college.establishment_year}</dd>
-
-              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>عدد الطلاب:</dt>
-              <dd>{college.student_count}</dd>
-
-              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>اسم المحافظة :</dt>
-              <dd>{college.governorate?.name || '--'}</dd>
-              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>الرابط الرسمي:</dt>
-              <dd
-                style={{
-                  maxWidth: '100%',
-                  overflowWrap: 'break-word', // يتيح لف النص داخل الحدود
-                  wordWrap: 'break-word',
-                  wordBreak: 'break-word',
-                }}
-              >
-                <a
-                  href={college.official_link}
-                  target="_blank"
-                  rel="noopener"
-                  className="official-link"
-                  style={{
-                    display: 'inline-block',
-                    maxWidth: '100%',
-                    color: '#3a8dde',
-                    textDecoration: 'underline',
-                    fontWeight: '500',
-                    direction: 'ltr',
-                  }}
-                >
-                  {college.official_link}
-                </a>
-              </dd>
-
-              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>هل كلية؟</dt>
-              <dd>{college.college ? 'نعم' : 'لا'}</dd>
-
-              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>الموقع (خط العرض وخط الطول):</dt>
-              <dd>
-                {location
-                  ? `خط العرض: ${location.lat}, خط الطول: ${location.lng}`
-                  : 'لا يوجد موقع'}
+              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>الإجابة:</dt>
+              <dd style={{ whiteSpace: 'pre-line', margin: 0 }}>
+                {faq.answer}
               </dd>
             </dl>
           </div>
         </div>
 
-        {/* عرض الخريطة */}
-        {location && (
-          <div className="section" style={{ marginTop: 30 }}>
-            <h3 style={{ marginBottom: 8, color: '#2c3e50' }}>الموقع على الخريطة</h3>
-            <SettingMap lat={location.lat} lng={location.lng} editable={false} height={300} />
-          </div>
-        )}
-
-        <div className="section" style={{ marginTop: 30 }}>
-          <h3 style={{ marginBottom: 8, color: '#2c3e50' }}>الملخص</h3>
-          <div style={{ color: '#34495e', fontSize: 16, lineHeight: 1.5 }}>{college.summary}</div>
-        </div>
-
-        <div className="section" style={{ marginTop: 20 }}>
-          <h3 style={{ marginBottom: 8, color: '#2c3e50' }}>التفاصيل</h3>
-          <div style={{ color: '#34495e', fontSize: 16, lineHeight: 1.5 }}>{college.details}</div>
-        </div>
-
-        <div style={{ marginTop: 30 }}>
+        {/* أزرار تعديل ورجوع */}
+        <div style={{
+          marginTop: 30,
+          display: 'flex',
+          gap: 12,
+          flexWrap: 'wrap',
+          justifyContent: 'flex-start'
+        }}>
           <Link
-            href={route('Admincolleges.index')}
-            className="back-link"
-            style={{ color: '#3a8dde', textDecoration: 'underline', fontWeight: 'bold' }}
+            href={route('faq.edit', faq.id)}
+            className="submit-btn"
+            style={{
+              display: 'inline-block',
+              textAlign: 'center',
+              padding: '12px 20px',
+              borderRadius: 8
+            }}
+          >
+            تعديل
+          </Link>
+          <Link
+            href={route('faq.index')}
+            style={{
+              color: "#3a8dde",
+              textDecoration: "underline",
+              background: "#eaf4ff",
+              borderRadius: 8,
+              padding: "10px 16px",
+              fontSize: "15px",
+              fontWeight: "bold",
+              minWidth: "100px",
+              textAlign: "center"
+            }}
           >
             رجوع
           </Link>
