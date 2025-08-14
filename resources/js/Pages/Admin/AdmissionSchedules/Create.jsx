@@ -15,47 +15,30 @@ export default function AdmissionScheduleCreate({ auth }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     post(route('admissionSchedule.store'), {
-      forceFormData: true, // ضروري لإرسال الملفات بشكل صحيح
+      forceFormData: true, // ضروري لإرسال الملفات
     });
   };
 
   return (
-    <AuthenticatedLayout user={auth.user} header={<h2 className="form-title">إضافة جدول قبول جديد</h2>}>
+    <AuthenticatedLayout user={auth.user}>
       <Head title="إضافة جدول قبول جديد" />
-      <div
-        style={{
-          minHeight: "100vh",
-          background: "rgb(179 194 215)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: '1rem',
-        }}
-      >
-        <form
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
-          className="modern-form"
-          style={{ width: '100%', maxWidth: 520 }}
-          noValidate
-        >
-          <h2 className="form-title" style={{ marginTop: 0, marginBottom: 16 }}>
-            إدخال بيانات جدول القبول
-          </h2>
+
+      <div className="modern-form" style={{ maxWidth: 520 }}>
+        <h2 className="form-title">إضافة جدول قبول جديد</h2>
+        <form onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
 
           {/* العنوان */}
           <div className="form-group">
-            <label htmlFor="title">العنوان</label>
+            <label htmlFor="title">عنوان الجدول</label>
             <input
               type="text"
               id="title"
-              className={errors.title ? "input-error" : ""}
               value={data.title}
-              onChange={e => setData('title', e.target.value)}
-              autoFocus
+              onChange={(e) => setData('title', e.target.value)}
+              className={errors.title ? 'input-error' : ''}
               required
             />
-            {errors.title && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.title}</div>}
+            {errors.title && <p className="input-error">{errors.title}</p>}
           </div>
 
           {/* التفاصيل */}
@@ -64,82 +47,74 @@ export default function AdmissionScheduleCreate({ auth }) {
             <textarea
               id="body"
               rows={5}
-              className={errors.body ? "input-error" : ""}
               value={data.body}
-              onChange={e => setData('body', e.target.value)}
+              onChange={(e) => setData('body', e.target.value)}
+              className={errors.body ? 'input-error' : ''}
               required
             />
-            {errors.body && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.body}</div>}
+            {errors.body && <p className="input-error">{errors.body}</p>}
           </div>
 
           {/* التاريخ */}
           <div className="form-group">
-            <label htmlFor="date">التاريخ</label>
+            <label htmlFor="date">تاريخ الجدول</label>
             <input
               type="date"
               id="date"
-              className={errors.date ? "input-error" : ""}
               value={data.date}
-              onChange={e => setData('date', e.target.value)}
+              onChange={(e) => setData('date', e.target.value)}
+              className={errors.date ? 'input-error' : ''}
               required
             />
-            {errors.date && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.date}</div>}
+            {errors.date && <p className="input-error">{errors.date}</p>}
           </div>
 
           {/* المسؤول */}
           <div className="form-group">
-            <label htmlFor="name">المسؤول</label>
+            <label htmlFor="name">اسم المسؤول</label>
             <input
               type="text"
               id="name"
-              className={errors.name ? "input-error" : ""}
               value={data.name}
-              onChange={e => setData('name', e.target.value)}
+              onChange={(e) => setData('name', e.target.value)}
+              className={errors.name ? 'input-error' : ''}
               required
             />
-            {errors.name && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.name}</div>}
+            {errors.name && <p className="input-error">{errors.name}</p>}
           </div>
 
           {/* الملف */}
           <div className="form-group">
-            <label htmlFor="file_url">الملف (اختياري)</label>
+            <label htmlFor="file_url">ملف الجدول (اختياري)</label>
             <input
               type="file"
               id="file_url"
               accept=".pdf,.doc,.docx,.txt"
-              className={errors.file_url ? "input-error" : ""}
-              onChange={e => setData('file_url', e.target.files[0])}
+              onChange={(e) => setData('file_url', e.target.files[0])}
+              className={errors.file_url ? 'input-error' : ''}
             />
-            {errors.file_url && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.file_url}</div>}
+            {errors.file_url && <p className="input-error">{errors.file_url}</p>}
           </div>
 
-          {/* أزرار الإجراء */}
-          <div style={{
-            display: "flex",
-            gap: "12px",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: 16,
-          }}>
+          {/* أزرار */}
+          <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
             <button
               type="submit"
-              disabled={processing}
               className="submit-btn"
+              disabled={processing}
               style={{ flex: 1 }}
             >
-              {processing ? "جاري الحفظ..." : "حفظ الجدول"}
+              {processing ? 'جاري الحفظ...' : 'حفظ الجدول'}
             </button>
             <Link
               href={route('admissionSchedule.index')}
+              className="back-link"
               style={{
-                color: "#3a8dde",
-                fontWeight: "bold",
-                textDecoration: "underline",
-                background: "#eaf4ff",
-                borderRadius: 7,
-                padding: "11px 15px",
-                fontSize: "15px",
-                textAlign: "center"
+                alignSelf: 'center',
+                color: '#3a8dde',
+                textDecoration: 'underline',
+                fontWeight: 'bold',
+                padding: '12px 20px',
               }}
             >
               رجوع

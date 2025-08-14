@@ -1,27 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Head, Link } from '@inertiajs/react';
+import { Inertia } from '@inertiajs/inertia';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import '@/Components/Admin/Style/Style.css';
 
 export default function AdmissionScheduleIndex({ auth, schedules, stats }) {
+
+  const [search, setSearch] = useState('');
+
+  // دالة لحذف الجدول
+  const handleDelete = (id) => {
+    if (confirm('هل أنت متأكد من حذف هذا الجدول؟')) {
+      Inertia.delete(route('admissionSchedule.destroy', id));
+    }
+  };
+
+  // تقصير النص لعدد كلمات محدد
+  const truncateWords = (text, wordLimit = 4) => {
+    if (!text) return '';
+    const words = text.trim().split(/\s+/);
+    if (words.length <= wordLimit) return text;
+    return words.slice(0, wordLimit).join(' ') + '...';
+  };
+
+  // تصفية الجداول بالبحث
+  const filteredSchedules = schedules.filter(schedule =>
+    schedule.title?.toLowerCase().includes(search.toLowerCase()) ||
+    schedule.name?.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <AuthenticatedLayout
-      user={auth.user}
-      header={<h2 className="form-title" style={{ marginBottom: 0 }}>جداول القبول</h2>}
-    >
+    <AuthenticatedLayout user={auth.user}>
       <Head title="جداول القبول" />
 
-      <div className="modern-table-container">
+      <div className="modern-table-container" style={{ maxWidth: '98%', margin: '40px auto' }}>
 
-        {/* شريط الفلترة وزر الإضافة */}
-        <div className="filter-bar" style={{ justifyContent: 'space-between', marginBottom: '30px' }}>
-          <h2 className="form-title" style={{ margin: 0, fontSize: "22px" }}>قائمة جداول القبول</h2>
-          <Link
-            href={route('admissionSchedule.create')}
-            className="add-btn"
-          >
-            إضافة جدول جديد
+        {/* رأس الصفحة */}
+        <div className="table-header-bar">
+          <span className="dashboard-title">لوحة تحكم جداول القبول</span>
+          <Link href={route('admissionSchedule.create')} className="add-btn">
+            + إضافة جدول جديد
           </Link>
+        </div>
+
+        {/* شريط البحث */}
+        <div className="filter-bar">
+          <input
+            type="text"
+            placeholder="بحث عن جدول..."
+            className="search-input"
+            aria-label="بحث"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+          <button type="button" className="search-btn">بحث</button>
         </div>
 
         {/* كروت الإحصائيات */}
@@ -50,37 +82,33 @@ export default function AdmissionScheduleIndex({ auth, schedules, stats }) {
           </div>
         </div>
 
-        {/* الجدول */}
+        {/* جدول جداول القبول */}
         <table className="modern-table">
           <thead>
             <tr>
-              <th>العنوان</th>
-              <th>التفاصيل</th>
-              <th>التاريخ</th>
-              <th>المسؤول</th>
-              <th>الملف</th>
-              <th>الإجراءات</th>
+              <th className="col-name">العنوان</th>
+              <th className="col-summary">التفاصيل</th>
+              <th className="col-date">التاريخ</th>
+              <th className="col-manager">المسؤول</th>
+              <th className="col-file">الملف</th>
+              <th className="col-actions">الإجراءات</th>
             </tr>
           </thead>
           <tbody>
-            {schedules.length === 0 ? (
+            {filteredSchedules.length === 0 ? (
               <tr>
                 <td colSpan={6} style={{ color: "#b3b3b3", fontWeight: 'bold', padding: '40px 0', textAlign: 'center' }}>
                   لا توجد جداول حالياً
                 </td>
               </tr>
             ) : (
-              schedules.map(schedule => (
+              filteredSchedules.map(schedule => (
                 <tr key={schedule.id}>
-                  <td className="truncate" style={{ maxWidth: '230px' }} title={schedule.title}>
-                    {schedule.title}
-                  </td>
-                  <td className="truncate" style={{ maxWidth: '300px' }} title={schedule.body}>
-                    {schedule.body.length > 100 ? schedule.body.substring(0, 100) + '...' : schedule.body}
-                  </td>
-                  <td>{new Date(schedule.date).toLocaleDateString('ar-EG')}</td>
-                  <td>{schedule.name}</td>
-                  <td>
+                  <td className="col-name" title={schedule.title}>{truncateWords(schedule.title)}</td>
+                  <td className="col-summary" title={schedule.body}>{truncateWords(schedule.body)}</td>
+                  <td className="col-date">{new Date(schedule.date).toLocaleDateString('ar-EG')}</td>
+                  <td className="col-manager">{schedule.name}</td>
+                  <td className="col-file">
                     {schedule.file_url ? (
                       <a
                         href={`/storage/${schedule.file_url}`}
@@ -91,29 +119,20 @@ export default function AdmissionScheduleIndex({ auth, schedules, stats }) {
                         عرض الملف
                       </a>
                     ) : (
-                      <span style={{ color: '#b3b3b3' }}>لا يوجد ملف</span>
+                      <span style={{ color: '#999', fontSize: '13px' }}>لا يوجد ملف</span>
                     )}
                   </td>
                   <td>
                     <div className="actions-cell">
-                      <Link
-                        title="عرض"
-                        href={route('admissionSchedule.show', schedule.id)}
-                        className="action-btn view-btn"
-                      >👁️</Link>
-                      <Link
-                        title="تعديل"
-                        href={route('admissionSchedule.edit', schedule.id)}
-                        className="action-btn edit-btn"
-                      >✏️</Link>
-                      <Link
+                      <Link href={route('admissionSchedule.show', schedule.id)} title="عرض">👁️</Link>
+                      <Link href={route('admissionSchedule.edit', schedule.id)} title="تعديل" >✏️</Link>
+                      <button
+                        type="button"
                         title="حذف"
-                        href={route('admissionSchedule.destroy', schedule.id)}
-                        method="delete"
-                        as="button"
-                        className="action-btn delete-btn"
-                        confirm="هل أنت متأكد من حذف هذا الجدول؟"
-                      >🗑️</Link>
+                        onClick={() => handleDelete(schedule.id)}
+                      >
+                        🗑️
+                      </button>
                     </div>
                   </td>
                 </tr>
