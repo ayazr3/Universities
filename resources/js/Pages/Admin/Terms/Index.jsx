@@ -1,27 +1,55 @@
-import React from 'react';
-import { Head, Link } from '@inertiajs/react';
+// resources/js/Pages/Admin/Terms/Index.jsx
+import React, { useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Head, Link } from '@inertiajs/react';
+import { Inertia } from '@inertiajs/inertia';
 import '@/Components/Admin/Style/Style.css';
 
+const truncateWords = (text, wordLimit = 4) => {
+  if (!text) return '';
+  const words = text.trim().split(/\s+/);
+  if (words.length <= wordLimit) return text;
+  return words.slice(0, wordLimit).join(' ') + '...';
+};
+
 export default function TermIndex({ auth, terms, stats }) {
+  const [search, setSearch] = useState('');
+
+  const handleDelete = (id) => {
+    if (confirm('هل أنت متأكد من حذف هذا الشرط؟')) {
+      Inertia.delete(route('terms.destroy', id));
+    }
+  };
+
+  const filteredTerms = terms.filter(term =>
+    term.title?.toLowerCase().includes(search.toLowerCase()) ||
+    term.content?.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <AuthenticatedLayout
-      user={auth.user}
-      header={<h2 className="form-title" style={{ marginBottom: 0 }}>الشروط</h2>}
-    >
-      <Head title="الشروط" />
+    <AuthenticatedLayout user={auth.user}>
+      <Head title="إدارة الشروط" />
+      <div className="modern-table-container" style={{ maxWidth: '98%', margin: '40px auto' }}>
 
-      <div className="modern-table-container">
-
-        {/* شريط الفلترة وزر الإضافة */}
-        <div className="filter-bar" style={{ justifyContent: 'space-between', marginBottom: '30px' }}>
-          <h2 className="form-title" style={{ margin: 0, fontSize: '22px' }}>قائمة الشروط</h2>
-          <Link href={route('terms.create')} className="add-btn">
-            إضافة شرط جديد
-          </Link>
+        {/* عنوان الصفحة وزر الإضافة */}
+        <div className="table-header-bar">
+          <span className="dashboard-title">لوحة تحكم الشروط</span>
+          <Link href={route('terms.create')} className="add-btn">إضافة شرط جديد</Link>
         </div>
 
-        {/* كروت الإحصائيات */}
+        {/* شريط البحث */}
+        <div className="filter-bar">
+          <input
+            type="text"
+            placeholder="ابحث في العنوان أو المحتوى..."
+            className="search-input"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+          <button type="button" className="search-btn">بحث</button>
+        </div>
+
+        {/* إحصائيات */}
         <div style={{ display: 'flex', gap: '16px', marginBottom: '32px', flexWrap: 'wrap' }}>
           <div style={{
             background: '#eaf4ff',
@@ -29,7 +57,7 @@ export default function TermIndex({ auth, terms, stats }) {
             borderRadius: '14px',
             minWidth: '160px',
             textAlign: 'center',
-            flex: '1',
+            flex: '1'
           }}>
             <div style={{ fontWeight: '700', color: '#26547c', marginBottom: 4 }}>إجمالي الشروط</div>
             <div style={{ fontWeight: '800', fontSize: '22px', color: '#2c3e50' }}>{stats.total}</div>
@@ -40,68 +68,41 @@ export default function TermIndex({ auth, terms, stats }) {
             borderRadius: '14px',
             minWidth: '160px',
             textAlign: 'center',
-            flex: '1',
+            flex: '1'
           }}>
             <div style={{ fontWeight: '700', color: '#229363', marginBottom: 4 }}>الشروط الحديثة</div>
             <div style={{ fontWeight: '800', fontSize: '22px', color: '#27ae60' }}>{stats.recent}</div>
           </div>
         </div>
 
-        {/* الجدول */}
+        {/* جدول */}
         <table className="modern-table">
           <thead>
             <tr>
               <th>العنوان</th>
               <th>المحتوى</th>
               <th>النوع</th>
-              <th>الإجراءات</th>
+              <th className="col-actions">الإجراءات</th>
             </tr>
           </thead>
           <tbody>
-            {terms.length === 0 ? (
+            {filteredTerms.length === 0 ? (
               <tr>
-                <td colSpan={4} style={{ color: '#b3b3b3', fontWeight: 'bold', padding: '40px 0', textAlign: 'center' }}>
-                  لا توجد شروط حاليا
+                <td colSpan="4" style={{ padding: '40px 0', textAlign: 'center', fontWeight: 'bold', color: '#b3b3b3' }}>
+                  لا توجد شروط للعرض.
                 </td>
               </tr>
             ) : (
-              terms.map(term => (
+              filteredTerms.map(term => (
                 <tr key={term.id}>
-                  <td className="truncate" style={{ maxWidth: '230px' }} title={term.title}>
-                    {term.title}
-                  </td>
-                  <td className="truncate" style={{ maxWidth: '300px' }} title={term.content}>
-                    {term.content.length > 100 ? `${term.content.substring(0, 100)}...` : term.content}
-                  </td>
-                  <td>
-                    {term.type === 'termsofservice' ? 'شروط الخدمة' : 'سياسة الخصوصية'}
-                  </td>
+                  <td title={term.title}>{truncateWords(term.title)}</td>
+                  <td title={term.content}>{truncateWords(term.content)}</td>
+                  <td>{term.type === 'termsofservice' ? 'شروط الخدمة' : 'سياسة الخصوصية'}</td>
                   <td>
                     <div className="actions-cell">
-                      <Link
-                        title="عرض"
-                        href={route('terms.show', term.id)}
-                        className="action-btn view-btn"
-                      >
-                        👁️
-                      </Link>
-                      <Link
-                        title="تعديل"
-                        href={route('terms.edit', term.id)}
-                        className="action-btn edit-btn"
-                      >
-                        ✏️
-                      </Link>
-                      <Link
-                        title="حذف"
-                        href={route('terms.destroy', term.id)}
-                        method="delete"
-                        as="button"
-                        className="action-btn delete-btn"
-                        confirm="هل أنت متأكد من حذف هذا الشرط؟"
-                      >
-                        🗑️
-                      </Link>
+                      <Link href={route('terms.show', term.id)} title="عرض">👁️</Link>
+                      <Link href={route('terms.edit', term.id)} title="تعديل">✏️</Link>
+                      <button type="button" title="حذف" onClick={() => handleDelete(term.id)}>🗑️</button>
                     </div>
                   </td>
                 </tr>
