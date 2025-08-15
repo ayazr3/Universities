@@ -3,24 +3,26 @@ import { Head, Link } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import '@/Components/Admin/Style/Style.css';
 
+// دالة لتقصير النص
+const truncateWords = (text, wordLimit = 4) => {
+  if (!text) return '';
+  const words = text.trim().split(/\s+/);
+  if (words.length <= wordLimit) return text;
+  return words.slice(0, wordLimit).join(' ') + '...';
+};
+
 export default function RegistrationStepIndex({ auth, steps, stats }) {
   return (
-    <AuthenticatedLayout
-      user={auth.user}
-      header={<h2 className="form-title" style={{ marginBottom: 0 }}>خطوات التسجيل</h2>}
-    >
+    <AuthenticatedLayout user={auth.user}>
       <Head title="خطوات التسجيل" />
 
-      <div className="modern-table-container">
+      <div className="modern-table-container" style={{ maxWidth: '90%', margin: '40px auto' }}>
 
-        {/* شريط الفلترة وزر الإضافة */}
-        <div className="filter-bar" style={{ justifyContent: 'space-between', marginBottom: '30px' }}>
-          <h2 className="form-title" style={{ margin: 0, fontSize: "22px" }}>قائمة خطوات التسجيل</h2>
-          <Link
-            href={route('registrationstep.create')}
-            className="add-btn"
-          >
-            إضافة خطوة جديدة
+        {/* العنوان وزر الإضافة */}
+        <div className="table-header-bar">
+          <span className="dashboard-title">لوحة تحكم خطوات التسجيل على المفاضلة</span>
+          <Link href={route('registrationstep.create')} className="add-btn">
+            إضافة خطوة
           </Link>
         </div>
 
@@ -54,58 +56,58 @@ export default function RegistrationStepIndex({ auth, steps, stats }) {
         <table className="modern-table">
           <thead>
             <tr>
-              <th>الخطوة</th>
-              <th>الوصف</th>
-              <th>الخطوات الفرعية</th>
-              <th>الإجراءات</th>
+              <th className="colStepTitle">اسم الخطوة</th>
+              <th className="colStepSummary">الوصف</th>
+              <th className="colStepSubSteps">الخطوات الفرعية</th>
+              <th className="colStepActions">الإجراءات</th>
             </tr>
           </thead>
           <tbody>
             {steps.length === 0 ? (
               <tr>
-                <td colSpan={4} style={{ color: "#b3b3b3", fontWeight:'bold', padding:'40px 0', textAlign: 'center' }}>
+                <td colSpan={4} style={{ color: "#b3b3b3", fontWeight: 'bold', padding: '40px 0', textAlign: 'center' }}>
                   لا توجد خطوات تسجيل حالياً
                 </td>
               </tr>
             ) : (
               steps.map(step => (
                 <tr key={step.id}>
-                  <td className="truncate" style={{ maxWidth: '230px' }} title={step.step_name}>
-                    {step.step_name}
+                  <td className="colStepTitle" title={step.step_name}>
+                    {truncateWords(step.step_name)}
                   </td>
-                  <td className="truncate" style={{ maxWidth: '300px' }} title={step.description}>
-                    {step.description.length > 100 ? step.description.substring(0, 100) + "..." : step.description}
+                  <td className="colStepSummary" title={step.description}>
+                    {truncateWords(step.description)}
                   </td>
-                  <td className="truncate" style={{ maxWidth: '300px' }} title={Array.isArray(step.sub_step) ? step.sub_step.join(', ') : ''}>
-                    {Array.isArray(step.sub_step) && step.sub_step.length > 0 ? step.sub_step.join(', ') : <span style={{color:"#b3b3b3"}}>لا يوجد خطوات فرعية</span>}
+                  <td className="colStepSubSteps" title={Array.isArray(step.sub_step) ? step.sub_step.join(', ') : ''}>
+                    {Array.isArray(step.sub_step) && step.sub_step.length > 0
+                      ? truncateWords(step.sub_step.join(', '), 4)
+                      : <span style={{ color: "#b3b3b3" }}>لا يوجد خطوات فرعية</span>}
                   </td>
-                  <td>
-                    <div className="actions-cell">
-                      <Link
-                        title="عرض"
-                        href={route('registrationstep.show', step.id)}
-                        className="action-btn view-btn"
-                      >👁️</Link>
-                      <Link
-                        title="تعديل"
-                        href={route('registrationstep.edit', step.id)}
-                        className="action-btn edit-btn"
-                      >✏️</Link>
-                      <Link
-                        title="حذف"
-                        href={route('registrationstep.destroy', step.id)}
-                        method="delete"
-                        as="button"
-                        className="action-btn delete-btn"
-                      >🗑️</Link>
-                    </div>
+                  <td className="colStepActions">
+                    <Link
+                      href={route('registrationstep.show', step.id)}
+                      title="عرض"
+                      className="icon-btn"
+                    >👁️</Link>
+                    <Link
+                      href={route('registrationstep.edit', step.id)}
+                      title="تعديل"
+                      className="icon-btn"
+                    >✏️</Link>
+                    <Link
+                      href={route('registrationstep.destroy', step.id)}
+                      method="delete"
+                      as="button"
+                      title="حذف"
+                      className="icon-btn"
+                      onClick={() => confirm('هل أنت متأكد من الحذف؟')}
+                    >🗑️</Link>
                   </td>
                 </tr>
               ))
             )}
           </tbody>
         </table>
-
       </div>
     </AuthenticatedLayout>
   );
