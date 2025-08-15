@@ -15,28 +15,11 @@ export default function OfficialLinkCreate({ auth }) {
   };
 
   return (
-    <AuthenticatedLayout user={auth.user} header={<h2 className="form-title">إضافة رابط رسمي جديد</h2>}>
+    <AuthenticatedLayout user={auth.user}>
       <Head title="إضافة رابط رسمي جديد" />
-      <div
-        style={{
-          minHeight: '100vh',
-          background: 'rgb(179 194 215)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '1rem',
-        }}
-      >
-        <form
-          onSubmit={handleSubmit}
-          className="modern-form"
-          style={{ width: '100%', maxWidth: 520 }}
-          noValidate
-        >
-          <h2 className="form-title" style={{ marginBottom: 16, marginTop: 0 }}>
-            إدخال بيانات الرابط الرسمي
-          </h2>
-
+      <div className="modern-form" style={{ maxWidth: 520 }}>
+        <h2 className="form-title">إضافة رابط رسمي جديد</h2>
+        <form onSubmit={handleSubmit} noValidate>
           {/* اسم الجهة */}
           <div className="form-group">
             <label htmlFor="entity_name">اسم الجهة</label>
@@ -49,7 +32,7 @@ export default function OfficialLinkCreate({ auth }) {
               autoFocus
               required
             />
-            {errors.entity_name && <div className="error-text">{errors.entity_name}</div>}
+            {errors.entity_name && <p className="input-error">{errors.entity_name}</p>}
           </div>
 
           {/* الرابط */}
@@ -57,25 +40,17 @@ export default function OfficialLinkCreate({ auth }) {
             <label htmlFor="link">الرابط</label>
             <input
               id="link"
-              type="text"
+              type="url"
               value={data.link}
               onChange={e => setData('link', e.target.value)}
               className={errors.link ? 'input-error' : ''}
               required
             />
-            {errors.link && <div className="error-text">{errors.link}</div>}
+            {errors.link && <p className="input-error">{errors.link}</p>}
           </div>
 
-          {/* أزرار الإجراء */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '12px',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginTop: 16,
-            }}
-          >
+          {/* الأزرار */}
+          <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
             <button
               type="submit"
               disabled={processing}
@@ -86,17 +61,13 @@ export default function OfficialLinkCreate({ auth }) {
             </button>
             <Link
               href={route('official-links.index')}
-              className="modern-link"
+              className="back-link"
               style={{
-                marginLeft: 16,
-                fontWeight: 'bold',
-                textDecoration: 'underline',
-                background: '#eaf4ff',
-                borderRadius: 7,
-                padding: '11px 15px',
-                fontSize: '15px',
-                textAlign: 'center',
+                alignSelf: 'center',
                 color: '#3a8dde',
+                textDecoration: 'underline',
+                fontWeight: 'bold',
+                padding: '12px 20px',
               }}
             >
               رجوع

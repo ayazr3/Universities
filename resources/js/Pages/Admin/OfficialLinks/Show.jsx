@@ -16,9 +16,22 @@ export default function OfficialLinkShow({ officialLink, auth }) {
       >
         <div
           className="modern-card"
-          style={{ maxWidth: 480, width: '100%', margin: '40px 0', padding: '32px 28px', background: "#fff" }}
+          style={{
+            maxWidth: 490,
+            width: '100%',
+            margin: '40px 0',
+            padding: '36px 32px',
+            background: '#fff',
+            borderRadius: 16,
+            boxShadow: '0 2px 18px #e8f1ff70',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '22px',
+          }}
         >
-          <h2 className="form-title" style={{ fontSize: '1.4rem' }}>{officialLink.entity_name}</h2>
+          <h2 className="form-title" style={{ fontSize: '1.25rem', marginBottom: 6, textAlign: 'center' }}>
+            {officialLink.entity_name}
+          </h2>
 
           <div className="card-detail-item">
             <span className="label">الرابط:</span>
@@ -33,7 +46,7 @@ export default function OfficialLinkShow({ officialLink, auth }) {
             </a>
           </div>
 
-          <div className="actions-cell" style={{ marginTop: '2.5rem', justifyContent: 'center' }}>
+          <div className="actions-cell" style={{ marginTop: '2rem', justifyContent: 'center' }}>
             <Link
               href={route('official-links.edit', officialLink.id)}
               className="action-btn edit-btn"
