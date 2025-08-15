@@ -1,3 +1,4 @@
+// resources/js/Pages/Admin/Settings/Create.jsx
 import React, { useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
@@ -7,7 +8,7 @@ import '@/Components/Admin/Style/Style.css';
 export default function SettingCreate({ auth }) {
   const { data, setData, post, processing, errors } = useForm({
     site_name: '',
-    logo: '',
+    logo: null, // تم تعديلها لقبول ملف
     url: '',
     location: { lat: 24.7136, lng: 46.6753 },
     description: '',
@@ -22,7 +23,6 @@ export default function SettingCreate({ auth }) {
     setData('location', { lat, lng });
   };
 
-  // دالة البحث في Nominatim
   const handleSearch = async () => {
     if (!searchQuery.trim()) {
       setSearchResults([]);
@@ -32,7 +32,9 @@ export default function SettingCreate({ auth }) {
     setSearchError(null);
     try {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}&limit=5&addressdetails=1&accept-language=ar`
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+          searchQuery
+        )}&limit=5&addressdetails=1&accept-language=ar`
       );
       const results = await response.json();
       setSearchResults(results);
@@ -43,7 +45,6 @@ export default function SettingCreate({ auth }) {
     }
   };
 
-  // عند اختيار نتيجة البحث
   const handleSelectLocation = (location) => {
     const lat = parseFloat(location.lat);
     const lng = parseFloat(location.lon);
@@ -55,28 +56,16 @@ export default function SettingCreate({ auth }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     post(route('settings.store'), {
-      forceFormData: true, // في حال وجود ملفات والحقول المعقدة
+      forceFormData: true,
     });
   };
 
   return (
-    <AuthenticatedLayout user={auth.user} header={<h2 className="form-title">إضافة إعداد جديد</h2>}>
+    <AuthenticatedLayout user={auth.user}>
       <Head title="إضافة إعداد جديد" />
-      <div
-        style={{
-          minHeight: '100vh',
-          background: 'rgb(179 194 215)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '1rem',
-        }}
-      >
-        <form onSubmit={handleSubmit} className="modern-form" style={{ width: '100%', maxWidth: 520 }} noValidate>
-          <h2 className="form-title" style={{ marginTop: 0, marginBottom: 16 }}>
-            إدخال بيانات الإعداد
-          </h2>
-
+      <div className="modern-form" style={{ maxWidth: 520 }}>
+        <h2 className="form-title">إضافة إعداد جديد</h2>
+        <form onSubmit={handleSubmit} noValidate>
           {/* اسم الموقع */}
           <div className="form-group">
             <label htmlFor="site_name">اسم الموقع</label>
@@ -89,21 +78,21 @@ export default function SettingCreate({ auth }) {
               required
               autoFocus
             />
-            {errors.site_name && <div className="error-text">{errors.site_name}</div>}
+            {errors.site_name && <p className="input-error">{errors.site_name}</p>}
           </div>
 
-          {/* رابط الشعار */}
+          {/* الشعار */}
           <div className="form-group">
-            <label htmlFor="logo">رابط الشعار</label>
+            <label htmlFor="logo">الشعار (صورة)</label>
             <input
-              type="text"
+              type="file"
               id="logo"
-              value={data.logo}
-              onChange={(e) => setData('logo', e.target.value)}
+              accept="image/*"
+              onChange={(e) => setData('logo', e.target.files[0])}
               className={errors.logo ? 'input-error' : ''}
               required
             />
-            {errors.logo && <div className="error-text">{errors.logo}</div>}
+            {errors.logo && <p className="input-error">{errors.logo}</p>}
           </div>
 
           {/* رابط الموقع */}
@@ -117,7 +106,7 @@ export default function SettingCreate({ auth }) {
               className={errors.url ? 'input-error' : ''}
               required
             />
-            {errors.url && <div className="error-text">{errors.url}</div>}
+            {errors.url && <p className="input-error">{errors.url}</p>}
           </div>
 
           {/* الوصف */}
@@ -131,10 +120,10 @@ export default function SettingCreate({ auth }) {
               className={errors.description ? 'input-error' : ''}
               required
             />
-            {errors.description && <div className="error-text">{errors.description}</div>}
+            {errors.description && <p className="input-error">{errors.description}</p>}
           </div>
 
-          {/* حقل البحث عن الموقع */}
+          {/* البحث عن الموقع */}
           <div className="form-group relative">
             <label htmlFor="location_search">البحث عن موقع</label>
             <input
@@ -149,13 +138,13 @@ export default function SettingCreate({ auth }) {
                 }
               }}
               placeholder="ابحث عن مدينة أو موقع"
-              className="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
             />
             <button
               type="button"
               onClick={handleSearch}
               disabled={searchLoading}
-              className="absolute top-8 right-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
+              className="search-btn"
+              style={{ marginTop: '8px' }}
             >
               {searchLoading ? 'جاري البحث...' : 'بحث'}
             </button>
@@ -174,42 +163,65 @@ export default function SettingCreate({ auth }) {
               </ul>
             )}
 
-            {searchError && <p className="text-red-500 text-xs italic mt-1">{searchError}</p>}
+            {searchError && <p className="input-error">{searchError}</p>}
           </div>
 
           {/* الخريطة */}
           <div className="form-group">
             <label>الموقع على الخريطة</label>
-            <SettingMap lat={data.location.lat} lng={data.location.lng} setLatLng={handleLatLng} editable={true} height={300} />
-            <div className="flex gap-4 mt-2">
+            <SettingMap
+              lat={data.location.lat}
+              lng={data.location.lng}
+              setLatLng={handleLatLng}
+              editable={true}
+              height={300}
+            />
+            <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
               <input
                 type="number"
                 step="any"
                 value={data.location.lat}
-                onChange={(e) => setData('location', { ...data.location, lat: parseFloat(e.target.value) })}
+                onChange={(e) =>
+                  setData('location', { ...data.location, lat: parseFloat(e.target.value) })
+                }
                 placeholder="خط العرض"
-                className="border px-2 py-1 rounded w-1/2"
               />
               <input
                 type="number"
                 step="any"
                 value={data.location.lng}
-                onChange={(e) => setData('location', { ...data.location, lng: parseFloat(e.target.value) })}
+                onChange={(e) =>
+                  setData('location', { ...data.location, lng: parseFloat(e.target.value) })
+                }
                 placeholder="خط الطول"
-                className="border px-2 py-1 rounded w-1/2"
               />
             </div>
             {errors.location && typeof errors.location === 'string' && (
-              <p className="text-red-500 text-xs italic">{errors.location}</p>
+              <p className="input-error">{errors.location}</p>
             )}
           </div>
 
-          {/* أزرار الحفظ والرجوع */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 16 }}>
-            <button type="submit" disabled={processing} className="submit-btn" style={{ flex: 1 }}>
+          {/* أزرار */}
+          <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
+            <button
+              type="submit"
+              disabled={processing}
+              className="submit-btn"
+              style={{ flex: 1 }}
+            >
               {processing ? 'جاري الحفظ...' : 'حفظ الإعداد'}
             </button>
-            <Link href={route('settings.index')} className="modern-link" style={{ marginLeft: 16 }}>
+            <Link
+              href={route('settings.index')}
+              className="back-link"
+              style={{
+                alignSelf: 'center',
+                color: '#3a8dde',
+                textDecoration: 'underline',
+                fontWeight: 'bold',
+                padding: '12px 20px',
+              }}
+            >
               رجوع
             </Link>
           </div>
