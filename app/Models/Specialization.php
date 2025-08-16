@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Specialization extends Model
 {
+     use HasFactory;
     protected $fillable = [
-        'college_id',
+        'college_id','college_id',
         'name',
         'summary',
         'details',
-        'graduate_future',
-        'name_graduate_future',
+        'title',
         'icon',
         'degree_type',
         'academic_year_number',

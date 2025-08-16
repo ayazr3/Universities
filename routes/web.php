@@ -42,7 +42,7 @@ Route::get('/', function () {
     ]);
 })->name('welcome'); // إضافة اسم للراوت هنا
 
-//من اجل المفاضلة على الصفحة الرئيسية 
+//من اجل المفاضلة على الصفحة الرئيسية
 Route::get('/', [UniversitySelectionPageController::class, 'welcomeUser'])->name('welcome');
 
 
@@ -84,6 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/guidances', GuidanceController::class);
     Route::resource('/governorates', GovernorateController::class);
     Route::resource('/Admincolleges', CollegeController::class);
+    Route::resource('/adminspecializations', SpecializationController::class);
 
 
 });
@@ -112,6 +113,6 @@ Route::get('/questions', [FaqController::class, 'indexUser'])->name('faq.indexUs
 
 Route::get('/university-selection', [UniversitySelectionPageController::class, 'indexUser'])->name('university.selection');
 
-////رات الشات 
+////رات الشات
 
 Route::get('/chat-ai', [ChatAIController::class, 'indexUser'])->name('chat.ai');
