@@ -47,26 +47,6 @@ export default function Create({ auth, colleges, governorates }) {
       <Head title="إضافة تخصص" />
       <form className="modern-form" onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
         <h2 className="form-title">إضافة تخصص جديد</h2>
-
-        {/* الكلية */}
-        {/* <div className="form-group">
-          <label htmlFor="college_id">الكلية</label>
-          <select
-            id="college_id"
-            name="college_id"
-            value={data.college_id}
-            onChange={handleChange}
-            required
-            className={errors.college_id ? 'input-error' : ''}
-          >
-            <option value="">اختر الكلية</option>
-            {colleges.map(college => (
-              <option key={college.id} value={college.id}>{college.name}</option>
-            ))}
-          </select>
-          {errors.college_id && <p className="input-error">{errors.college_id}</p>}
-        </div> */}
-        {/* اختيار المحافظة */}
         <div className="form-group">
         <label htmlFor="governorate_id">المحافظة</label>
         <select
