@@ -28,6 +28,9 @@ export default function Show({ specialization, auth }) {
           <dt style={{ fontWeight: 'bold', marginTop: 8 }}>الكلية:</dt>
           <dd>{specialization.college?.name || '--'}</dd>
 
+          <dt style={{ fontWeight: 'bold', marginTop: 8 }}>المحافظة:</dt>
+          <dd>{specialization.college?.governorate?.name || '--'}</dd>
+
           <dt style={{ fontWeight: 'bold', marginTop: 8 }}>الملخص:</dt>
           <dd style={{ whiteSpace: 'pre-line', margin: 0 }}>{specialization.summary}</dd>
 
@@ -62,9 +65,9 @@ export default function Show({ specialization, auth }) {
             href={route('adminspecializations.edit', { adminspecialization: specialization.id })}
             className="action-btn edit-btn"
             style={{ minWidth: 100 }}
-            >
+          >
             تعديل
-            </Link>
+          </Link>
           <Link
             href={route('adminspecializations.index')}
             className="action-btn view-btn"

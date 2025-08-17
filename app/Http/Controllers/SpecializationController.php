@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\College;
+use App\Models\Governorate;
 use App\Models\Specialization;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -29,13 +30,18 @@ class SpecializationController extends Controller
             'specializations' => [$specialization]
         ]);
     }
-    // عرض جميع التخصصات
+    // جلب التخصصات مع الكلية والمحافظة (عبر العلاقة)
     public function index()
     {
-        $specializations = Specialization::with('college')->latest()->get();
+        // التأكد من تحميل العلاقة governorate عبر college
+        $specializations = Specialization::with('college.governorate')->latest()->get();
+
+        // جلب المحافظات لإظهار خيارات البحث
+        $governorates = \App\Models\Governorate::all();
 
         return inertia('Admin/Specializations/Index', [
             'specializations' => $specializations,
+            'governorates' => $governorates,
             'stats' => [
                 'total' => Specialization::count(),
                 'recent' => Specialization::where('created_at', '>', now()->subDays(7))->count(),
@@ -46,10 +52,17 @@ class SpecializationController extends Controller
     // عرض نموذج إضافة تخصص جديد
     public function create()
     {
+        // $colleges = College::all();
+
+        // return inertia('Admin/Specializations/Create', [
+        //     'colleges' => $colleges,
+        // ]);
         $colleges = College::all();
+        $governorates = Governorate::all(); // جلب المحافظات
 
         return inertia('Admin/Specializations/Create', [
             'colleges' => $colleges,
+            'governorates' => $governorates,
         ]);
     }
 
@@ -86,7 +99,8 @@ class SpecializationController extends Controller
     // عرض تفاصيل تخصص معين
     public function show(Specialization $adminspecialization)
     {
-        $adminspecialization->load('college');
+         // تحميل العلاقة college مع governorate أيضاً
+        $adminspecialization->load('college.governorate');
 
         return inertia('Admin/Specializations/Show', [
             'specialization' => $adminspecialization
@@ -97,10 +111,12 @@ class SpecializationController extends Controller
     public function edit(Specialization $adminspecialization)
     {
         $colleges = College::all();
+        $governorates = \App\Models\Governorate::all();
 
         return inertia('Admin/Specializations/Edit', [
             'specialization' => $adminspecialization,
             'colleges' => $colleges,
+            'governorates' => $governorates,
         ]);
     }
 

@@ -1,30 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
 import '@/Components/Admin/Style/Style.css';
 
-export default function Edit({ auth, specialization, colleges }) {
+export default function Edit({ auth, specialization, colleges, governorates }) {
+  // اجلب الكلية الحالية للعثور على المحافظة الافتراضية المختارة
+  const currentCollege = colleges.find(col => col.id === specialization.college_id);
+  const defaultGovernorateId = currentCollege ? currentCollege.governorate_id : '';
+
   const [data, setData] = useState({
     college_id: specialization.college_id || '',
     name: specialization.name || '',
     summary: specialization.summary || '',
     details: specialization.details || '',
     title: specialization.title || '',
-    icon: null, // تحميل أيقونة جديدة
+    icon: null, // تحميل أيقونة جديدة فقط
     degree_type: specialization.degree_type || '',
     academic_year_number: specialization.academic_year_number || '',
   });
 
+  const [selectedGovernorate, setSelectedGovernorate] = useState(defaultGovernorateId);
+  const [filteredColleges, setFilteredColleges] = useState([]);
   const [processing, setProcessing] = useState(false);
   const [errors, setErrors] = useState({});
+
+  // فلترة الكليات حسب المحافظة المختارة
+  useEffect(() => {
+    if (selectedGovernorate) {
+      setFilteredColleges(
+        colleges.filter(col => col.governorate_id === Number(selectedGovernorate))
+      );
+    } else {
+      setFilteredColleges(colleges ?? []);
+    }
+  }, [selectedGovernorate, colleges]);
+
+  // إذا غير المستخدم المحافظة، أزل اختيار الكلية
+  const handleGovernorateChange = (e) => {
+    const govId = e.target.value;
+    setSelectedGovernorate(govId);
+    setData(prev => ({ ...prev, college_id: '' }));
+  };
 
   const handleChange = (e) => {
     const { name, type, value, files } = e.target;
     if (type === 'file') {
-      setData((prev) => ({ ...prev, [name]: files[0] }));
+      setData(prev => ({ ...prev, [name]: files[0] }));
     } else {
-      setData((prev) => ({ ...prev, [name]: value }));
+      setData(prev => ({ ...prev, [name]: value }));
     }
   };
 
@@ -34,19 +58,16 @@ export default function Edit({ auth, specialization, colleges }) {
     setErrors({});
 
     const formData = new FormData();
-
     for (const key of ['college_id', 'name', 'summary', 'details', 'title', 'degree_type', 'academic_year_number']) {
       formData.append(key, data[key]);
     }
-
     if (data.icon) {
       formData.append('icon', data.icon);
     }
-
-    formData.append('_method', 'PUT'); // تحويل POST إلى PUT
+    formData.append('_method', 'PUT');
 
     Inertia.post(route('adminspecializations.update', { adminspecialization: specialization.id }), formData, {
-      onError: (errs) => {
+      onError: errs => {
         setErrors(errs);
         setProcessing(false);
       },
@@ -60,11 +81,27 @@ export default function Edit({ auth, specialization, colleges }) {
   return (
     <AuthenticatedLayout user={auth.user}>
       <Head title={`تعديل التخصص - ${specialization.name}`} />
-
       <form className="modern-form" onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
         <h2 className="form-title">تعديل بيانات التخصص</h2>
 
-        {/* اختيار الكلية */}
+        {/* اختيار المحافظة */}
+        <div className="form-group">
+          <label htmlFor="governorate_id">المحافظة</label>
+          <select
+            id="governorate_id"
+            name="governorate_id"
+            value={selectedGovernorate}
+            onChange={handleGovernorateChange}
+            required
+          >
+            <option value="">اختر المحافظة</option>
+            {governorates.map(gov => (
+              <option key={gov.id} value={gov.id}>{gov.name}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* الكلية */}
         <div className="form-group">
           <label htmlFor="college_id">الكلية</label>
           <select
@@ -75,8 +112,8 @@ export default function Edit({ auth, specialization, colleges }) {
             required
             className={errors.college_id ? 'input-error' : ''}
           >
-            <option value="" disabled>اختر الكلية</option>
-            {colleges.map((college) => (
+            <option value="">اختر الكلية</option>
+            {filteredColleges.map(college => (
               <option key={college.id} value={college.id}>{college.name}</option>
             ))}
           </select>
@@ -116,7 +153,7 @@ export default function Edit({ auth, specialization, colleges }) {
 
         {/* التفاصيل */}
         <div className="form-group">
-          <label htmlFor="details">التفاصيل</label>
+          <label htmlFor="details">تفاصيل التخصص</label>
           <textarea
             id="details"
             name="details"
@@ -147,7 +184,7 @@ export default function Edit({ auth, specialization, colleges }) {
 
         {/* الأيقونة */}
         <div className="form-group">
-          <label htmlFor="icon">أيقونة التخصص (صورة جديدة)</label>
+          <label htmlFor="icon">أيقونة التخصص (اختياري رفع جديدة)</label>
           <input
             id="icon"
             type="file"
@@ -202,7 +239,7 @@ export default function Edit({ auth, specialization, colleges }) {
           <button type="submit" disabled={processing} className="submit-btn">
             {processing ? 'جاري التحديث...' : 'تحديث البيانات'}
           </button>
-          <Link href={route('adminspecializations.index')} className="back-link" style={{ alignSelf: 'center', marginLeft: 10 }}>
+          <Link href={route('adminspecializations.index')} className="back-link" style={{ alignSelf: 'center' }}>
             رجوع
           </Link>
         </div>

@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import '@/Components/Admin/Style/Style.css';
 
-export default function Create({ auth, colleges }) {
+export default function Create({ auth, colleges, governorates }) {
   const { data, setData, post, processing, errors } = useForm({
     college_id: '',
     name: '',
@@ -14,6 +14,17 @@ export default function Create({ auth, colleges }) {
     degree_type: '',
     academic_year_number: '',
   });
+
+  const [selectedGovernorate, setSelectedGovernorate] = useState('');
+    const [filteredColleges, setFilteredColleges] = useState(colleges);
+
+    const handleGovernorateChange = (e) => {
+    const govId = e.target.value;
+    setSelectedGovernorate(govId);
+    const newFiltered = colleges.filter(c => c.governorate_id === parseInt(govId));
+    setFilteredColleges(newFiltered);
+    setData('college_id', ''); // Reset selected college
+    };
 
   const handleChange = (e) => {
     const { name, type, value, files } = e.target;
@@ -38,7 +49,7 @@ export default function Create({ auth, colleges }) {
         <h2 className="form-title">إضافة تخصص جديد</h2>
 
         {/* الكلية */}
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="college_id">الكلية</label>
           <select
             id="college_id"
@@ -54,8 +65,42 @@ export default function Create({ auth, colleges }) {
             ))}
           </select>
           {errors.college_id && <p className="input-error">{errors.college_id}</p>}
+        </div> */}
+        {/* اختيار المحافظة */}
+        <div className="form-group">
+        <label htmlFor="governorate_id">المحافظة</label>
+        <select
+            id="governorate_id"
+            name="governorate_id"
+            value={selectedGovernorate}
+            onChange={handleGovernorateChange}
+            required
+        >
+            <option value="">اختر المحافظة</option>
+            {governorates.map(gov => (
+            <option key={gov.id} value={gov.id}>{gov.name}</option>
+            ))}
+        </select>
         </div>
 
+        {/* اختيار الكلية بعد التصفية */}
+        <div className="form-group">
+        <label htmlFor="college_id">الكلية</label>
+        <select
+            id="college_id"
+            name="college_id"
+            value={data.college_id}
+            onChange={handleChange}
+            required
+            className={errors.college_id ? 'input-error' : ''}
+        >
+            <option value="">اختر الكلية</option>
+            {filteredColleges.map(college => (
+            <option key={college.id} value={college.id}>{college.name}</option>
+            ))}
+        </select>
+        {errors.college_id && <p className="input-error">{errors.college_id}</p>}
+        </div>
         {/* اسم التخصص */}
         <div className="form-group">
           <label htmlFor="name">اسم التخصص</label>

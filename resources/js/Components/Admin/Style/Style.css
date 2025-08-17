@@ -698,6 +698,8 @@ input[type="file"]:focus {
   .modern-table td.col-image,
   .modern-table th.col-file,
   .modern-table td.col-file,
+  .modern-table th.col-governorate,
+  .modern-table td.col-governorate,
 
    .modern-table th.colProjSummary,
   .modern-table td.colProjSummary,
