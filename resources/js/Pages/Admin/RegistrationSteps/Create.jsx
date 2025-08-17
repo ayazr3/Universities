@@ -16,41 +16,25 @@ export default function RegistrationStepCreate({ auth }) {
   };
 
   return (
-    <AuthenticatedLayout user={auth.user} header={<h2 className="form-title">إضافة خطوة تسجيل جديدة</h2>}>
+    <AuthenticatedLayout user={auth.user}>
       <Head title="إضافة خطوة تسجيل جديدة" />
-      <div
-        style={{
-          minHeight: "100vh",
-          background: "rgb(179 194 215)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: '1rem',
-        }}
-      >
-        <form
-          onSubmit={handleSubmit}
-          className="modern-form"
-          style={{ width: '100%', maxWidth: 520 }}
-          noValidate
-        >
-          <h2 className="form-title" style={{ marginTop: 0, marginBottom: 16 }}>
-            إدخال بيانات خطوة التسجيل
-          </h2>
 
+      <div className="modern-form" style={{ maxWidth: 520 }}>
+        <h2 className="form-title">إضافة خطوة تسجيل جديدة</h2>
+
+        <form onSubmit={handleSubmit} noValidate>
           {/* اسم الخطوة */}
           <div className="form-group">
             <label htmlFor="step_name">اسم الخطوة</label>
             <input
               type="text"
               id="step_name"
-              className={errors.step_name ? "input-error" : ""}
               value={data.step_name}
-              onChange={e => setData('step_name', e.target.value)}
-              autoFocus
+              onChange={(e) => setData('step_name', e.target.value)}
+              className={errors.step_name ? 'input-error' : ''}
               required
             />
-            {errors.step_name && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.step_name}</div>}
+            {errors.step_name && <p className="input-error">{errors.step_name}</p>}
           </div>
 
           {/* الوصف */}
@@ -59,12 +43,12 @@ export default function RegistrationStepCreate({ auth }) {
             <textarea
               id="description"
               rows={5}
-              className={errors.description ? "input-error" : ""}
               value={data.description}
-              onChange={e => setData('description', e.target.value)}
+              onChange={(e) => setData('description', e.target.value)}
+              className={errors.description ? 'input-error' : ''}
               required
             />
-            {errors.description && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.description}</div>}
+            {errors.description && <p className="input-error">{errors.description}</p>}
           </div>
 
           {/* الخطوات الفرعية */}
@@ -73,42 +57,35 @@ export default function RegistrationStepCreate({ auth }) {
             <input
               type="text"
               id="sub_step"
-              className={errors.sub_step ? "input-error" : ""}
               value={data.sub_step.join(',')}
-              onChange={e => setData('sub_step', e.target.value.split(',').map(s => s.trim()))}
+              onChange={(e) =>
+                setData('sub_step', e.target.value.split(',').map((s) => s.trim()))
+              }
               placeholder="مثلاً: خطوة 1, خطوة 2, خطوة 3"
+              className={errors.sub_step ? 'input-error' : ''}
             />
-            {errors.sub_step && <div style={{ color: "#e74c3c", fontSize: "13px" }}>{errors.sub_step}</div>}
+            {errors.sub_step && <p className="input-error">{errors.sub_step}</p>}
           </div>
 
-          {/* أزرار الإجراء */}
-          <div
-            style={{
-              display: "flex",
-              gap: "12px",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginTop: 16,
-            }}
-          >
+          {/* أزرار */}
+          <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
             <button
               type="submit"
-              disabled={processing}
               className="submit-btn"
+              disabled={processing}
               style={{ flex: 1 }}
             >
-              {processing ? "جاري الحفظ..." : "حفظ الخطوة"}
+              {processing ? 'جاري الحفظ...' : 'حفظ الخطوة'}
             </button>
             <Link
               href={route('registrationstep.index')}
+              className="back-link"
               style={{
-                color: "#3a8dde",
-                fontWeight: "bold",
-                textDecoration: "underline",
-                background: "#eaf4ff",
-                borderRadius: 7,
-                padding: "11px 15px",
-                fontSize: "15px",
+                alignSelf: 'center',
+                color: '#3a8dde',
+                textDecoration: 'underline',
+                fontWeight: 'bold',
+                padding: '12px 20px',
               }}
             >
               رجوع

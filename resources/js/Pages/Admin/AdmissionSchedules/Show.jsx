@@ -5,75 +5,77 @@ import '@/Components/Admin/Style/Style.css';
 
 export default function AdmissionScheduleShow({ admissionSchedule, auth }) {
   return (
-    <AuthenticatedLayout
-      user={auth.user}
-      header={<h2 className="form-title" style={{ marginBottom: 0 }}>تفاصيل جدول القبول</h2>}
-    >
-      <Head title="تفاصيل جدول القبول" />
+    <AuthenticatedLayout user={auth.user}>
+      <Head title={`تفاصيل جدول القبول - ${admissionSchedule.title}`} />
+
       <div
-        className="modern-table-container"
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', minHeight: '70vh' }}
+        className="panel"
+        style={{
+          maxWidth: 700,
+          margin: '40px auto',
+          padding: 20,
+          background: '#fff',
+          borderRadius: 12,
+          boxShadow: '0 12px 24px rgba(58,141,222,0.15)',
+          fontFamily: "'Cairo', sans-serif",
+        }}
       >
-        <div
-          className="modern-card"
-          style={{ maxWidth: 480, width: '100%', margin: '40px 0', padding: '32px 28px', background: '#fff' }}
-        >
+        {/* العنوان */}
+        <h1 className="form-title" style={{ marginBottom: 22, fontSize: '1.7rem' }}>
+          {admissionSchedule.title}
+        </h1>
 
-          {/* العنوان */}
-          <h2 className="form-title" style={{ fontSize: '1.4rem' }}>{admissionSchedule.title}</h2>
+        {/* التفاصيل */}
+        <div className="details-grid" style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+          <div style={{ flex: 1 }}>
+            <dl style={{ direction: 'rtl', fontSize: 16, color: '#34495e' }}>
+              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>التفاصيل:</dt>
+              <dd style={{ whiteSpace: 'pre-line', margin: 0 }}>
+                {admissionSchedule.body}
+              </dd>
 
-          {/* التفاصيل */}
-          <div className="card-detail-item" style={{ flexDirection: 'column', gap: '8px' }}>
-            <span className="label" style={{ marginBottom: '5px' }}>التفاصيل:</span>
-            <p className="text-gray-700 whitespace-pre-line" style={{ margin: 0 }}>{admissionSchedule.body}</p>
+              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>التاريخ:</dt>
+              <dd>{new Date(admissionSchedule.date).toLocaleDateString('ar-EG')}</dd>
+
+              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>المسؤول:</dt>
+              <dd>{admissionSchedule.name}</dd>
+
+              {admissionSchedule.file_url && (
+                <>
+                  <dt style={{ fontWeight: 'bold', marginTop: 8 }}>الملف المرفق:</dt>
+                  <dd>
+                    <a
+                      href={`/storage/${admissionSchedule.file_url}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="table-link"
+                      style={{ fontWeight: '500', direction: 'ltr' }}
+                    >
+                      عرض الملف
+                    </a>
+                  </dd>
+                </>
+              )}
+            </dl>
           </div>
+        </div>
 
-          {/* التاريخ */}
-          <div className="card-detail-item">
-            <span className="label">التاريخ:</span>
-            <span>{new Date(admissionSchedule.date).toLocaleDateString('ar-EG')}</span>
-          </div>
-
-          {/* المسؤول */}
-          <div className="card-detail-item">
-            <span className="label">المسؤول:</span>
-            <span>{admissionSchedule.name}</span>
-          </div>
-
-          {/* الملف المرفق */}
-          {admissionSchedule.file_url && (
-            <div className="card-detail-item" style={{ flexDirection: 'column', gap: 0 }}>
-              <span className="label" style={{ marginBottom: '5px' }}>الملف المرفق:</span>
-              <a
-                href={`/storage/${admissionSchedule.file_url}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="table-link"
-                style={{ fontWeight: '500', direction: 'ltr', marginRight: 8 }}
-              >
-                عرض الملف
-              </a>
-            </div>
-          )}
-
-          {/* أزرار التعديل والرجوع */}
-          <div className="actions-cell" style={{ marginTop: '2.5rem', justifyContent: 'center' }}>
-            <Link
-              href={route('admissionSchedule.edit', admissionSchedule.id)}
-              className="action-btn edit-btn"
+        {/* أزرار تعديل ورجوع */}
+        <div className="actions-cell" style={{ marginTop: '2.5rem', justifyContent: 'center' }}>
+          <Link
+            href={route('admissionSchedule.edit', admissionSchedule.id)}
+            className="action-btn edit-btn"
               style={{ minWidth: '100px' }}
-            >
-              تعديل
-            </Link>
-            <Link
-              href={route('admissionSchedule.index')}
-              className="action-btn view-btn"
+          >
+            تعديل
+          </Link>
+          <Link
+            href={route('admissionSchedule.index')}
+            className="action-btn view-btn"
               style={{ background: '#e2e8f0', color: '#3059d5', minWidth: '100px' }}
-            >
-              رجوع
-            </Link>
-          </div>
-
+          >
+            رجوع
+          </Link>
         </div>
       </div>
     </AuthenticatedLayout>

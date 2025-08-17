@@ -1,97 +1,106 @@
 import React from 'react';
 import { Head, Link } from '@inertiajs/react';
+import { Inertia } from '@inertiajs/inertia';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import '@/Components/Admin/Style/Style.css'; // تأكد من مسار ملف CSS
+import '@/Components/Admin/Style/Style.css';
+
+// دالة تقصير النصوص الطويلة
+const truncateWords = (text, wordLimit = 4) => {
+  if (!text) return '';
+  const words = text.trim().split(/\s+/);
+  if (words.length <= wordLimit) return text;
+  return words.slice(0, wordLimit).join(' ') + '...';
+};
 
 export default function FaqIndex({ auth, faqs, stats }) {
+  const handleDelete = (id) => {
+    if (confirm("هل أنت متأكد من حذف السؤال؟")) {
+      Inertia.delete(route('faq.destroy', id));
+    }
+  };
+
   return (
-    <AuthenticatedLayout
-      user={auth.user}
-      header={<h2 className="form-title" style={{ marginBottom: 0 }}>الأسئلة الشائعة</h2>}
-    >
+    <AuthenticatedLayout user={auth.user}>
       <Head title="الأسئلة الشائعة" />
+      <div className="modern-table-container" style={{ maxWidth: '85%', margin: '40px auto' }}>
 
-      <div className="modern-table-container">
-
-        {/* شريط الفلترة مع زر الإضافة */}
-        <div className="filter-bar" style={{ justifyContent: 'space-between', marginBottom: '30px' }}>
-          <h2 className="form-title" style={{ margin: 0, fontSize: "22px" }}>قائمة الأسئلة الشائعة</h2>
+        {/* رأس الصفحة */}
+        <div className="table-header-bar">
+          <span className="dashboard-title">لوحة تحكم الأسئلة الشائعة</span>
           <Link href={route('faq.create')} className="add-btn">
-            إضافة سؤال جديد
+            إضافة سؤال
           </Link>
         </div>
 
         {/* كروت الإحصائيات */}
-        <div style={{ display: 'flex', gap: '16px', marginBottom: '32px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '16px', marginBottom: '20px', flexWrap: 'wrap' }}>
           <div style={{
-            background: "#eaf4ff",
-            padding: "16px 24px",
-            borderRadius: "14px",
-            minWidth: "160px",
-            textAlign: "center",
-            flex: "1"
+            background: '#eaf4ff',
+            padding: '16px 24px',
+            borderRadius: '14px',
+            minWidth: '160px',
+            textAlign: 'center',
+            flex: '1'
           }}>
-            <div style={{ fontWeight: "700", color: "#26547c", marginBottom: 4 }}>إجمالي الأسئلة</div>
-            <div style={{ fontWeight: "800", fontSize: "22px", color: "#2c3e50" }}>{stats.total}</div>
+            <div style={{ fontWeight: '700', color: '#26547c', marginBottom: 4 }}>إجمالي الأسئلة</div>
+            <div style={{ fontWeight: '800', fontSize: '22px', color: '#2c3e50' }}>{stats.total}</div>
           </div>
           <div style={{
-            background: "#e7ffe9",
-            padding: "16px 24px",
-            borderRadius: "14px",
-            minWidth: "160px",
-            textAlign: "center",
-            flex: "1"
+            background: '#e7ffe9',
+            padding: '16px 24px',
+            borderRadius: '14px',
+            minWidth: '160px',
+            textAlign: 'center',
+            flex: '1'
           }}>
-            <div style={{ fontWeight: "700", color: "#229363", marginBottom: 4 }}>الأسئلة الحديثة</div>
-            <div style={{ fontWeight: "800", fontSize: "22px", color: "#27ae60" }}>{stats.recent}</div>
+            <div style={{ fontWeight: '700', color: '#229363', marginBottom: 4 }}>الأسئلة الحديثة</div>
+            <div style={{ fontWeight: '800', fontSize: '22px', color: '#27ae60' }}>{stats.recent}</div>
           </div>
         </div>
 
-        {/* الجدول */}
+        {/* جدول الأسئلة */}
         <table className="modern-table">
           <thead>
             <tr>
-              <th>السؤال</th>
-              <th>الإجابة</th>
-              <th>الإجراءات</th>
+              <th className="col-question">السؤال</th>
+              <th className="col-answer">الإجابة</th>
+              <th className="col-actions">الإجراءات</th>
             </tr>
           </thead>
           <tbody>
             {faqs.length === 0 ? (
               <tr>
-                <td colSpan={3} style={{ color: "#b3b3b3", fontWeight: 'bold', padding: '40px 0' }}>
+                <td colSpan="3" style={{ color: "#b3b3b3", fontWeight: 'bold', padding: '40px 0', textAlign: 'center' }}>
                   لا توجد أسئلة شائعة حالياً
                 </td>
               </tr>
             ) : (
               faqs.map(faq => (
                 <tr key={faq.id}>
-                  <td className="truncate" style={{ maxWidth: '300px' }} title={faq.question}>
-                    {faq.question}
-                  </td>
-                  <td className="truncate" style={{ maxWidth: '400px' }} title={faq.answer}>
-                    {faq.answer}
-                  </td>
-                  <td>
-                    <div className="actions-cell">
-                      <Link
-                        title="عرض"
-                        href={route('faq.show', faq.id)}
-                        className="action-btn view-btn"
-                      >👁️</Link>
-                      <Link
-                        title="تعديل"
-                        href={route('faq.edit', faq.id)}
-                        className="action-btn edit-btn"
-                      >✏️</Link>
-                      <Link
-                        title="حذف"
-                        href={route('faq.destroy', faq.id)}
-                        method="delete"
-                        as="button"
-                        className="action-btn delete-btn"
-                      >🗑️</Link>
-                    </div>
+                  <td className="col-question" title={faq.question}>{truncateWords(faq.question)}</td>
+                  <td className="col-answer" title={faq.answer}>{truncateWords(faq.answer)}</td>
+                  <td className="col-actions">
+                    <button
+                      className="icon-btn"
+                      title="عرض"
+                      onClick={() => Inertia.visit(route('faq.show', faq.id))}
+                    >
+                      👁️
+                    </button>
+                    <button
+                      className="icon-btn"
+                      title="تعديل"
+                      onClick={() => Inertia.visit(route('faq.edit', faq.id))}
+                    >
+                      ✏️
+                    </button>
+                    <button
+                      className="icon-btn"
+                      title="حذف"
+                      onClick={() => handleDelete(faq.id)}
+                    >
+                      🗑️
+                    </button>
                   </td>
                 </tr>
               ))

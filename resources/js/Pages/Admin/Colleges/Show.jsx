@@ -1,23 +1,24 @@
 import React from 'react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
-import SettingMap from '@/Components/SettingMap'; // استيراد مكون الخريطة
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import SettingMap from '@/Components/SettingMap';
 import '@/Components/Admin/Style/Style.css';
 
-export default function Show({ auth, college }) {
-  console.log('COLLEGE PROPS', college);
-
-  // فك تحويل نص location إن كان موجود كـ string
+export default function CollegeShow({ college, auth }) {
+  // إذا كان location نص JSON نحوله
   const location =
-    typeof college.location === 'string' ? JSON.parse(college.location) : college.location;
+    typeof college.location === 'string'
+      ? JSON.parse(college.location)
+      : college.location || { lat: 24.7136, lng: 46.6753 };
 
   return (
     <AuthenticatedLayout user={auth.user}>
-      <Head title={college.name} />
+      <Head title={`تفاصيل الكلية - ${college.name}`} />
+
       <div
         className="panel"
         style={{
-          maxWidth: 700,
+          maxWidth: 750,
           margin: '40px auto',
           padding: 20,
           background: '#fff',
@@ -26,95 +27,93 @@ export default function Show({ auth, college }) {
           fontFamily: "'Cairo', sans-serif",
         }}
       >
-        <h1 className="form-title" style={{ marginBottom: 20 }}>
+        {/* العنوان */}
+        <h1 className="form-title" style={{ marginBottom: 22, fontSize: '1.7rem' }}>
           {college.name}
         </h1>
-        <div className="details-grid" style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
-          <div style={{ flex: '0 0 220px' }}>
-            {college.image && (
-              <img
-                src={`/storage/${college.image}`}
-                alt={college.name}
-                style={{ width: '100%', borderRadius: 14, marginBottom: 14, border: '1px solid #eee' }}
-              />
-            )}
-          </div>
+
+        {/* التفاصيل */}
+        <div className="details-grid" style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
           <div style={{ flex: 1 }}>
             <dl style={{ direction: 'rtl', fontSize: 16, color: '#34495e' }}>
               <dt style={{ fontWeight: 'bold', marginTop: 8 }}>المحافظة:</dt>
-              <dd>{college.governorate?.name ?? '--'}</dd>
+              <dd>{college.governorate?.name || '--'}</dd>
+
+              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>ملخص النص:</dt>
+              <dd style={{ whiteSpace: 'pre-line', margin: 0 }}>{college.summary}</dd>
+
+              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>التفاصيل:</dt>
+              <dd style={{ whiteSpace: 'pre-line', margin: 0 }}>{college.details}</dd>
 
               <dt style={{ fontWeight: 'bold', marginTop: 8 }}>سنة التأسيس:</dt>
-              <dd>{college.establishment_year}</dd>
+              <dd>{college.establishment_year || '--'}</dd>
 
               <dt style={{ fontWeight: 'bold', marginTop: 8 }}>عدد الطلاب:</dt>
-              <dd>{college.student_count}</dd>
+              <dd>{college.student_count || '--'}</dd>
 
-              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>اسم المحافظة :</dt>
-              <dd>{college.governorate?.name || '--'}</dd>
               <dt style={{ fontWeight: 'bold', marginTop: 8 }}>الرابط الرسمي:</dt>
-              <dd
-                style={{
-                  maxWidth: '100%',
-                  overflowWrap: 'break-word', // يتيح لف النص داخل الحدود
-                  wordWrap: 'break-word',
-                  wordBreak: 'break-word',
-                }}
-              >
-                <a
-                  href={college.official_link}
-                  target="_blank"
-                  rel="noopener"
-                  className="official-link"
-                  style={{
-                    display: 'inline-block',
-                    maxWidth: '100%',
-                    color: '#3a8dde',
-                    textDecoration: 'underline',
-                    fontWeight: '500',
-                    direction: 'ltr',
-                  }}
-                >
-                  {college.official_link}
-                </a>
-              </dd>
-
-              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>هل كلية؟</dt>
-              <dd>{college.college ? 'نعم' : 'لا'}</dd>
-
-              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>الموقع (خط العرض وخط الطول):</dt>
               <dd>
-                {location
-                  ? `خط العرض: ${location.lat}, خط الطول: ${location.lng}`
-                  : 'لا يوجد موقع'}
+                {college.official_link ? (
+                  <a
+                    href={college.official_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="table-link"
+                  >
+                    زيارة
+                  </a>
+                ) : (
+                  '--'
+                )}
               </dd>
+
+              <dt style={{ fontWeight: 'bold', marginTop: 8 }}>هل هي كلية؟</dt>
+              <dd>{college.college ? 'نعم' : 'لا'}</dd>
             </dl>
           </div>
+
+          {/* صورة الكلية إن وجدت */}
+          {college.image && (
+            <div>
+              <img
+                src={college.image.startsWith('http') ? college.image : `/storage/${college.image}`}
+                alt={college.name}
+                style={{
+                  width: 200,
+                  height: 200,
+                  objectFit: 'cover',
+                  borderRadius: 8,
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                }}
+              />
+            </div>
+          )}
         </div>
 
-        {/* عرض الخريطة */}
-        {location && (
-          <div className="section" style={{ marginTop: 30 }}>
-            <h3 style={{ marginBottom: 8, color: '#2c3e50' }}>الموقع على الخريطة</h3>
-            <SettingMap lat={location.lat} lng={location.lng} editable={false} height={300} />
-          </div>
-        )}
-
-        <div className="section" style={{ marginTop: 30 }}>
-          <h3 style={{ marginBottom: 8, color: '#2c3e50' }}>الملخص</h3>
-          <div style={{ color: '#34495e', fontSize: 16, lineHeight: 1.5 }}>{college.summary}</div>
+        {/* الموقع على الخريطة */}
+        <div style={{ marginTop: 20 }}>
+          <dt style={{ fontWeight: 'bold', marginBottom: 8 }}>الموقع على الخريطة:</dt>
+          <SettingMap
+            lat={location.lat || 24.7136}
+            lng={location.lng || 46.6753}
+            editable={false}
+            height={250}
+          />
         </div>
 
-        <div className="section" style={{ marginTop: 20 }}>
-          <h3 style={{ marginBottom: 8, color: '#2c3e50' }}>التفاصيل</h3>
-          <div style={{ color: '#34495e', fontSize: 16, lineHeight: 1.5 }}>{college.details}</div>
-        </div>
-
-        <div style={{ marginTop: 30 }}>
+        {/* أزرار تعديل ورجوع */}
+        <div className="actions-cell" style={{ marginTop: '2.5rem', justifyContent: 'center' }}>
+          <Link
+            href={route('Admincolleges.edit', college.id)}
+            className="action-btn edit-btn"
+              style={{ minWidth: '100px' }}
+          >
+            تعديل
+          </Link>
           <Link
             href={route('Admincolleges.index')}
-            className="back-link"
-            style={{ color: '#3a8dde', textDecoration: 'underline', fontWeight: 'bold' }}
+            className="action-btn view-btn"
+              style={{ background: '#e2e8f0', color: '#3059d5', minWidth: '100px' }}
           >
             رجوع
           </Link>

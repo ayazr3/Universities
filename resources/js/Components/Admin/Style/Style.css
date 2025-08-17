@@ -698,6 +698,8 @@ input[type="file"]:focus {
   .modern-table td.col-image,
   .modern-table th.col-file,
   .modern-table td.col-file,
+  .modern-table th.col-governorate,
+  .modern-table td.col-governorate,
 
    .modern-table th.colProjSummary,
   .modern-table td.colProjSummary,
@@ -875,5 +877,47 @@ input[type="file"]:focus {
 .location-search-bar input.search-input{
 
     max-width: 100%;
+}
+
+/* قائمة الخطوات الفرعية في عرض خطوة التسجيل */
+.sub-steps-list {
+  padding-inline-start: 20px;
+  margin: 0;
+  list-style-type: decimal; /* ترقيم تلقائي */
+  direction: rtl; /* عرض من اليمين لليسار */
+  font-family: 'Cairo', sans-serif;
+  line-height: 1.8;
+}
+
+.sub-steps-list li {
+  margin-bottom: 4px;
+}
+
+@media (max-width: 700px) {
+  /* إخفاء الأعمدة الوسطى */
+  .modern-table th.col-college,
+  .modern-table td.col-college,
+  .modern-table th.col-summary,
+  .modern-table td.col-summary,
+  .modern-table th.col-title,
+  .modern-table td.col-title,
+  .modern-table th.col-degree,
+  .modern-table td.col-degree,
+  .modern-table th.col-year,
+  .modern-table td.col-year,
+  .modern-table th.col-icon,
+  .modern-table td.col-icon {
+    display: none;
+  }
+
+  /* إظهار العمود الأول والأخير فقط */
+  .modern-table th.col-name,
+  .modern-table td.col-name,
+  .modern-table th.col-actions,
+  .modern-table td.col-actions {
+    display: table-cell;
+    font-size: 16px;
+    padding: 14px 8px;
+  }
 }
 

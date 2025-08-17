@@ -3,8 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body, * {
   font-family: 'El Messiri', sans-serif !important;
+
 }
 
 /* body {
