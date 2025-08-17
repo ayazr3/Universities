@@ -5,8 +5,12 @@ import EducationalVideos from '@/Components/EducationalVideos/EducationalVideos'
 import TechTips from '@/Components/TechTips/TechTips';
 import Navbar from "@/Components/Navbar/Navbar";
 import Footer from "@/Components/Footer/Footer";
-
+import { usePage } from "@inertiajs/react";
+ 
+  
 export default function GuidanceIndex({ articles, books, videos, advices }) {
+  const { props } = usePage();
+  const { quickLinks } = props;
   return (
     <>
         <Navbar />
@@ -16,7 +20,7 @@ export default function GuidanceIndex({ articles, books, videos, advices }) {
       <BooksSection books={books} />
       <EducationalVideos videos={videos} />
       
-      <Footer/>
+    <Footer quickLinks={quickLinks} />
     </>
   );
 }

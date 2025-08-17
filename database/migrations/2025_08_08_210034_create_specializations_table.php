@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name',100);
             $table->text('summary');
             $table->text('details');
-            $table->string('title');
+            $table->string('title',50);
             $table->string('icon',255);
             $table->string('degree_type',100);
             $table->integer('academic_year_number');

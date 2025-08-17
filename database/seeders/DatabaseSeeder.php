@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
+        //     'email' => 'rateb@example.com',
         // ]);
            $this->call([
-
-//         AnnouncementSeeder::class,
+// SpecializationSeeder::class,
+  //  AnnouncementSeeder::class,
 //         UsersTableSeeder::class,
 //           FaqSeeder::class,
 //           AdmissionScheduleSeeder::class,
@@ -29,9 +29,13 @@ class DatabaseSeeder extends Seeder
 //         OfficialLinkSeeder::class,
 //         TermSeeder::class,
 //        GuidanceSeeder::class,
-//          GovernoratesTableSeeder::class,
-//         CollegeSeeder::class,
-       SpecializationSeeder::class,
+        // CollegeSeeder::class,
+        // GovernoratesTableSeeder::class,
+        // CourseSeeder::class
+        // TopStudentSeeder::class
+    //  GraduationProjectsTableSeeder::class
+  //  FutureOpportunitiesSeeder::class
+    //  SpecializationSeeder::class
 
 // SpecializationSeeder::class,
 
@@ -41,7 +45,7 @@ class DatabaseSeeder extends Seeder
           // AdmissionScheduleSeeder::class,
         // RegistrationStepSeeder::class,
         // SettingSeeder::class,
-        // OfficialLinkSeeder::class,
+        OfficialLinkSeeder::class,
         // TermSeeder::class,
         // GuidanceSeeder::class,
 

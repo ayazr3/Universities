@@ -1,13 +1,80 @@
-import React from "react";
-import "./computerEngineeringHero.css";
-import { Link, useNavigate } from "react-router";
+// import React from "react";
+// import "./computerEngineeringHero.css";
+// import { Link, router } from '@inertiajs/react';
 
-const ComputerEngineeringHero = ({ specialization }) => {
-  const navigate = useNavigate();
+// const ComputerEngineeringHero = ({ collegeName, title, degreeType, academicYears ,specializationId }) => {
+
+
+//   const handleProjectSelect = (e) => {
+//     if (e.target.value !== "") {
+//       router.visit("/Projects");
+//     }
+//   };
+
+//   return (
+//     <section className="ce-hero">
+//       <header className="ce-navbar">
+//         <nav className="ce-navlinks">
+    
+//           <Link href={`/specializations/${specializationId}/top-students`} className="ce-link">
+//               اوائل الكلية
+//           </Link>
+
+//           <select className="ce-projects-list" onChange={handleProjectSelect} defaultValue="">
+//             <option value="" disabled>
+//               مشاريع التخرج
+//             </option>
+//             <option value="project1">2023-2024</option>
+//             <option value="project2">2024-2025</option>
+//             <option value="project3">2025-2026</option>
+//           </select>
+//         </nav>
+//       </header>
+
+//       <div className="ce-content">
+//         <div className="ce-title-row">
+//           <span className="ce-icon ce-icon-left">{"<>"}</span>
+//           <h1 className="ce-titlee">{collegeName}</h1>
+//           <span className="ce-icon ce-icon-right">🧠</span>
+//         </div>
+
+//         <div className="ce-subtitle">{title}</div>
+
+//         <div className="ce-tags">
+//           <span className="ce-tag ce-tag-lightning">{title}</span>
+//           <span className="ce-tag">{degreeType}</span>
+//           <span className="ce-tag">{academicYears} سنوات</span>
+//         </div>
+
+//         <div className="ce-scroll-indicator">
+//           <span className="ce-scroll-dot"></span>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default ComputerEngineeringHero;
+
+
+import React, { useEffect, useState } from "react";
+import "./computerEngineeringHero.css";
+import { Link, router } from '@inertiajs/react';
+import axios from "axios";
+
+const ComputerEngineeringHero = ({ collegeName, title, degreeType, academicYears, specializationId }) => {
+  const [years, setYears] = useState([]);
+  const [selectedYear, setSelectedYear] = useState("");
+
+  useEffect(() => {
+    axios.get(`/specializations/${specializationId}/graduation-projects/years`)
+      .then(res => setYears(res.data));
+  }, [specializationId]);
 
   const handleProjectSelect = (e) => {
     if (e.target.value !== "") {
-      navigate("/Projects");
+      setSelectedYear(e.target.value);
+      router.visit(`/specializations/${specializationId}/graduation-projects/${e.target.value}`);
     }
   };
 
@@ -15,29 +82,30 @@ const ComputerEngineeringHero = ({ specialization }) => {
     <section className="ce-hero">
       <header className="ce-navbar">
         <nav className="ce-navlinks">
-          <Link to={"/TheFirsts"} className="ce-link">
+          <Link href={`/specializations/${specializationId}/top-students`} className="ce-link">
             اوائل الكلية
           </Link>
           <select className="ce-projects-list" onChange={handleProjectSelect} defaultValue="">
             <option value="" disabled>
               مشاريع التخرج
             </option>
-            {/* يمكن اضافة بيانات مشاريع بناء على academic_year_number مثلا */}
-            <option value="project1">{specialization.academic_year_number + " - السنة الأكاديمية"}</option>
+            {years.map(year => (
+              <option key={year} value={year}>{year}</option>
+            ))}
           </select>
         </nav>
       </header>
       <div className="ce-content">
         <div className="ce-title-row">
           <span className="ce-icon ce-icon-left">{"<>"}</span>
-          <h1 className="ce-titlee"> {specialization.name} </h1>
+          <h1 className="ce-titlee">{collegeName}</h1>
           <span className="ce-icon ce-icon-right">🧠</span>
         </div>
-        <div className="ce-subtitle">Computer Engineering</div>
+        <div className="ce-subtitle">{title}</div>
         <div className="ce-tags">
-          <span className="ce-tag ce-tag-lightning">العلوم التطبيقة ⚡</span>
-          <span className="ce-tag">{specialization.degree_type}</span>
-          <span className="ce-tag">{specialization.academic_year_number} سنوات</span>
+          <span className="ce-tag ce-tag-lightning">{title}</span>
+          <span className="ce-tag">{degreeType}</span>
+          <span className="ce-tag">{academicYears} سنوات</span>
         </div>
         <div className="ce-scroll-indicator">
           <span className="ce-scroll-dot"></span>

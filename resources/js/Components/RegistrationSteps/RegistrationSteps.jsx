@@ -7,7 +7,7 @@ const RegistrationSteps = ({ steps }) => (
     <p className="reg-desc">
       اتبع هذه الخطوات البسيطة لضمان تقديم طلبك بشكل صحيح ومتكامل
     </p>
-    <div className="reg-steps">
+    <div className="reg-stepss">
       {steps.map((step, idx) => (
         <React.Fragment key={step.id}>
           {idx !== 0 && (
@@ -20,7 +20,7 @@ const RegistrationSteps = ({ steps }) => (
             </div>
           )}
           <div className={`reg-step reg-step-${idx + 1} animate-in`}>
-            <div className="reg-icon">📄</div>
+            <div className="reg-icon">📝</div>
             <div>
               <h3>{step.step_name}</h3>
               <ul>

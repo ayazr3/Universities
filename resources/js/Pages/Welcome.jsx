@@ -1,30 +1,87 @@
+// import Governorates from "@/Components/Governorates/Governorates";
+// import Navbar from "@/Components/Navbar/Navbar";
+// import { Head } from "@inertiajs/react";
+// import Footer from "@/Components/Footer/Footer"
+// import HelpSmart from "@/Components/HelpSmart/HelpSmart";
+// import Support from "@/Components/Support/Support";
+
+// import Differentiation from "@/Components/differentiation/differentiation";
+// export default function Welcome({ GOVERNORATES , registrationSteps, admissionFile}) {
+//   return (
+//     <>
+//       <Head title="طريقك للجامعة " />
+     
+//       <Navbar />
+   
+//       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
+//         <Governorates GOVERNORATES={GOVERNORATES} />
+//         <HelpSmart/>
+//         <Support/>
+//   <Differentiation registrationSteps={registrationSteps} admissionFile={admissionFile} /> 
+//       </div>
+//       <Footer/>
+//     </>
+//   );
+// }
+import React, { useState, useRef } from "react";
 import Governorates from "@/Components/Governorates/Governorates";
 import Navbar from "@/Components/Navbar/Navbar";
 import { Head } from "@inertiajs/react";
-import Footer from "@/Components/Footer/Footer"
+import Footer from "@/Components/Footer/Footer";
 import HelpSmart from "@/Components/HelpSmart/HelpSmart";
 import Support from "@/Components/Support/Support";
-
 import Differentiation from "@/Components/differentiation/differentiation";
-export default function Welcome({ GOVERNORATES , registrationSteps, admissionFile}) {
+import LastNews from "@/Components/LastNews/LastNews";
+import Hero from "@/Components/Hero/Hero";
+import { usePage } from "@inertiajs/react";
+
+
+ 
+
+export default function Welcome({ GOVERNORATES, registrationSteps, admissionFile,totalSpecializationsCount,    }) {
+
+    const { props } = usePage();
+  const { quickLinks } = props;
+
+
+  const [showGovernorates, setShowGovernorates] = useState(false);
+  const governoratesRef = useRef(null);
+
+  // دالة استدعاء عند الضغط "استكشف التخصص"
+  const handleExploreClick = () => {
+    setShowGovernorates(true);
+    // تمرير للجزء الخاص بـ Governorates بسلاسة (اختياري)
+    setTimeout(() => {
+      governoratesRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 1);
+  };
+
+
+  
+// export default function Welcome({ GOVERNORATES, registrationSteps, admissionFile,  totalSpecializationsCount }) {
   return (
     <>
       <Head title="طريقك للجامعة " />
-     
       <Navbar />
-   
+      {/* إضافة كومبوننت Hero أعلى المحتوى الأساسي */}
+      <Hero   
+       totalSpecializationsCount={totalSpecializationsCount} 
+      onExploreClick={handleExploreClick}/>
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
         <Governorates GOVERNORATES={GOVERNORATES} />
-        <HelpSmart/>
-        <Support/>
-  <Differentiation registrationSteps={registrationSteps} admissionFile={admissionFile} /> 
+          {/* {showGovernorates && <div ref={governoratesRef}>
+          <Governorates GOVERNORATES={GOVERNORATES} />
+        </div>} */}
+
+        <HelpSmart />
+        <Support />
+        <Differentiation registrationSteps={registrationSteps} admissionFile={admissionFile} />
+                
       </div>
-      <Footer/>
+     <Footer quickLinks={quickLinks} />
     </>
   );
 }
-
-
 
 
 

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Specialization;
-use App\Models\College;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SpecializationFactory extends Factory
@@ -13,15 +12,14 @@ class SpecializationFactory extends Factory
     public function definition()
     {
         return [
-            'college_id' => College::factory(), // تفترض وجود factory لـ College
-            'name' => $this->faker->unique()->words(3, true), // اسم مكون من عدة كلمات
-            'summary' => $this->faker->paragraph(),
-            'details' => $this->faker->paragraphs(3, true),
-            'graduate_future' => $this->faker->paragraph(),
-            'name_graduate_future' => $this->faker->jobTitle(),
-            'icon' => $this->faker->imageUrl(100, 100, 'education', true, 'icon'),
-            'degree_type' => $this->faker->randomElement(['بكالوريوس', 'ماجستير', 'دكتوراه']),
-            'academic_year_number' => $this->faker->numberBetween(1, 5),
+            'college_id' => \App\Models\College::factory(), // يُفترض وجود Factory لـ College
+            'name' => $this->faker->unique()->words(3, true),
+            'summary' => $this->faker->paragraph,
+            'details' => $this->faker->text(500),
+            'title' => $this->faker->word,
+            'icon' => $this->faker->imageUrl(64, 64, 'abstract'),
+            'degree_type' => $this->faker->randomElement(['Bachelor', 'Master', 'PhD']),
+            'academic_year_number' => $this->faker->numberBetween(1, 6),
         ];
     }
 }

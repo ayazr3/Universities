@@ -13,16 +13,16 @@ class GovernoratesTableSeeder extends Seeder
     public function run(): void
     {
         $governorates = [
-            ['name' => 'القاهرة'],
-            ['name' => 'الجيزة'],
-            ['name' => 'الإسكندرية'],
-            ['name' => 'المنصورة'],
-            ['name' => 'أسوان'],
-            ['name' => 'الأقصر'],
-            ['name' => 'سوهاج'],
-            ['name' => 'الشرقية'],
-            ['name' => 'الدقهلية'],
-            ['name' => 'المنوفية'],
+            ['name' => 'دمشق'],
+            ['name' => 'حلب'],
+            ['name' => 'حمص'],
+            ['name' => 'ادلب '],
+            ['name' => 'درعا'],
+            ['name' => 'دير الزور'],
+            ['name' => 'اللاذقية'],
+            ['name' => 'طرطوس '],
+            ['name' => 'الحسكة'],
+            ['name' => 'حماة'],
         ];
 
         DB::table('governorates')->insert($governorates);

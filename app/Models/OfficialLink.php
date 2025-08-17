@@ -9,8 +9,9 @@ class OfficialLink extends Model
 {
     use HasFactory;
 
-     protected $fillable = [
-        'entity_name',
-        'link',
-    ];
+  
+    protected $table = 'official_links';
+
+    protected $fillable = ['entity_name', 'link'];
+    
 }

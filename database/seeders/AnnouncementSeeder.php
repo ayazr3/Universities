@@ -2,18 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Announcement;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Announcement;
 
 class AnnouncementSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        // إنشاء 20 إعلان عشوائي باستخدام الـ Factory
         Announcement::factory()->count(10)->create();
     }
 }

@@ -10,13 +10,9 @@ const ComputerEngineering = ({ specialization }) => {
       <div className="ce-content">
         <h1 className="ce-titles">ما هو تخصص {specialization.name}؟</h1>
         <div className="ce-desc-wrapper">
-          <p className="ce-desc">
-            {specialization.summary}
-          </p>
+          <p className="ce-desc">{specialization.summary}</p>
           {isExpanded && (
-            <p className="ce-desc ce-desc-expanded">
-              {specialization.details}
-            </p>
+            <p className="ce-desc ce-desc-expanded">{specialization.details}</p>
           )}
         </div>
         <button

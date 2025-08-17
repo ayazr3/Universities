@@ -7,7 +7,9 @@ import UniversityCentersFAQ from "@/Components/UniversityCentersFAQ/UniversityCe
 import Navbar from "@/Components/Navbar/Navbar";
 import Footer from "@/Components/Footer/Footer";
 import Differentiation from '@/Components/Differentiation/Differentiation';
+import { usePage } from "@inertiajs/react";
 
+ 
 
 const UniversitySelectionPage = ({
   admissionSchedules,
@@ -17,6 +19,8 @@ const UniversitySelectionPage = ({
   currentYear,
   universityCentersByGovernorate,  // البيانات الجديدة
 }) => {
+   const { props } = usePage();
+  const { quickLinks } = props;
   return (
     <>
       <Navbar />
@@ -32,13 +36,13 @@ const UniversitySelectionPage = ({
         <UniversityCentersFAQ data={universityCentersByGovernorate} />
         <SupportBox />
 
-      <Differentiation registrationSteps={registrationSteps} admissionFile={admissionFile} />
+      {/* <Differentiation registrationSteps={registrationSteps} admissionFile={admissionFile} /> */}
 
 
 
         
       </div>
-      <Footer />
+  <Footer quickLinks={quickLinks} />
     </>
   );
 };

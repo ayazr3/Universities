@@ -1,0 +1,706 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;400&display=swap');
+
+body {
+  background: linear-gradient(120deg, #f2f6ff 0%, #e7eaf6 100%);
+}
+
+.ssx-container {
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  padding: 46.8px 8px 28px 8px;
+  min-height: 100vh;
+  background: none;
+}
+
+.ssx-title {
+  text-align: center;
+  font-size: 2.86rem;
+  font-weight: bold;
+  margin-bottom: 9.1px;
+  letter-spacing: 1.3px;
+  background: none;
+}
+
+.ssx-gradient-text {
+  background: linear-gradient(90deg, #4b5fc4 30%, #2cbb7f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ssx-stats {
+  display: flex;
+  justify-content: center;
+  gap: 31.2px;
+  margin-bottom: 23.4px;
+  flex-wrap: wrap;
+}
+
+.ssx-statbox {
+  background: rgba(255,255,255,0.7);
+  border-radius: 20.8px;
+  box-shadow: 0 1.3px 9.1px 0 rgba(76, 106, 185, 0.10);
+  padding: 16.9px 26px;
+  text-align: center;
+  min-width: 117px;
+  transition: box-shadow 0.07s;
+}
+
+.ssx-stat-value {
+  display: block;
+  color: #2c4da7;
+  font-size: 1.95rem;
+  font-weight: bold;
+}
+
+.ssx-stat-label {
+  color: #6e7ba3;
+  font-size: 1.26rem;
+}
+
+.ssx-no-students {
+  text-align: center;
+  color: #c0392b;
+  font-size: 1.43rem;
+  padding: 39px 0;
+  grid-column: 1/-1;
+}
+
+.ssx-subtitle {
+  color: #6e7ba3;
+  text-align: center;
+  margin-bottom: 31.2px;
+  font-size: 1.31rem;
+}
+
+.ssx-filter {
+  display: flex;
+  justify-content: center;
+  gap: 10.4px;
+  margin-bottom: 28.6px;
+}
+
+.ssx-filter-btn {
+  background: rgba(255,255,255,0.8);
+  border: none;
+  border-radius: 23.4px;
+  padding: 9.1px 26px;
+  font-size: 1.26rem;
+  color: #4b5fc4;
+  cursor: pointer;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  transition: background 0.07s, color 0.07s, box-shadow 0.07s;
+  box-shadow: 0 1.3px 5.2px #e9eefa;
+}
+
+.ssx-filter-btn.active,
+.ssx-filter-btn:hover {
+  background: linear-gradient(90deg, #4b5fc4 60%, #2cbb7f 100%);
+  color: #fff;
+  box-shadow: 0 2.6px 13px #b3c7fa;
+}
+
+.ssx-ripple {
+  position: relative;
+  z-index: 2;
+}
+
+.ssx-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(286px, 1fr));
+  gap: 23.4px;
+  max-width: 1430px;
+  margin: 0 auto;
+}
+
+.ssx-card {
+  background: rgba(255,255,255,0.85);
+  border-radius: 20.8px;
+  box-shadow: 0 2.6px 18.2px 0 rgba(76, 106, 185, 0.10);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-height: 351px;
+  transition: transform 0.07s cubic-bezier(.4,2,.6,1), box-shadow 0.07s;
+  border: 1.3px solid #e8eaf6;
+}
+
+.ssx-card-img-wrap {
+  width: 100%;
+  height: 143px;
+  background: linear-gradient(110deg, #e7eaf6 50%, #f2f6ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.ssx-card-img {
+  width: 85.8px;
+  height: 85.8px;
+  border-radius: 65%;
+  object-fit: cover;
+  border: 3.9px solid #fff;
+  box-shadow: 0 1.3px 7.8px #dbeafe;
+  background: #fff;
+  transition: box-shadow 0.07s;
+}
+
+.ssx-card:hover .ssx-card-img {
+  box-shadow: 0 3.9px 18.2px #a6b3f7;
+}
+
+.ssx-badge {
+  position: absolute;
+  top: 11.7px;
+  left: 11.7px;
+  background: #f8d90f;
+  color: #fff;
+  font-size: 1.16rem;
+  padding: 2.6px 15.6px;
+  border-radius: 15.6px;
+  font-weight: bold;
+  box-shadow: 0 1.3px 5.2px #fae18d;
+  animation: badge-pop 0.2s;
+  letter-spacing: 1.3px;
+  border: 1.3px solid #f7e47b;
+}
+
+.ssx-badge.gold {
+  background: linear-gradient(90deg, #f8d90f 70%, #ffe066 100%);
+  color: #7c5d00;
+  border: 1.3px solid #f7e47b;
+}
+.ssx-badge.silver {
+  background: linear-gradient(90deg, #bfc7d3 60%, #e0e7ef 100%);
+  color: #3b4252;
+  border: 1.3px solid #d4dbe6;
+}
+
+@keyframes badge-pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  80% { transform: scale(1.1); opacity: 1;}
+  100% { transform: scale(1); }
+}
+
+.ssx-card-info {
+  padding: 18.2px 13px 9.1px 13px;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6.5px;
+}
+
+.ssx-card-name {
+  font-size: 1.39rem;
+  font-weight: bold;
+  color: #2c4da7;
+  margin-bottom: 1.3px;
+}
+
+.ssx-card-major {
+  color: #4b5fc4;
+  font-size: 1.26rem;
+  margin-bottom: 1.3px;
+}
+
+.ssx-card-university {
+  color: #7c88a5;
+  font-size: 1.21rem;
+  margin-bottom: 6.5px;
+}
+
+.ssx-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.26rem;
+  margin-top: 6.5px;
+  color: #5f6b89;
+  font-weight: 500;
+}
+
+.ssx-card-year {
+  background: #f2f5fa;
+  border-radius: 7.8px;
+  padding: 1.3px 10.4px;
+}
+
+.ssx-card-score {
+  color: #2cbb7f;
+  font-weight: bold;
+  font-size: 1.31rem;
+  letter-spacing: 1.3px;
+}
+
+@media (max-width: 900px) {
+  .ssx-grid {
+    grid-template-columns: repeat(auto-fit, minmax(221px, 1fr));
+    gap: 13px;
+  }
+  .ssx-container {
+    padding: 18.2px 2.6px;
+  }
+  .ssx-title {
+    font-size: 1.82rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .ssx-grid {
+    grid-template-columns: 1fr;
+    gap: 9.1px;
+  }
+  .ssx-title {
+    font-size: 1.3rem;
+  }
+  .ssx-stats {
+    gap: 6.5px;
+  }
+  .ssx-filter {
+    gap: 2.6px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(120deg, #232946 0%, #1a1f37 100%);
+  }
+  .ssx-container {
+    background: none;
+  }
+  .ssx-card,
+  .ssx-statbox {
+    background: rgba(35, 41, 70, 0.92);
+    color: #e5e9f7;
+    border: 1.3px solid #2c4da7;
+  }
+  .ssx-card-info,
+  .ssx-card-footer,
+  .ssx-card-major,
+  .ssx-card-university {
+    color: #bfc7d3;
+  }
+  .ssx-title, .ssx-gradient-text {
+    color: #e5e9f7;
+    background: none;
+    -webkit-text-fill-color: unset;
+  }
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;400&display=swap');
+
+body {
+  background: linear-gradient(120deg, #f2f6ff 0%, #e7eaf6 100%);
+}
+
+.ssx-container {
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  padding: 46.8px 8px 28px 8px;
+  min-height: 100vh;
+  background: none;
+}
+
+.ssx-title {
+  text-align: center;
+  font-size: 2.86rem;
+  font-weight: bold;
+  margin-bottom: 9.1px;
+  letter-spacing: 1.3px;
+  background: none;
+}
+
+.ssx-gradient-text {
+  background: linear-gradient(90deg, #4b5fc4 30%, #2cbb7f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ssx-subtitle {
+  color: #6e7ba3;
+  text-align: center;
+  margin-bottom: 31.2px;
+  font-size: 1.31rem;
+}
+
+.ssx-filter {
+  display: flex;
+  justify-content: center;
+  gap: 10.4px;
+  margin-bottom: 28.6px;
+  position: relative;
+}
+
+/* عرض قائمة الفلترة كاملة على الشاشات الكبيرة */
+.ssx-filter-large {
+  display: flex;
+  gap: 10.4px;
+}
+
+/* إخفاء القائمة الكبيرة على الشاشات الصغيرة */
+.ssx-filter-dropdown {
+  display: none;
+  position: relative;
+}
+
+/* أزرار الفلترة */
+.ssx-filter-btn {
+  background: rgba(255,255,255,0.8);
+  border: none;
+  border-radius: 23.4px;
+  padding: 9.1px 26px;
+  font-size: 1.26rem;
+  color: #4b5fc4;
+  cursor: pointer;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  transition: background 0.07s, color 0.07s, box-shadow 0.07s;
+  box-shadow: 0 1.3px 5.2px #e9eefa;
+}
+
+.ssx-filter-btn.active,
+.ssx-filter-btn:hover {
+  background: linear-gradient(90deg, #4b5fc4 60%, #2cbb7f 100%);
+  color: #fff;
+  box-shadow: 0 2.6px 13px #b3c7fa;
+}
+
+.ssx-ripple {
+  position: relative;
+  z-index: 2;
+}
+
+/* Grid display */
+.ssx-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(286px, 1fr));
+  gap: 23.4px;
+  max-width: 1430px;
+  margin: 0 auto;
+}
+
+/* حالة وجود كارد واحد فقط - نجعله في الوسط مع حجم ثابت وألا يتمدد */
+.ssx-grid.single-card {
+  justify-content: center;
+  grid-template-columns: minmax(286px, 400px);
+}
+
+/* بطاقات الطلاب */
+.ssx-card {
+  background: rgba(255,255,255,0.85);
+  border-radius: 20.8px;
+  box-shadow: 0 2.6px 18.2px 0 rgba(76, 106, 185, 0.10);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-height: 351px;
+  transition: transform 0.07s cubic-bezier(.4,2,.6,1), box-shadow 0.07s;
+  border: 1.3px solid #e8eaf6;
+}
+
+/* img wrap */
+.ssx-card-img-wrap {
+  width: 100%;
+  height: 143px;
+  background: linear-gradient(110deg, #e7eaf6 50%, #f2f6ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.ssx-card-img {
+  width: 85.8px;
+  height: 85.8px;
+  border-radius: 65%;
+  object-fit: cover;
+  border: 3.9px solid #fff;
+  box-shadow: 0 1.3px 7.8px #dbeafe;
+  background: #fff;
+  transition: box-shadow 0.07s;
+}
+
+.ssx-card:hover .ssx-card-img {
+  box-shadow: 0 3.9px 18.2px #a6b3f7;
+}
+
+.ssx-card-info {
+  padding: 18.2px 13px 9.1px 13px;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6.5px;
+}
+
+.ssx-card-name {
+  font-size: 1.39rem;
+  font-weight: bold;
+  color: #2c4da7;
+  margin-bottom: 1.3px;
+}
+
+.ssx-card-major {
+  color: #4b5fc4;
+  font-size: 1.26rem;
+  margin-bottom: 1.3px;
+}
+
+.ssx-card-university {
+  color: #7c88a5;
+  font-size: 1.21rem;
+  margin-bottom: 6.5px;
+}
+
+.ssx-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.26rem;
+  margin-top: 6.5px;
+  color: #5f6b89;
+  font-weight: 500;
+}
+
+.ssx-card-year {
+  background: #f2f5fa;
+  border-radius: 7.8px;
+  padding: 1.3px 10.4px;
+}
+
+.ssx-card-score {
+  color: #2cbb7f;
+  font-weight: bold;
+  font-size: 1.31rem;
+  letter-spacing: 1.3px;
+}
+
+.ssx-no-students {
+  text-align: center;
+  color: #c0392b;
+  font-size: 1.43rem;
+  padding: 39px 0;
+  grid-column: 1/-1;
+}
+
+/* --- Dropdown styles للشاشات الصغيرة ---*/
+
+.ssx-filter-dropdown .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 9.1px 20px;
+  background: rgba(255,255,255,0.8);
+  border: none;
+  border-radius: 23.4px;
+  font-size: 1.26rem;
+  color: #4b5fc4;
+  cursor: pointer;
+  font-weight: 600;
+  position: relative;
+  box-shadow: 0 1.3px 5.2px #e9eefa;
+  width: 200px;
+
+  transition: background 0.07s, color 0.07s, box-shadow 0.07s;
+}
+
+.ssx-filter-dropdown .dropdown-toggle:hover,
+.ssx-filter-dropdown .dropdown-toggle:focus {
+  background: linear-gradient(90deg, #4b5fc4 60%, #2cbb7f 100%);
+  color: #fff;
+  box-shadow: 0 2.6px 13px #b3c7fa;
+  outline: none;
+}
+
+.ssx-filter-dropdown .arrow {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.ssx-filter-dropdown .arrow.open {
+  transform: rotate(180deg);
+}
+
+/* قائمة العناصر المنسدلة */
+.ssx-filter-dropdown-menu {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+  list-style: none;
+  padding: 10px 0;
+  width: 200px;
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.ssx-filter-dropdown-item {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: #4b5fc4;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  
+}
+
+.ssx-filter-dropdown-item:hover,
+.ssx-filter-dropdown-item.active {
+  background: linear-gradient(90deg, #4b5fc4 60%, #2cbb7f 100%);
+  color: white;
+}
+
+/* --- ريسبونسيف --- */
+@media (max-width: 900px) {
+  /* اجعل الخطوط أصغر */
+  .ssx-title {
+    font-size: 1.82rem;
+  }
+  .ssx-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  /* حجم الكارد أصغر */
+  .ssx-grid {
+    grid-template-columns: repeat(auto-fit, minmax(221px, 1fr));
+    gap: 13px;
+  }
+  .ssx-card {
+    min-height: 280px;
+  }
+  .ssx-card-name {
+    font-size: 1.15rem;
+  }
+  .ssx-card-major {
+    font-size: 1.05rem;
+  }
+  .ssx-card-university {
+    font-size: 1rem;
+  }
+  .ssx-card-footer {
+    font-size: 1rem;
+  }
+
+  /* فلتر السنوات: إخفاء القائمة الكبيرة وإظهار الـdropdown */
+  .ssx-filter-large {
+    display: none;
+  }
+  .ssx-filter-dropdown {
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  .ssx-grid {
+    grid-template-columns: 1fr;
+    gap: 9.1px;
+  }
+  .ssx-title {
+    font-size: 1.3rem;
+  }
+  .ssx-subtitle {
+    margin-bottom: 15px;
+  }
+  .ssx-filter-btn,
+  .ssx-filter-dropdown .dropdown-toggle {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+  .ssx-filter-dropdown-menu {
+    width: 160px;
+  }
+  .ssx-filter-dropdown-item {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+  .ssx-card {
+    min-height: 260px;
+  }
+  .ssx-card-name {
+    font-size: 1rem;
+  }
+  .ssx-card-major {
+    font-size: 0.9rem;
+  }
+  .ssx-card-university {
+    font-size: 0.85rem;
+  }
+  .ssx-card-footer {
+    font-size: 0.9rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(120deg, #232946 0%, #1a1f37 100%);
+  }
+  .ssx-container {
+    background: none;
+  }
+  .ssx-card,
+  .ssx-statbox {
+    background: rgba(35, 41, 70, 0.92);
+    color: #e5e9f7;
+    border: 1.3px solid #2c4da7;
+  }
+  .ssx-card-info,
+  .ssx-card-footer,
+  .ssx-card-major,
+  .ssx-card-university {
+    color: #bfc7d3;
+  }
+  .ssx-title, .ssx-gradient-text {
+    color: #e5e9f7;
+    background: none;
+    -webkit-text-fill-color: unset;
+  }
+}
+
+/* احتفظ بأي أنيميشن موجود سابقاً كما في الكود الأساسي */
+@keyframes badge-pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  80% { transform: scale(1.1); opacity: 1;}
+  100% { transform: scale(1); }
+}
+
+.ssx-badge {
+  position: absolute;
+  top: 11.7px;
+  left: 11.7px;
+  background: #f8d90f;
+  color: #fff;
+  font-size: 1.16rem;
+  padding: 2.6px 15.6px;
+  border-radius: 15.6px;
+  font-weight: bold;
+  box-shadow: 0 1.3px 5.2px #fae18d;
+  animation: badge-pop 0.2s;
+  letter-spacing: 1.3px;
+  border: 1.3px solid #f7e47b;
+}
+
+.ssx-badge.gold {
+  background: linear-gradient(90deg, #f8d90f 70%, #ffe066 100%);
+  color: #7c5d00;
+  border: 1.3px solid #f7e47b;
+}
+.ssx-badge.silver {
+  background: linear-gradient(90deg, #bfc7d3 60%, #e0e7ef 100%);
+  color: #3b4252;
+  border: 1.3px solid #d4dbe6;
+}

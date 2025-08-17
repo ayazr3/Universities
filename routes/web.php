@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Announcement;
 use App\Http\Controllers\AdmissionScheduleController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\FaqController;
@@ -18,7 +18,8 @@ use App\Http\Controllers\GovernorateController;
 use App\Http\Controllers\SpecializationController;
 use App\Http\Controllers\UniversitySelectionPageController;
 use App\Http\Controllers\ChatAIController;
-
+use App\Http\Controllers\TopStudentController;
+use App\Http\Controllers\GraduationProjectController;
 
 /*
 /*
@@ -31,6 +32,8 @@ use App\Http\Controllers\ChatAIController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::get('/', function () {
     $GOVERNORATES = Governorate::latest()->get();
     return Inertia::render('Welcome', [
@@ -39,11 +42,27 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
         'GOVERNORATES' => $GOVERNORATES,
+       
     ]);
-})->name('welcome'); // إضافة اسم للراوت هنا
+})->name('welcome');
+  
+// Route::get('/', function () {
+//     $GOVERNORATES = Governorate::latest()->get();
+
+
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//         'GOVERNORATES' => $GOVERNORATES,
+     
+//     ]);
+// })->name('welcome'); // إضافة اسم للراوت هنا
 
 //من اجل المفاضلة على الصفحة الرئيسية 
 Route::get('/', [UniversitySelectionPageController::class, 'welcomeUser'])->name('welcome');
+
 
 
 // Route::get('/', function () {
@@ -115,3 +134,23 @@ Route::get('/university-selection', [UniversitySelectionPageController::class, '
 ////رات الشات 
 
 Route::get('/chat-ai', [ChatAIController::class, 'indexUser'])->name('chat.ai');
+
+
+//راوت الاختصاصات 
+Route::get('/specializations/{id}', [SpecializationController::class, 'showUser'])->name('specializations.showUser');
+
+
+//راوت الاوئل 
+
+Route::get('/specializations/{id}/top-students', [TopStudentController::class, 'showUser'])
+    ->name('specializations.topStudents');
+
+
+
+//راوتات مشاريع التخرج
+
+Route::get('/specializations/{id}/graduation-projects/years', [GraduationProjectController::class, 'bySpecialization']);
+Route::get('/specializations/{id}/graduation-projects/{year}', [GraduationProjectController::class, 'showByYear']);
+Route::post('/graduation-projects/comments', [GraduationProjectController::class, 'addComment']);
+
+

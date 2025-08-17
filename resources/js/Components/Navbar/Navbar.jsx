@@ -3,6 +3,7 @@ import { CiUser, CiSearch } from "react-icons/ci";
 import { RiBook3Fill } from "react-icons/ri";
 import { Link } from "@inertiajs/react";
 import "./navba.css";
+import logo from "./img/logo.webp";
 
 
 const Navbar = () => {
@@ -111,8 +112,18 @@ const Navbar = () => {
       </div>
 
       <div className="N_right_side">
-        <span>دليل البكلوريا</span>
-        <RiBook3Fill />
+        <span>طريقك للجامعة </span>
+       <img
+  src={logo}
+  alt="طريقك للجامعة  "
+  style={{  
+      width: "62px",           // يمكنك تغيير الحجم كما تريد
+    height: "62px",
+    borderRadius: "50%",     // تجعل الصورة دائرية
+    objectFit: "cover",      // تغطي الحواف بشكل مثالي
+    marginRight: "8px"}} // يمكنك تعديل الحجم أو النمط
+/>
+
       </div>
     </div>
   );

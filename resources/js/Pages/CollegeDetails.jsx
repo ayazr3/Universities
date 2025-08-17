@@ -44,11 +44,15 @@ import EngineeringCollege from '@/Components/EngineeringCollege/EngineeringColle
 import CollegeIntro from '@/Components/CollegeIntro/CollegeIntro';
 import CollegeMap from '@/Components/CollegeMap/CollegeMap';
 import Specialties from '@/Components/Specialties/Specialties';
-
 import Navbar from '@/Components/Navbar/Navbar';
 import Footer from '@/Components/Footer/Footer';
+import { usePage } from "@inertiajs/react";
+
 
 export default function CollegeDetails({ college, specializations }) {
+   const { props } = usePage();
+  const { quickLinks } = props;
+
   const stats = [
     { value: college.establishment_year, label: "سنة التأسيس", color: "#2962ff" },
     { value: college.student_count, label: "عدد الطلاب", color: "#43a047" },
@@ -65,7 +69,7 @@ export default function CollegeDetails({ college, specializations }) {
       <Specialties specializations={specializations} collegeId={college.id} />
 
       </div>
-      <Footer />
+      <Footer quickLinks={quickLinks} />
     </>
   );
 }

@@ -1,0 +1,297 @@
+/* LastNews.css */
+body {
+  font-family: 'Tajawal', 'Segoe UI', sans-serif;
+  direction: rtl;
+  background: #f9fafc;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.LN_container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.LN_Cards {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin: 2rem auto 2.5rem;
+  padding: 1rem 0.5rem;
+  box-sizing: border-box;
+  max-width: 1200px;
+}
+
+.LN_card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: linear-gradient(135deg, #fafdff 60%, #e6f0fd 100%);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0, 105, 217, 0.13), 0 2px 8px rgba(0,0,0,0.04);
+  overflow: hidden;
+  transition: transform 0.33s cubic-bezier(.4,2,.3,1), box-shadow 0.3s;
+  width: 100%;
+  max-width: 370px;
+  min-width: 260px;
+  min-height: 420px;
+  position: relative;
+  margin: 1rem;
+  border: 1.5px solid #e1e9f6;
+  box-sizing: border-box;
+  flex: 1 1 300px;
+}
+
+.LN_card:hover {
+  box-shadow: 0 16px 40px rgba(0, 105, 217, 0.19), 0 4px 16px rgba(0,0,0,0.09);
+  transform: translateY(-12px) scale(1.032);
+}
+
+.LN_tag {
+  background: linear-gradient(90deg, #0069d9 60%, #4fd1c5 100%);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 0.5rem 1.3rem 0.5rem 0.8rem;
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 4;
+  box-shadow: 0 2px 8px rgba(0,105,217,0.09);
+  letter-spacing: 0.7px;
+  pointer-events: none;
+}
+
+.LN_image {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  border-top-right-radius: 22px;
+  border-top-left-radius: 22px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #eaf3fc 60%, #fafdff 100%);
+  box-shadow: 0 6px 22px rgba(0,105,217,0.13);
+}
+
+/* طبقة تدرج شفافة فوق الصورة لإضفاء عمق */
+.LN_image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,105,217,0.06) 0%, rgba(255,255,255,0.0) 80%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.LN_image img {
+  width: 96%;
+  height: 96%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 18px;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 18px rgba(0,105,217,0.09);
+  filter: brightness(0.97) contrast(1.09) saturate(1.09);
+  transition: 
+    transform 0.5s cubic-bezier(.4,2,.3,1), 
+    filter 0.4s, 
+    box-shadow 0.3s;
+  position: relative;
+  z-index: 3;
+}
+
+.LN_card:hover .LN_image img {
+  transform: scale(1.08) rotate(-1.5deg);
+  filter: brightness(1.07) contrast(1.14) saturate(1.17);
+  box-shadow: 0 8px 32px rgba(0,105,217,0.17);
+}
+
+/* أيقونة تراكب اختيارية أعلى الصورة */
+.LN_overlayIcon {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 5;
+  background: rgba(255,255,255,0.82);
+  border-radius: 50%;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0,105,217,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LN_Text {
+  display: flex;
+  flex-direction: column;
+  direction: ltr;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 1.2rem 1.4rem 0.7rem 1.4rem;
+  text-align: right;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.LN_InfoRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.LN_university {
+  color: #0069d9;
+  font-weight: 700;
+  font-size: 1.07rem;
+}
+
+.LN_date {
+  color: #7c8ba1;
+  font-size: 1.02rem;
+  font-weight: 500;
+}
+
+.LN_newsTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #222;
+  text-align: right;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+.LN_Text p {
+  color: #222;
+  font-size: 1.13rem;
+  font-weight: 400;
+  line-height: 1.95;
+  margin: 0;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.1px;
+}
+
+.LN_readMore {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  align-self: flex-end;
+  text-decoration: none;
+  font-weight: 700;
+  color: #0069d9;
+  font-size: 1.07rem;
+  border-radius: 8px;
+  padding: 0.42rem 1.1rem;
+  background: #f4f8ff;
+  transition: background 0.23s, color 0.23s;
+  margin-bottom: 1.2rem;
+  margin-top: auto;
+  box-shadow: 0 1px 3px rgba(0,105,217,0.08);
+}
+
+.LN_readMore:hover {
+  background: linear-gradient(90deg, #0069d9 60%, #4fd1c5 100%);
+  color: #fff;
+}
+
+.LN_readMore svg path {
+  transition: stroke 0.23s;
+}
+.LN_readMore:hover svg path {
+  stroke: #fff;
+}
+
+.LN_bottom {
+  text-align: center;
+  margin-bottom: 2.7rem;
+}
+
+.LN_btn {
+  background: linear-gradient(90deg, #0069d9 70%, #4fd1c5 100%);
+  color: white;
+  border: none;
+  padding: 0.95rem 2.3rem;
+  font-size: 1.15rem;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  box-shadow: 0 2px 10px rgba(0,105,217,0.13);
+  transition: background 0.33s, box-shadow 0.33s;
+}
+
+.LN_btn:hover {
+  background: linear-gradient(90deg, #0050a6 60%, #38b2ac 100%);
+  box-shadow: 0 6px 22px rgba(0,105,217,0.19);
+}
+
+@media (max-width: 900px) {
+  .LN_Cards {
+    gap: 1rem;
+    padding: 0.5rem;
+    margin-right: 13px;
+    max-width: 100%;
+  }
+  .LN_card {
+    width: 96vw;
+    max-width: 99vw;
+    min-height: 320px;
+    flex: 1 1 280px;
+  }
+  .LN_image {
+    height: 140px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 0.95rem;
+  }
+  .LN_Cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.2rem;
+  }
+  .LN_card {
+    width: 99vw;
+    min-height: 220px;
+    max-width: 99vw;
+    flex: 1 1 100%;
+    margin: 0.4rem 0;
+  }
+  .LN_image {
+    height: 85px;
+  }
+  .LN_Text {
+    padding: 0.5rem 0.5rem 0.3rem 0.5rem;
+  }
+  .LN_btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+}

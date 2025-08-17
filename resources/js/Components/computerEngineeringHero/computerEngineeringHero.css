@@ -219,12 +219,13 @@
 
 @media (max-width: 992px) {
   .ce-hero {
-    height: auto;
-    min-height: 60vh;
+    /* height: auto;
+    min-height: 60vh; */
   }
   .ce-content {
     padding-top: 5vw;
     padding-bottom: 5vw;
+    
   }
   .ce-navlinks {
     gap: 1vw;
@@ -257,7 +258,7 @@
 
 @media (max-width: 576px) {
   .ce-hero {
-    min-height: 80vh;
+    /* min-height: 80vh; */
   }
   .ce-navbar {
     padding: 0.5rem 1vw;
@@ -266,31 +267,31 @@
     gap: 4vw;
   }
   .ce-link {
-    font-size: clamp(0.8rem, 3.5vw, 1rem);
+    font-size: 0.9rem; /* تقليل الحجم قليلاً من clamp(0.8rem, 3.5vw, 1rem) */
     margin-top: 2px;
   }
   .ce-projects-list {
     margin-right: 0;
     padding: 3px 8px;
-    font-size: clamp(0.8rem, 3.5vw, 1rem);
+    font-size: 0.9rem; /* تعديل الحجم */
   }
   .ce-title-row {
     gap: 0.5rem;
     margin-bottom: 0.3rem;
   }
   .ce-titlee {
-    font-size: clamp(1.5rem, 7vw, 2rem);
+    font-size: 1.7rem; /* تقليل الحجم لتحسين الملاءمة */
   }
   .ce-icon {
-    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    font-size: 1.3rem; /* تقليل الحجم */
     padding: 0.3rem 0.6rem;
   }
   .ce-subtitle {
-    font-size: clamp(0.9rem, 3.8vw, 1.1rem);
+    font-size: 1rem; /* تعديل الحجم */
     margin-bottom: 1.5rem;
   }
   .ce-tag {
-    font-size: clamp(0.8rem, 3.5vw, 1rem);
+    font-size: 0.9rem; /* تقليل الحجم */
     padding: 0.3rem 1rem;
   }
   .ce-scroll-dot {
@@ -301,19 +302,73 @@
 
 @media (max-width: 400px) {
   .ce-hero {
-    min-height: 85vh;
+   min-height: 50vh;
+   height: 50vh;
   }
   .ce-navlinks {
     gap: 5vw;
   }
   .ce-titlee {
-    font-size: clamp(1.3rem, 8vw, 1.8rem);
+    font-size: 1.5rem; /* تقليل الحجم عن السابق */
   }
   .ce-subtitle {
-    font-size: clamp(0.8rem, 4vw, 1rem);
+    font-size: 0.9rem; /* تقليل الحجم */
   }
   .ce-tag {
-    font-size: clamp(0.7rem, 4vw, 0.9rem);
+    font-size: 0.8rem; /* تقليل الحجم */
     padding: 0.2rem 0.8rem;
   }
+}
+
+/* الرسوم المتحركة */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.7);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Animation for cards on tab switch */
+.fade-in {
+  animation: fadeIn 0.7s;
+}
+
+.slide-up {
+  animation: slideUp 0.7s;
 }

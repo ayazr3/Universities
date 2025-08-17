@@ -36,11 +36,16 @@ const HelpSmart = () => {
             <h3>اسأل عن تفاصيل التخصصات واستفسر أكثر</h3>
           </div>
         </div>
-        <Link href="/chatAi">
-          <button onClick={topScroll}>
+              <Link
+                  href={route('chat.ai')}   
+                  onClick={() => setMenuOpen(false)}
+                  className={window.location.pathname === "/chat-ai" ? "active" : ""}
+                > <button >
             تحدث مع المساعد الان <BsArrowRightShort size={20} />
           </button>
-        </Link>
+                
+                </Link>
+        
       </div>
       <div className="S_rightSide">
         <div className="S_container">

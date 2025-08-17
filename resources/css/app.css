@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=El+Messiri&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=El+Messiri&display=swap");
-
-body {
-    @apply font-custom;
+body, * {
+  font-family: 'El Messiri', sans-serif !important;
 }
+
+/* body {
+    @apply font-custom;
+} */

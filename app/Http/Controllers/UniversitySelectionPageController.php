@@ -54,22 +54,24 @@ class UniversitySelectionPageController extends Controller
         'admissionFile' => $admissionFile,
         'totalSpecializationsCount' => $totalSpecializationsCount,
         'currentYear' => $currentYear,
-        'universityCentersByGovernorate' => $universityCentersByGovernorate, // حقن البيانات الجديدة هنا
+        'universityCentersByGovernorate' => $universityCentersByGovernorate, 
     ]);
 }
 public function welcomeUser()
 {
+     $totalSpecializationsCount = Specialization::count();
     $registrationSteps = RegistrationStep::all();
     $firstFile = AdmissionSchedule::whereNotNull('file_url')->first();
     $admissionFile = $firstFile ? asset('storage/' . $firstFile->file_url) : null;
 
-    // جلب بيانات المحافظات (لو تستخدمها في صفحة Welcome)
-    $governorates = \App\Models\Governorate::all(); // تأكد من استيرادها في الأعلى إذا استخدمتها
+  
+    $governorates = \App\Models\Governorate::all(); 
 
     return inertia('Welcome', [
         'GOVERNORATES' => $governorates,
         'registrationSteps' => $registrationSteps,
         'admissionFile' => $admissionFile,
+         'totalSpecializationsCount' => $totalSpecializationsCount,
     ]);
 }
 

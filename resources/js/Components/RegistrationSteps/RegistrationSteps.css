@@ -12,7 +12,7 @@
 
 /* Body & Main Layout */
 body {
-  font-family: "El Messiri", sans-serif;
+
   background: var(--bg-light);
   direction: rtl;
 }
@@ -47,7 +47,7 @@ body {
 }
 
 /* Steps Grid */
-.reg-steps {
+.reg-stepss {
   display: grid;
   grid-template-columns: 1fr 60px 1fr;
   grid-template-rows: repeat(2, minmax(220px, auto));
@@ -96,6 +96,7 @@ body {
 .reg-step h3 {
   font-size: 1.3rem;
   color: var(--main-color);
+  direction: rtl;
   margin-bottom: 10px;
   font-weight: 700;
 }
@@ -104,12 +105,13 @@ body {
   padding: 0;
   margin: 0;
 }
-.reg-step li {
+.reg-stepss .reg-step li {
   font-size: 1.05rem;
   color: #333;
   margin-bottom: 7px;
   position: relative;
-  padding-right: 18px;
+  direction: rtl;
+  padding-right: 38px;
 }
 .reg-step li:before {
   content: "✔";
@@ -126,7 +128,7 @@ body {
   color: var(--arrow-color);
   font-weight: bold;
   opacity: 0.85;
-  user-select: none;
+  /* user-select: none; */
   z-index: 1;
   transition: color 0.2s;
 }
@@ -181,7 +183,7 @@ body {
 
 /* Responsive Design - التعديلات المهمة */
 @media (max-width: 900px) {
-  .reg-steps {
+  .reg-stepss {
     grid-template-columns: 1fr;
     grid-template-rows: none;
     gap: 24px 0;
@@ -226,7 +228,7 @@ body {
 }
 /* تحسين استخدام grid للشاشات الصغيرة باستخدام flexbox */
 @media (max-width: 900px) {
-  .reg-steps {
+  .reg-stepss {
     display: flex;
     flex-direction: column;
     gap: 24px 0;

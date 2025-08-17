@@ -2,8 +2,12 @@ import "./FAQ.css";
 import React, { useState, useRef, useEffect } from "react";
 import Navbar from "@/Components/Navbar/Navbar";
 import Footer from "@/Components/Footer/Footer";
-
+import { usePage } from "@inertiajs/react";
+ 
+ 
 const Faq = ({ faqs }) => {
+  const { props } = usePage();
+  const { quickLinks } = props;
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleFAQ = (index) => {
@@ -31,7 +35,7 @@ const Faq = ({ faqs }) => {
         ))}
       </div>
     </div>
-    <Footer/>
+    <Footer quickLinks={quickLinks} />
     </>
   );
 };

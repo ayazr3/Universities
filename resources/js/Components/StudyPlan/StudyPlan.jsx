@@ -1,35 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./StudyPlan.css";
 
-const StudyPlan = ({ coursesByYear = [], specialization }) => {
-  const [selectedYear, setSelectedYear] = useState(0);
-  const [yearsData, setYearsData] = useState([]);
+const StudyPlan = ({ courses = [] }) => {
+const [selectedYear, setSelectedYear] = useState(1);
 
-  useEffect(() => {
-    if (coursesByYear && coursesByYear.length > 0) {
-      setYearsData(coursesByYear);
-    }
-  }, [coursesByYear]);
+  
 
-  const handleDownload = (fileUrl, courseName) => {
-    if (fileUrl) {
-      // إنشاء رابط للتحميل
-      const link = document.createElement('a');
-      link.href = fileUrl;
-      link.download = courseName || 'course-material';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      alert('لا يوجد ملف متاح للتحميل');
-    }
+  const yearsGrouped = {};
+
+  if (courses.length > 0) {
+    courses.forEach((course) => {
+      if (!yearsGrouped[course.academic_year_number]) {
+        yearsGrouped[course.academic_year_number] = [];
+      }
+      yearsGrouped[course.academic_year_number].push(course);
+    });
+  }
+
+  const yearLabels = {
+    1: "السنة الأولى",
+    2: "السنة الثانية",
+    3: "السنة الثالثة",
+    4: "السنة الرابعة",
+    5: "السنة الخامسة",
   };
 
-  if (!yearsData || yearsData.length === 0) {
+  if (Object.keys(yearsGrouped).length === 0) {
     return (
-      <div className="study-plan-container">
-        <h1 className="study-plan-title">الخطة الدراسية</h1>
-        <p>لا توجد مقررات متاحة حالياً</p>
+      <div className="study-plan-bg">
+        <div className="study-plan-container">
+          <h1 className="study-plan-title">الخطة الدراسية</h1>
+          <p className="study-plan-subtitle">لا توجد مقررات دراسية متاحة حالياً.</p>
+        </div>
       </div>
     );
   }
@@ -37,70 +39,69 @@ const StudyPlan = ({ coursesByYear = [], specialization }) => {
   return (
     <div className="study-plan-bg">
       <div className="study-plan-container">
-        <h1 className="study-plan-title">
-          الخطة الدراسية - {specialization?.name}
-        </h1>
-        <p className="study-plan-subtitle">
-          استكشف المقررات الدراسية عبر السنوات الأربع
-        </p>
-        
+        <h1 className="study-plan-title">الخطة الدراسية</h1>
+        <p className="study-plan-subtitle">استكشف المقررات الدراسية</p>
         <div className="study-plan-tabs">
-          {yearsData.map((year, idx) => (
+          {Object.keys(yearsGrouped).map((year) => (
             <button
-              key={idx}
-              className={`tab-btn ${selectedYear === idx ? "active" : ""}`}
-              onClick={() => setSelectedYear(idx)}
+              key={year}
+              className={`tab-btn ${parseInt(year) === selectedYear ? "active" : ""}`}
+              onClick={() => setSelectedYear(parseInt(year))}
             >
-              {year.label}
+              {yearLabels[year] || `السنة ${year}`}
             </button>
           ))}
         </div>
-        
+
         <div className="study-plan-cards-outer">
           <div className="study-plan-cards fade-in">
             <div className="year-info">
-              <span className="year-title">
-                {yearsData[selectedYear]?.label}
-              </span>
+              <span className="year-title">{yearLabels[selectedYear]}</span>
               <span className="year-semester">الفصل الأول والثاني</span>
             </div>
-            
             <div className="cards-list">
-              {yearsData[selectedYear]?.cards?.map((card, i) => (
-                <div
-                  className="study-card slide-up"
-                  key={card.id}
-                  style={{ animationDelay: `${i * 0.15 + 0.15}s` }}
-                >
-                  <div className="card-content">
-                    <div className="card-title">{card.title}</div>
-                    <div className="card-desc">{card.desc}</div>
-                  </div>
-                  <div className="card-actions">
-                    <button 
-                      className="download-btn"
-                      onClick={() => handleDownload(card.file_url, card.title)}
-                      title="تحميل مواد المقرر"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="128"
-                        height="128"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+              {(yearsGrouped[selectedYear] && yearsGrouped[selectedYear].length > 0) ? (
+                yearsGrouped[selectedYear].map((course, i) => (
+                  <div
+                    className="study-card slide-up"
+                    key={course.id}
+                    style={{ animationDelay: `${i * 0.15 + 0.15}s` }}
+                  >
+                    <div className="card-content">
+                      <div className="card-title">{course.name}</div>
+                      <div className="card-desc">{course.description}</div>
+                    </div>
+                    <div className="card-actions">
+                      <a
+                        className="download-btn"
+                        href={course.file_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                        title="تحميل ملف المادة"
                       >
-                        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" fill="#333333" />
-                        <path d="M7 11l5 5l5 -5" fill="#333333" />
-                        <path d="M12 4l0 12" fill="#333333" />
-                      </svg>
-                    </button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+                          <polyline points="7 11 12 16 17 11" />
+                          <line x1="12" y1="4" x2="12" y2="16" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p>لا توجد مقررات لهذه السنة.</p>
+              )}
             </div>
           </div>
         </div>

@@ -4,9 +4,69 @@ namespace App\Http\Controllers;
 
 use App\Models\TopStudent;
 use Illuminate\Http\Request;
+use App\Models\Specialization;
+use Inertia\Inertia;
 
 class TopStudentController extends Controller
 {
+
+     public function showUser($specializationId)
+    {
+    //     $specialization = Specialization::findOrFail($specializationId);
+
+    //     $topStudents = TopStudent::where('specialization_id', $specializationId)
+    //         ->orderBy('rank')
+    //         ->get()
+    //         ->map(function ($student) {
+    //             return [
+    //                 'id' => $student->id,
+    //                 'name' => $student->name,
+    //                 'image' => $student->image,
+    //                 'gpa' => $student->gpa,
+    //                 'rank' => $student->rank,
+    //                 'graduation_year' => $student->graduation_year,
+    //             ];
+    //         });
+
+    //     return Inertia::render('TopStudentsPage', [
+    //         'specialization' => $specialization,
+    //         'students' => $topStudents,
+    //     ]);
+    // }
+   
+        // جلب التخصص مع الكلية والمحافظة
+        $specialization = Specialization::with('college.governorate')->findOrFail($specializationId);
+
+        // جلب طلاب الاوائل المرتبطين بالتخصص
+        $topStudents = TopStudent::where('specialization_id', $specializationId)
+            ->orderBy('rank')
+            ->get()
+            ->map(function ($student) {
+                return [
+                    'id' => $student->id,
+                    'name' => $student->name,
+                    'image' => $student->image,
+                    'gpa' => $student->gpa,
+                    'rank' => $student->rank,
+                    'graduation_year' => $student->graduation_year,
+                ];
+            });
+
+        return Inertia::render('TopStudentsPage', [
+            'specialization' => [
+                'id' => $specialization->id,
+                'name' => $specialization->name,
+                'college' => [
+                    'id' => $specialization->college->id,
+                    'name' => $specialization->college->name,
+                    'governorate' => $specialization->college->governorate ? $specialization->college->governorate->name : null,
+                ],
+            ],
+            'students' => $topStudents,
+        ]);
+    }
+
+
     /**
      * Display a listing of the resource.
      */

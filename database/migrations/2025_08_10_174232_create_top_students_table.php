@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('graduation_projects', function (Blueprint $table) {
+        Schema::create('top_students', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('specialization_id')->constrained()->onDelete('cascade');
+           $table->foreignId('specialization_id')->constrained()->onDelete('cascade');
             $table->string('name',100);
-            $table->text('description');
-            $table->string('thesis_file',255);
-            $table->json('project_images');
+            $table->string('image',100);
+            $table->decimal('gpa',3,2);
+            $table->integer('rank');
             $table->year('graduation_year');
-            $table->json('team_members');
-            $table->string('supervisor',100);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('graduation_projects');
+        Schema::dropIfExists('top_students');
     }
 };

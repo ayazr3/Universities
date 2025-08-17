@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Announcement extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'title',
         'summary',
@@ -17,8 +18,5 @@ class Announcement extends Model
         'details',
     ];
 
-     // إذا أردت تحويل تاريخ النشر إلى كائن Carbon تلقائيًا
-    protected $dates = [
-        'publish_date',
-    ];
+    protected $dates = ['publish_date'];
 }

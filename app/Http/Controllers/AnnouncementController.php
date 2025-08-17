@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\View; // إذا كنت تريد استخدام ط
 
 class AnnouncementController extends Controller
 {
+        public function indexUser()
+    {
+        // نجلب آخر 3 أخبار فقط
+        $lastAnnouncements = Announcement::latest('publish_date')->take(3)->get();
+
+        return $lastAnnouncements;
+    }
+
+
     public function index()
     {
         $announcements = Announcement::latest()->get();

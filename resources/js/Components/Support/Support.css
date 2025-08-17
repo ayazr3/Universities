@@ -79,19 +79,21 @@
   color: black;
   margin-top: 16px;
   margin-right: 20px;
+  font-size: 18px;
+  font-weight: 700;
 }
 .S_Cards .S_card .icon svg {
-  color: var(--Dark-blue);
-  background-color: var(--bg-color);
+  color:#1a61df;
+  background-color: #0050ec14;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   padding: 7px;
   box-shadow: 0 3px 8px rgba(63, 112, 196, 0.4);
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 .S_Cards .S_card .icon svg:hover {
-  background-color: var(--Dark-blue);
+  background-color:#1a61df;
   color: white;
   transform: scale(1.15);
 }
@@ -105,7 +107,7 @@
 }
 .S_Cards .S_card p {
   font-weight: 400;
-  color: var(--Text-color);
+  color: #a4a4a4;
   margin-right: 0.8rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -120,10 +122,10 @@
   font-size: 1.2rem;
 }
 .btn {
-  border: 1.5px solid var(--Dark-blue);
-  color: var(--Dark-blue);
-  border-radius: 10px;
-  padding: 12px 30px;
+  border: 1.5px solid #1a61df;
+  color: #1a61df;
+  border-radius: 30px;
+  padding: 10px 25px;
   background-color: white;
   font-weight: 700;
   cursor: pointer;
@@ -131,9 +133,9 @@
   box-shadow: 0 4px 12px rgba(63, 112, 196, 0.25);
 }
 .btn:hover {
-  border-color: var(--Dark-blue);
+  border-color:#1a61df;
   color: white;
-  background-color: var(--Dark-blue);
+  background-color: #1a61df;
   box-shadow: 0 8px 20px rgba(41, 111, 232, 0.7);
 }
 

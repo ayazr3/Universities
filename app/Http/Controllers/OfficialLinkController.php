@@ -7,6 +7,7 @@ use App\Models\OfficialLink;
 
 class OfficialLinkController extends Controller
 {
+
     // عرض جميع الروابط الرسمية
     public function index()
     {
