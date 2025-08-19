@@ -906,7 +906,17 @@ input[type="file"]:focus {
   .modern-table th.col-year,
   .modern-table td.col-year,
   .modern-table th.col-icon,
-  .modern-table td.col-icon {
+  .modern-table td.col-icon,
+  .modern-table th.col-specialization,
+  .modern-table td.col-specialization,
+  .modern-table th.col-governorate,
+  .modern-table td.col-governorate,
+  .modern-table th.col-graduation_year,
+  .modern-table td.col-graduation_year,
+  .modern-table th.col-supervisor,
+  .modern-table td.col-supervisor,
+  .modern-table th.col-members,
+  .modern-table td.col-members {
     display: none;
   }
 

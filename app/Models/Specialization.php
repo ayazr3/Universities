@@ -24,4 +24,9 @@ class Specialization extends Model
     {
         return $this->belongsTo(College::class);
     }
+
+    public function graduationproject()
+    {
+         return $this->belongsTo(GraduationProject::class);
+    }
 }
