@@ -44,6 +44,7 @@ class CollegeController extends Controller
                 'id' => $specialization->id,
                 'name' => $specialization->name,
                 'summary' => $specialization->summary,
+                ""
             ];
         }),
     ]);

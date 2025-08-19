@@ -138,7 +138,7 @@ Route::get('/chat-ai', [ChatAIController::class, 'indexUser'])->name('chat.ai');
 
 
 //راوت الاختصاصات 
-Route::get('/specializations/{id}', [SpecializationController::class, 'showUser'])->name('specializations.showUser');
+    Route::get('/specializations/{id}', [SpecializationController::class, 'showUser'])->name('specializations.showUser');
 
 
 //راوت الاوئل 
