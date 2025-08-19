@@ -28,6 +28,7 @@ class Specialization extends Model
     {
         return $this->belongsTo(College::class);
     }
+
     
 
     public function courses()
@@ -51,5 +52,6 @@ public function graduationProjects()
 {
   return $this->hasMany(GraduationProject::class);
 }
+
 
 }

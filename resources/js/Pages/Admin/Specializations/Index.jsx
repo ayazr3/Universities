@@ -17,6 +17,8 @@ export default function Index({ auth, specializations, governorates, stats }) {
   const [filterCollege, setFilterCollege] = useState('');
   const [filterDegree, setFilterDegree] = useState('');
   const [filteredColleges, setFilteredColleges] = useState([]);
+  const degreeTypes = [...new Set(specializations.map(s => s.degree_type))];
+  const [filteredDegreeTypes, setFilteredDegreeTypes] = useState(degreeTypes);
 
   // جلب جميع الكليات (بما تحتويه التخصصات)
   const allColleges = [...new Map(specializations.map(s => [s.college?.id, s.college])).values()].filter(c => c);
@@ -30,11 +32,27 @@ export default function Index({ auth, specializations, governorates, stats }) {
       setFilteredColleges(filtered);
 
       // إذا الكلية المحددة حاليا ليست ضمن الكليات المصفاة، امسحها
-      if (!filtered.some(col => col.id.toString() === filterCollege)) {
-        setFilterCollege('');
-      }
+    //   if (!filtered.some(col => col.id.toString() === filterCollege)) {
+    //     setFilterCollege('');
+    //   }
     }
   }, [filterGovernorate, allColleges, filterCollege]);
+
+  useEffect(() => {
+  if (filterCollege === '') {
+    setFilteredDegreeTypes(degreeTypes);
+    setFilterDegree(''); // إعادة تعيين اختيار نوع الدرجة
+  } else {
+    const filteredSpecs = specializations.filter(spec => spec.college?.id.toString() === filterCollege);
+    const filteredDegrees = [...new Set(filteredSpecs.map(spec => spec.degree_type))];
+    setFilteredDegreeTypes(filteredDegrees);
+
+    if (!filteredDegrees.includes(filterDegree)) {
+      setFilterDegree('');
+    }
+  }
+}, [filterCollege, specializations]);
+
 
   const handleDelete = (id) => {
     if (confirm("هل أنت متأكد من حذف التخصص؟")) {
@@ -56,7 +74,7 @@ export default function Index({ auth, specializations, governorates, stats }) {
     return matchesSearch && matchesCollege && matchesDegree && matchesGovernorate;
   });
 
-  const degreeTypes = [...new Set(specializations.map(s => s.degree_type))];
+
 
   return (
     <AuthenticatedLayout user={auth.user}>
@@ -106,12 +124,13 @@ export default function Index({ auth, specializations, governorates, stats }) {
             aria-label="نوع الدرجة"
             value={filterDegree}
             onChange={e => setFilterDegree(e.target.value)}
-          >
+            >
             <option value="">نوع الدرجة</option>
-            {degreeTypes.map(degree => (
-              <option key={degree} value={degree}>{degree}</option>
+            {filteredDegreeTypes.map(degree => (
+                <option key={degree} value={degree}>{degree}</option>
             ))}
-          </select>
+            </select>
+
 
           {/* حقل البحث */}
           <input

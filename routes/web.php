@@ -18,7 +18,9 @@ use App\Http\Controllers\GovernorateController;
 use App\Http\Controllers\SpecializationController;
 use App\Http\Controllers\UniversitySelectionPageController;
 use App\Http\Controllers\ChatAIController;
+
 use App\Http\Controllers\TopStudentController;
+
 use App\Http\Controllers\GraduationProjectController;
 
 /*
@@ -104,6 +106,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/governorates', GovernorateController::class);
     Route::resource('/Admincolleges', CollegeController::class);
     Route::resource('/adminspecializations', SpecializationController::class);
+    Route::resource('/admingraduation_projects', GraduationProjectController::class);
+
 
 
 });

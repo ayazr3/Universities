@@ -44,7 +44,7 @@ export default function Authenticated({ user, header, children }) {
                         <li><a href={route('guidances.index')} className={route().current('guidances.index') ? "active" : ""}>التوجيه والدعم</a></li>
                         <li><a href={route('faq.index')} className={route().current('faq.index') ? "active" : ""}>الأسئلة الشائعة</a></li>
                         <li><a href={route('announcement.index')} className={route().current('announcements.index') ? "active" : ""}>الطلاب الأوائل</a></li>
-                        <li><a href={route('announcement.index')} className={route().current('announcements.index') ? "active" : ""}>المشاريع</a></li>
+                        <li><a href={route('admingraduation_projects.index')} className={route().current('admingraduation_projects.index') ? "active" : ""}>المشاريع</a></li>
                         <li><a href={route('announcement.index')} className={route().current('announcements.index') ? "active" : ""}>المراكز الجامعية</a></li>
                         <li><a href={route('announcement.index')} className={route().current('announcements.index') ? "active" : ""}>الإعلانات</a></li>
                         <li><a href={route('registrationstep.index')} className={route().current('registrationstep.index') ? "active" : ""}>خطوات التسجيل</a></li>
