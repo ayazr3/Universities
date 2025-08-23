@@ -118,7 +118,7 @@ export default function Index({ auth, courses, specializations, governorates, st
                                 <div className="col-actions" style={{ display: "flex", gap: 8, justifyContent: "center" }}>
                                     <Link href={`/admincourses/${course.id}`} title="عرض">👁️</Link>
                                     <Link href={`/admincourses/${course.id}/edit`} title="تعديل">✏️</Link>
-                                    <button type="button" title="حذف" onClick={() => handleDelete(project.id)}>🗑️</button>
+                                    <button type="button" title="حذف" onClick={() => handleDelete(course.id)}>🗑️</button>
                                 </div>
                             </td>
                         </tr>
