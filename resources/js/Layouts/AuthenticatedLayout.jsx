@@ -27,7 +27,7 @@ export default function Authenticated({ user, header, children }) {
             {/* الشريط الجانبي */}
             <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
                 <div className="sidebar-header">
-                    <span className="sidebar-title">دليل الطالب</span>
+                    <span className="sidebar-title">طريقك الجامعي</span>
                 </div>
                 <div className="sidebar-section">
                     <span className="section-title">المحتوى الأساسي</span>
@@ -35,7 +35,7 @@ export default function Authenticated({ user, header, children }) {
                         <li><a href={route('governorates.index')} className={route().current('governorates.index') ? "active" : ""}>المحافظات</a></li>
                         <li><a href={route('Admincolleges.index')} className={route().current('Admincolleges.index') ? "active" : ""}>الكليات</a></li>
                         <li><a href={route('adminspecializations.index')} className={route().current('adminspecializations.index') ? "active" : ""}>الإختصاصات</a></li>
-                        <li><a href={route('announcement.index')} className={route().current('announcements.index') ? "active" : ""}>المقررات الدراسية</a></li>
+                        <li><a href={route('admincourses.index')} className={route().current('admincourses.index') ? "active" : ""}>المقررات الدراسية</a></li>
                     </ul>
                 </div>
                 <div className="sidebar-section">

@@ -18,7 +18,7 @@ use App\Http\Controllers\GovernorateController;
 use App\Http\Controllers\SpecializationController;
 use App\Http\Controllers\UniversitySelectionPageController;
 use App\Http\Controllers\ChatAIController;
-
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TopStudentController;
 
 use App\Http\Controllers\GraduationProjectController;
@@ -44,10 +44,10 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
         'GOVERNORATES' => $GOVERNORATES,
-       
+
     ]);
 })->name('welcome');
-  
+
 // Route::get('/', function () {
 //     $GOVERNORATES = Governorate::latest()->get();
 
@@ -58,7 +58,7 @@ Route::get('/', function () {
 //         'laravelVersion' => Application::VERSION,
 //         'phpVersion' => PHP_VERSION,
 //         'GOVERNORATES' => $GOVERNORATES,
-     
+
 //     ]);
 // })->name('welcome'); // إضافة اسم للراوت هنا
 
@@ -107,6 +107,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/Admincolleges', CollegeController::class);
     Route::resource('/adminspecializations', SpecializationController::class);
     Route::resource('/admingraduation_projects', GraduationProjectController::class);
+    Route::resource('/admincourses', CourseController::class);
 
 
 
@@ -141,11 +142,11 @@ Route::get('/university-selection', [UniversitySelectionPageController::class, '
 Route::get('/chat-ai', [ChatAIController::class, 'indexUser'])->name('chat.ai');
 
 
-//راوت الاختصاصات 
+//راوت الاختصاصات
     Route::get('/specializations/{id}', [SpecializationController::class, 'showUser'])->name('specializations.showUser');
 
 
-//راوت الاوئل 
+//راوت الاوئل
 
 Route::get('/specializations/{id}/top-students', [TopStudentController::class, 'showUser'])
     ->name('specializations.topStudents');

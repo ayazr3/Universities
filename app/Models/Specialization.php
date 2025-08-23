@@ -29,9 +29,9 @@ class Specialization extends Model
         return $this->belongsTo(College::class);
     }
 
-    
 
-    public function courses()
+
+    public function course()
 {
     return $this->hasMany(Course::class);
 }
