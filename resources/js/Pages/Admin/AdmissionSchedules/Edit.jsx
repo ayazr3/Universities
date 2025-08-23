@@ -37,18 +37,18 @@ export default function AdmissionScheduleEdit({ admissionSchedule, auth }) {
 
   return (
     <AuthenticatedLayout user={auth.user}>
-      <Head title="تعديل جدول القبول" />
+      <Head title="تعديل مواعيد القبول" />
       <form
         className="modern-form"
         encType="multipart/form-data"
         onSubmit={handleSubmit}
         noValidate
       >
-        <h2 className="form-title">تعديل جدول القبول</h2>
+        <h2 className="form-title">تعديل مواعيد القبول</h2>
 
         {/* العنوان */}
         <div className="form-group">
-          <label htmlFor="title">عنوان الجدول</label>
+          <label htmlFor="title">عنوان الموعد</label>
           <input
             type="text"
             id="title"
@@ -78,7 +78,7 @@ export default function AdmissionScheduleEdit({ admissionSchedule, auth }) {
 
         {/* التاريخ */}
         <div className="form-group">
-          <label htmlFor="date">تاريخ الجدول</label>
+          <label htmlFor="date">تاريخ الموعد</label>
           <input
             type="date"
             id="date"
@@ -108,7 +108,7 @@ export default function AdmissionScheduleEdit({ admissionSchedule, auth }) {
 
         {/* الملف */}
         <div className="form-group">
-          <label htmlFor="file_url">ملف الجدول (اختياري)</label>
+          <label htmlFor="file_url">ملف المفاضلة (اختياري)</label>
           <input
             type="file"
             id="file_url"

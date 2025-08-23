@@ -6,7 +6,7 @@ import '@/Components/Admin/Style/Style.css';
 export default function AdmissionScheduleShow({ admissionSchedule, auth }) {
   return (
     <AuthenticatedLayout user={auth.user}>
-      <Head title={`تفاصيل جدول القبول - ${admissionSchedule.title}`} />
+      <Head title={`تفاصيل موعد القبول - ${admissionSchedule.title}`} />
 
       <div
         className="panel"

@@ -10,7 +10,7 @@ export default function AdmissionScheduleIndex({ auth, schedules, stats }) {
 
   // دالة لحذف الجدول
   const handleDelete = (id) => {
-    if (confirm('هل أنت متأكد من حذف هذا الجدول؟')) {
+    if (confirm('هل أنت متأكد من حذف هذا الموعد؟')) {
       Inertia.delete(route('admissionSchedule.destroy', id));
     }
   };
@@ -31,15 +31,15 @@ export default function AdmissionScheduleIndex({ auth, schedules, stats }) {
 
   return (
     <AuthenticatedLayout user={auth.user}>
-      <Head title="جداول القبول" />
+      <Head title=" مواعيد القبول" />
 
       <div className="modern-table-container" style={{ maxWidth: '98%', margin: '40px auto' }}>
 
         {/* رأس الصفحة */}
         <div className="table-header-bar">
-          <span className="dashboard-title">لوحة تحكم جداول القبول</span>
+          <span className="dashboard-title">لوحة تحكم  مواعيد القبول</span>
           <Link href={route('admissionSchedule.create')} className="add-btn">
-            + إضافة جدول جديد
+            + إضافة موعد جديد
           </Link>
         </div>
 
@@ -47,7 +47,7 @@ export default function AdmissionScheduleIndex({ auth, schedules, stats }) {
         <div className="filter-bar">
           <input
             type="text"
-            placeholder="بحث عن جدول..."
+            placeholder="بحث عن موعد..."
             className="search-input"
             aria-label="بحث"
             value={search}
@@ -82,7 +82,7 @@ export default function AdmissionScheduleIndex({ auth, schedules, stats }) {
           </div>
         </div>
 
-        {/* جدول جداول القبول */}
+        {/* مواعيد  القبول */}
         <table className="modern-table">
           <thead>
             <tr>
@@ -98,7 +98,7 @@ export default function AdmissionScheduleIndex({ auth, schedules, stats }) {
             {filteredSchedules.length === 0 ? (
               <tr>
                 <td colSpan={6} style={{ color: "#b3b3b3", fontWeight: 'bold', padding: '40px 0', textAlign: 'center' }}>
-                  لا توجد جداول حالياً
+                  لا توجد مواعيد حالياً
                 </td>
               </tr>
             ) : (
