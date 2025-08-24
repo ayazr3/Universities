@@ -16,7 +16,7 @@ return new class extends Migration
            $table->foreignId('specialization_id')->constrained()->onDelete('cascade');
             $table->string('name',100);
             $table->string('image',100);
-            $table->decimal('gpa',3,2);
+            $table->decimal('gpa', 5, 2);
             $table->integer('rank');
             $table->year('graduation_year');
             $table->timestamps();

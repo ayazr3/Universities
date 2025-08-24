@@ -12,12 +12,12 @@ class AnnouncementFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence(6, true),
-            'summary' => $this->faker->text(200),
-            'publisher' => $this->faker->name(),
-            'image' => $this->faker->image('public/storage/images', 640, 480, null, false), // or just a filename string
-            'publish_date' => $this->faker->date(),
-            'details' => $this->faker->paragraphs(3, true),
+           'title' => $this->faker->sentence(6, true),
+        'summary' => $this->faker->text(200),
+        'publisher' => $this->faker->name(),
+        'image' => $this->faker->imageUrl(400, 300),
+        'details' => $this->faker->paragraphs(3, true),
+        'publish_date' => $this->faker->date(),  // إضافة حقل publish_date
         ];
     }
 }

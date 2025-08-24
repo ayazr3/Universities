@@ -108,6 +108,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/adminspecializations', SpecializationController::class);
     Route::resource('/admingraduation_projects', GraduationProjectController::class);
     Route::resource('/admincourses', CourseController::class);
+    Route::resource('admintopstudents', TopStudentController::class);
 
 
 
