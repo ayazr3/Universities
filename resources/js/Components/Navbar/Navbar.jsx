@@ -112,16 +112,17 @@ const Navbar = () => {
       </div>
 
       <div className="N_right_side">
-        <span>طريقك للجامعة </span>
+        <span>طريقك الى الجامعة </span>
        <img
   src={logo}
-  alt="طريقك للجامعة  "
-  style={{  
-      width: "62px",           // يمكنك تغيير الحجم كما تريد
-    height: "62px",
-    borderRadius: "50%",     // تجعل الصورة دائرية
-    objectFit: "cover",      // تغطي الحواف بشكل مثالي
-    marginRight: "8px"}} // يمكنك تعديل الحجم أو النمط
+  alt="طريقك الى الجامعة  "
+  className="logo"
+  // style={{  
+  //     width: "62px",           // يمكنك تغيير الحجم كما تريد
+  //   height: "62px",
+  //   borderRadius: "50%",     // تجعل الصورة دائرية
+  //   objectFit: "cover",      // تغطي الحواف بشكل مثالي
+  //   marginRight: "8px"}} // يمكنك تعديل الحجم أو النمط
 />
 
       </div>

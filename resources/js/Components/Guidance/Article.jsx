@@ -23,9 +23,7 @@ const ArticlesMiniPage = ({ articles = [] }) => {
           ))}
         </div>
       </main>
-      <div className="lovable-badge-mini">
-        <span>Edit with <b>Lovable</b></span>
-      </div>
+      
     </div>
   );
 };

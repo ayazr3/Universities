@@ -24,23 +24,31 @@ class GraduationProjectController extends Controller
         return response()->json($years);
     }
 
-    public function showByYear($specializationId, $year)
-    {
-        $projects = GraduationProject::where('specialization_id', $specializationId)
-            ->where('graduation_year', $year)
-            ->with(['comments', 'specialization.college.governorate'])
-            ->get()
-            ->map(function($project) {
-                $project->team_members_as_string = is_array($project->team_members) ? implode(' - ', $project->team_members) : $project->team_members;
-                $project->governorate_name = $project->specialization->college->governorate->name ?? '';
-                $project->college_name = $project->specialization->college->name ?? '';
-                return $project;
-            });
+ public function showByYear($specializationId, $year)
+{
+    $projects = GraduationProject::where('specialization_id', $specializationId)
+        ->where('graduation_year', $year)
+        ->with(['comments', 'specialization.college.governorate'])
+        ->get()
+        ->map(function($project) {
+            // تحويل team_members إلى نص موحد للعرض
+            $project->team_members_as_string = is_array($project->team_members) ? implode(' - ', $project->team_members) : $project->team_members;
 
-        return Inertia::render('GraduationProjects', [
-            'projects' => $projects
-        ]);
-    }
+            // جلب أسماء الحقول ذات العلاقة
+            $project->governorate_name = $project->specialization->college->governorate->name ?? '';
+            $project->college_name = $project->specialization->college->name ?? '';
+
+            // فك ترميز JSON الخاص بالصور وتحويلها إلى مصفوفة لضمان القراءة الصحيحة في React
+            $project->project_images = is_array($project->project_images) ? $project->project_images : json_decode($project->project_images, true) ?? [];
+
+            return $project;
+        });
+
+    return Inertia::render('GraduationProjects', [
+        'projects' => $projects
+    ]);
+}
+
 
     public function addComment(Request $request)
     {

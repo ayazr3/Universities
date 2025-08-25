@@ -11,14 +11,14 @@ const Hero = ({ totalSpecializationsCount,onExploreClick }) => {
       <div className="h-left_side">
         <div className="image">
           {/* استخدم المسار النسبي للصورة الموجودة في public */}
-          <img src="/images/R.jpeg" alt="hero" />
+          <img src="/images/R.png" alt="hero" />
         </div>
       </div>
       <div className="h_right_side">
         <h1>أختر مسارك الجامعي</h1>
         <h3>بثقة وحماس</h3>
         <h5>
-          منصة متكاملة تساعدك في أستكشاف اختصاصك الجامعي , فهم المقررات <br />
+          منصة متكاملة تساعدك في أستكشاف اختصاصك الجامعي , فهم المقررات 
           و الحصول على دعم مخصص لاختيار اختصاصك المفضل
         </h5>
         <div className="h-btn">

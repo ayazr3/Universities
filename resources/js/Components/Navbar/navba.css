@@ -5,7 +5,6 @@
 /* ========== أساسيات النافبار ========== */
 .navBar {
   display: flex;
-  
   align-items: center;
   justify-content: space-between;
   max-width: 100vw;
@@ -164,22 +163,23 @@
   transform: translateY(-2px);
 }
 
-.N_right_side svg {
+.N_right_side .logo {
   margin: 0.7rem;
   padding: 0.4rem;
-  background-color: var(--Dark-blue);
+
   font-weight: bold;
   border-radius: 50%;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 3px 6px rgba(0, 64, 128, 0.5);
+  width:75px ;
+  height: 75px;
+  
 }
 
-.N_right_side svg:hover {
-  background-color: #004080;
+.N_right_side .logo:hover {
+
   transform: scale(1.1) rotate(8deg);
-  box-shadow: 0 7px 15px rgba(0, 64, 128, 0.7);
+  
 }
 
 /* ========== Keyframes للانيميشن ========== */
@@ -402,6 +402,19 @@
 
   .search_button {
     font-size: 1.2rem;
+  }
+
+  /* تعديل صورة اللوجو إلى 50x50 بكسل في الشاشات المحمولة */
+  .N_right_side img.logo {
+    margin: 0;
+  padding: 0;
+
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    max-width: none !important;
+    max-height: none !important;
   }
 }
 
