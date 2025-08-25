@@ -115,7 +115,8 @@ export default function Create({ auth, governorates, colleges, specializations }
             type="number"
             step="0.01"
             min="0"
-            max="4"
+            max="10"
+            placeholder="9.5"
             name="gpa"
             value={data.gpa}
             onChange={handleChange}

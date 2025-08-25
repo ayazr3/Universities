@@ -26,8 +26,8 @@ export default function CollegeDetails({ college, specializations }) {
       <Navbar />
       <div>
         <EngineeringCollege stats={stats} name={college.name} image={imageSrc} />
-        <CollegeIntro summary={college.summary} />
-        <CollegeMap location={college.location} name={college.name} address={college.details} />
+        <CollegeIntro summary={college.details} />
+        <CollegeMap location={college.location} name={college.name} address={college.summary} />
         <Specialties specializations={specializations} collegeId={college.id} />
       </div>
       <Footer quickLinks={quickLinks} />

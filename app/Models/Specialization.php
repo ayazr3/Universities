@@ -31,7 +31,7 @@ class Specialization extends Model
 
 
 
-    public function course()
+    public function courses()
     {
         return $this->hasMany(Course::class);
     }
@@ -46,10 +46,7 @@ class Specialization extends Model
     }
 
 
-    // public function academicPrograms()
-    // {
-    //     return $this->hasMany(AcademicProgram::class);
-    // }
+
 
     public function graduationProjects()
     {
