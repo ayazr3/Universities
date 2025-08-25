@@ -20,21 +20,23 @@ class DatabaseSeeder extends Seeder
         // ]);
            $this->call([
 // SpecializationSeeder::class,
-  //  AnnouncementSeeder::class,
-//         UsersTableSeeder::class,
-//           FaqSeeder::class,
-//           AdmissionScheduleSeeder::class,
-//         RegistrationStepSeeder::class,
-//         SettingSeeder::class,
-//         OfficialLinkSeeder::class,
-//         TermSeeder::class,
-//        GuidanceSeeder::class,
-        // CollegeSeeder::class,
-        // GovernoratesTableSeeder::class,
-        // CourseSeeder::class
-        // TopStudentSeeder::class
-    //  GraduationProjectsTableSeeder::class
-  //  FutureOpportunitiesSeeder::class
+//    AnnouncementSeeder::class,
+        UsersTableSeeder::class,
+          FaqSeeder::class,
+          AdmissionScheduleSeeder::class,
+        RegistrationStepSeeder::class,
+        SettingSeeder::class,
+        OfficialLinkSeeder::class,
+        TermSeeder::class,
+       GuidanceSeeder::class,
+       GovernoratesTableSeeder::class,
+        CollegeSeeder::class,
+        SpecializationSeeder::class,
+        CourseSeeder::class,
+        TopStudentSeeder::class,
+     GraduationProjectsTableSeeder::class,
+   FutureOpportunitiesSeeder::class,
+   GraduationProjectSeeder::class,
     //  SpecializationSeeder::class
 
 // SpecializationSeeder::class,
@@ -45,7 +47,7 @@ class DatabaseSeeder extends Seeder
           // AdmissionScheduleSeeder::class,
         // RegistrationStepSeeder::class,
         // SettingSeeder::class,
-        OfficialLinkSeeder::class,
+        // OfficialLinkSeeder::class,
         // TermSeeder::class,
         // GuidanceSeeder::class,
 

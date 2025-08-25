@@ -21,15 +21,15 @@ export default function AdmissionScheduleCreate({ auth }) {
 
   return (
     <AuthenticatedLayout user={auth.user}>
-      <Head title="إضافة جدول قبول جديد" />
+      <Head title="إضافة موعد قبول جديد" />
 
       <div className="modern-form" style={{ maxWidth: 520 }}>
-        <h2 className="form-title">إضافة جدول قبول جديد</h2>
+        <h2 className="form-title">إضافة موعد قبول جديد</h2>
         <form onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
 
           {/* العنوان */}
           <div className="form-group">
-            <label htmlFor="title">عنوان الجدول</label>
+            <label htmlFor="title">عنوان الموعد</label>
             <input
               type="text"
               id="title"
@@ -57,7 +57,7 @@ export default function AdmissionScheduleCreate({ auth }) {
 
           {/* التاريخ */}
           <div className="form-group">
-            <label htmlFor="date">تاريخ الجدول</label>
+            <label htmlFor="date">تاريخ الموعد</label>
             <input
               type="date"
               id="date"
@@ -85,7 +85,7 @@ export default function AdmissionScheduleCreate({ auth }) {
 
           {/* الملف */}
           <div className="form-group">
-            <label htmlFor="file_url">ملف الجدول (اختياري)</label>
+            <label htmlFor="file_url">ملف المفاضلة (اختياري)</label>
             <input
               type="file"
               id="file_url"

@@ -29,29 +29,32 @@ class Specialization extends Model
         return $this->belongsTo(College::class);
     }
 
-    
-
-    public function courses()
-{
-    return $this->hasMany(Course::class);
-}
 
 
-public function futureOpportunities()
-{
-    return $this->hasMany(FutureOpportunities::class);
-}
+    public function course()
+    {
+        return $this->hasMany(Course::class);
+    }
+    public function topStudent()
+    {
+        return $this->hasMany(TopStudent::class);
+    }
+
+    public function futureOpportunities()
+    {
+        return $this->hasMany(FutureOpportunities::class);
+    }
 
 
-// public function academicPrograms()
-// {
-//     return $this->hasMany(AcademicProgram::class);
-// }
+    // public function academicPrograms()
+    // {
+    //     return $this->hasMany(AcademicProgram::class);
+    // }
 
-public function graduationProjects()
-{
-  return $this->hasMany(GraduationProject::class);
-}
+    public function graduationProjects()
+    {
+    return $this->hasMany(GraduationProject::class);
+    }
 
 
 }
