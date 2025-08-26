@@ -45,7 +45,7 @@ export default function Authenticated({ user, header, children }) {
                         <li><a href={route('faq.index')} className={route().current('faq.index') ? "active" : ""}>الأسئلة الشائعة</a></li>
                         <li><a href={route('admintopstudents.index')} className={route().current('admintopstudents.index') ? "active" : ""}>الطلاب الأوائل</a></li>
                         <li><a href={route('admingraduation_projects.index')} className={route().current('admingraduation_projects.index') ? "active" : ""}>المشاريع</a></li>
-                        <li><a href={route('announcement.index')} className={route().current('announcements.index') ? "active" : ""}>المراكز الجامعية</a></li>
+                        <li><a href={route('adminuniversitycenters.index')} className={route().current('adminuniversitycenters.index') ? "active" : ""}>المراكز الجامعية</a></li>
                         <li><a href={route('announcement.index')} className={route().current('announcements.index') ? "active" : ""}>الإعلانات</a></li>
                         <li><a href={route('registrationstep.index')} className={route().current('registrationstep.index') ? "active" : ""}>خطوات التسجيل</a></li>
                         <li><a href={route('admissionSchedule.index')} className={route().current('admissionSchedule.index') ? "active" : ""}>المواعيد</a></li>

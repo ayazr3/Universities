@@ -9,10 +9,16 @@ class UniversityCenter extends Model
 {
     use HasFactory;
 
+     protected $fillable = [
+        'name',
+        'description',
+        'governorate_id',
+    ];
+
     public function governorate()
     {
-        // return $this->belongsTo(Governorate::class);
-         return $this->hasMany(\App\Models\UniversityCenter::class);
+        return $this->belongsTo(Governorate::class);
+        //  return $this->hasMany(\App\Models\UniversityCenter::class);
 }
     }
-   
+

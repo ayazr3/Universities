@@ -916,7 +916,9 @@ input[type="file"]:focus {
   .modern-table th.col-supervisor,
   .modern-table td.col-supervisor,
   .modern-table th.col-members,
-  .modern-table td.col-members {
+  .modern-table td.col-members,
+  .modern-table th.col-description,
+  .modern-table td.col-description {
     display: none;
   }
 

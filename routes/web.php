@@ -22,6 +22,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TopStudentController;
 
 use App\Http\Controllers\GraduationProjectController;
+use App\Http\Controllers\UniversityCenterController;
 
 /*
 /*
@@ -109,7 +110,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/admingraduation_projects', GraduationProjectController::class);
     Route::resource('/admincourses', CourseController::class);
     Route::resource('admintopstudents', TopStudentController::class);
-
+    Route::resource('adminuniversitycenters', UniversityCenterController::class);
 
 
 });
