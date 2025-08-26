@@ -19,6 +19,7 @@ use App\Http\Controllers\SpecializationController;
 use App\Http\Controllers\UniversitySelectionPageController;
 use App\Http\Controllers\ChatAIController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\FutureOpportunitiesController;
 use App\Http\Controllers\TopStudentController;
 
 use App\Http\Controllers\GraduationProjectController;
@@ -111,7 +112,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/admincourses', CourseController::class);
     Route::resource('admintopstudents', TopStudentController::class);
     Route::resource('adminuniversitycenters', UniversityCenterController::class);
-
+    Route::resource('adminfutureopportunities', FutureOpportunitiesController::class);
 
 });
 
